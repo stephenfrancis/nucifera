@@ -1,0 +1,44 @@
+{
+  "content": [
+    {
+      "type": "h1",
+      "cells": [
+        {
+          "field": {
+            "type": "text",
+            "id": "title"
+          }
+        }
+      ]
+    },
+    {
+      "type": "p",
+      "cells": [
+        {
+          "field": {
+            "type": "date",
+            "id": "created_at"
+          }
+        },
+        {
+          "field": {
+            "type": "text",
+            "id": "created_by"
+          }
+        }
+      ]
+    },
+    {
+      "type": "p",
+      "cells": [
+        {
+          "field": {
+            "type": "richtext",
+            "id": "body"
+          }
+        }
+      ]
+    }
+  ],
+  "id": "builtin"
+}

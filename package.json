@@ -1,0 +1,45 @@
+{
+  "name": "nucifera",
+  "version": "0.0.1",
+  "description": "Lotus Notes as it should have been!",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/stephenfrancis/nucifera.git"
+  },
+  "author": "Stephen Francis <stephen.francis@gmail.com>",
+  "license": "UNLICENSED",
+  "dependencies": {
+    "@types/pouchdb": "^6.4.0",
+    "@types/react-router": "^5.1.8",
+    "@types/react-router-dom": "^5.1.6",
+    "parcel": "^2.0.0-nightly.464",
+    "pouchdb": "^7.2.2",
+    "react": "16.14.0",
+    "react-dom": "16.14.0",
+    "react-router": "^5.2.0",
+    "react-router-dom": "^5.2.0",
+    "typescript": "4.0.3"
+  },
+  "devDependencies": {
+    "@testing-library/react": "11.0.4",
+    "@testing-library/react-hooks": "3.4.2",
+    "@types/jest": "26.0.14",
+    "@types/node": "14.11.8",
+    "@types/react": "16.9.55",
+    "@types/react-dom": "16.9.8",
+    "jest": "26.5.3",
+    "prettier": "2.1.2",
+    "ts-jest": "26.4.3",
+    "ts-node": "9.0.0"
+  },
+  "scripts": {
+    "serve": "npx parcel serve src/app/index.html",
+    "test": "yarn test:clearCache && jest ./packages --forceExit",
+    "test:all": "yarn lint:css && yarn test",
+    "tsc": "tsc -p ./tsconfig.json"
+  },
+  "bugs": {
+    "url": "https://github.com/stephenfrancis/nucifera/issues"
+  }
+}

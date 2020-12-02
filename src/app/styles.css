@@ -1,0 +1,40 @@
+.header {
+  border-bottom: 1px solid black;
+  height: 40px;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+}
+
+.gutter {
+  border-right: 1px solid black;
+  bottom: 0;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 40px;
+}
+
+.footer {
+  border-top: 1px solid black;
+  bottom: 0;
+  height: 40px;
+  left: 0;
+  position: fixed;
+  right: 0;
+}
+
+.log {
+  box-sizing: border-box;
+  margin-left: 40px;
+  overflow: hidden;
+  padding: 8px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: calc(100vw - 56px);
+}
+
+.log_error {
+  color: red;
+}

@@ -1,0 +1,53 @@
+import * as React from "react";
+import * as ReactDOM from "react-dom";
+import { Route, Switch } from "react-router";
+import { BrowserRouter, Link } from "react-router-dom";
+
+import OpenDocument from "./OpenDocument";
+import OpenView from "./OpenView";
+
+const App: React.FC<{}> = () => {
+  return (
+    <BrowserRouter>
+      <Switch>
+        <Route
+          path="/:db/edit/:doc_id"
+          render={(props) => {
+            return (
+              <OpenDocument
+                db_id={props.match.params.db}
+                doc_id={props.match.params.doc_id}
+                edit_mode={true}
+              />
+            );
+          }}
+        />
+        <Route
+          path="/:db/show/:doc_id"
+          render={(props) => {
+            return (
+              <OpenDocument
+                db_id={props.match.params.db}
+                doc_id={props.match.params.doc_id}
+                edit_mode={false}
+              />
+            );
+          }}
+        />
+        <Route
+          path="/:db/view/:view_id"
+          render={(props) => {
+            return (
+              <OpenView
+                db_id={props.match.params.db}
+                view_id={props.match.params.view_id}
+              />
+            );
+          }}
+        />
+      </Switch>
+    </BrowserRouter>
+  );
+};
+
+ReactDOM.render(<App />, document.getElementById("root"));
