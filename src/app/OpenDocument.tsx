@@ -1,59 +1,36 @@
 import * as React from "react";
-import PouchDB from "pouchdb";
 
-import BuiltinTemplate from "./builtin_template.json";
+import Database from "../data/Database";
 import DisplayDocument from "./DisplayDocument";
 import Loading from "./Loading";
-import { error, info } from "./Logger";
+import { error, info } from "../data/Logger";
+import { editMode } from "../types/General";
 import { Template } from "../types/Template";
 
 interface Props {
   db_id: string;
   doc_id: string;
-  edit_mode: boolean;
+  edit_mode: editMode;
+  template_id?: string; // for create mode only
 }
 
-const renderLoading = () => <div>Loading...</div>;
-
 const Main: React.FC<Props> = (props) => {
-  const [db, setDB] = React.useState<PouchDB.Database>(null);
+  const [db, setDB] = React.useState<Database>(null);
   const [doc, setDoc] = React.useState<any>(null);
   const [template, setTemplate] = React.useState<Template>(null);
   React.useEffect(() => {
-    info(`opening database: ${props.db_id}`);
-    setDB(new PouchDB(props.db_id));
+    setDB(new Database(props.db_id));
   }, [props.db_id]);
   React.useEffect(() => {
     if (db) {
-      info(`getting document: ${props.doc_id}`);
-      db.get(props.doc_id)
-        .then((result: any) => {
-          setDoc(result);
-          const template_id = result.template;
-          if (
-            template_id &&
-            template_id !== "main" &&
-            (!template || template.id !== template_id)
-          ) {
-            info(`getting template: ${template_id}`);
-            return db.get(template_id);
-          }
-        })
-        .then((result: any) => {
-          if (result) {
-            setTemplate(result);
-          } else if (!template || template.id !== "main") {
-            info(`getting template: main`);
-            return db.get("main");
-          }
-        })
-        .then((result: any) => {
-          if (result) {
-            setTemplate(result);
-          } else if (!template) {
-            info(`getting template: builtin`);
-            setTemplate(BuiltinTemplate as Template);
-          }
+      const promise =
+        props.edit_mode === "create"
+          ? db.createNewDocumentFromTemplate(props.doc_id)
+          : db.getExistingDocumentAndTemplate(props.doc_id);
+      promise
+        .then(([temp_doc, temp_template]) => {
+          setDoc(temp_doc);
+          setTemplate(temp_template);
         })
         .catch((err) => {
           error(err);

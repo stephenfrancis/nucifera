@@ -11,25 +11,26 @@ const App: React.FC<{}> = () => {
     <BrowserRouter>
       <Switch>
         <Route
-          path="/:db/edit/:doc_id"
+          path="/:db/create/:template_id(/:doc_id)"
           render={(props) => {
             return (
               <OpenDocument
                 db_id={props.match.params.db}
                 doc_id={props.match.params.doc_id}
-                edit_mode={true}
+                edit_mode="create"
+                template_id={props.match.params.template_id}
               />
             );
           }}
         />
         <Route
-          path="/:db/show/:doc_id"
+          path="/:db/:edit_mode/:doc_id"
           render={(props) => {
             return (
               <OpenDocument
                 db_id={props.match.params.db}
                 doc_id={props.match.params.doc_id}
-                edit_mode={false}
+                edit_mode={props.match.params.edit_mode}
               />
             );
           }}

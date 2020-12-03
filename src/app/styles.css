@@ -1,3 +1,7 @@
+body {
+  font-family: "Titillium Web", sans-serif;
+}
+
 .header {
   border-bottom: 1px solid black;
   height: 40px;
@@ -5,6 +9,12 @@
   position: fixed;
   right: 0;
   top: 0;
+}
+
+.burger_icon {
+  cursor: pointer;
+  font-size: 24px;
+  padding: 2px 8px;
 }
 
 .gutter {
@@ -27,12 +37,13 @@
 
 .log {
   box-sizing: border-box;
+  cursor: pointer;
   margin-left: 40px;
   overflow: hidden;
-  padding: 8px;
+  padding: 6px 10px;
   text-overflow: ellipsis;
   white-space: nowrap;
-  width: calc(100vw - 56px);
+  width: calc(100vw - 60px);
 }
 
 .log_error {
