@@ -1,5 +1,10 @@
 import * as React from "react";
 
+import Database from "../data/Database";
+import Loading from "./Loading";
+import { error, info } from "../data/Logger";
+import { View } from "../types/View";
+
 interface Props {
   db_id: string;
   view_id: string;
@@ -10,30 +15,19 @@ const renderLoading = () => <div>Loading...</div>;
 const renderView = (id: string) => <div>Document Id: {id}</div>;
 
 const Main: React.FC<Props> = (props) => {
-  const [db, setDB] = React.useState<PouchDB.Database>(null);
-  const [view, setView] = React.useState<any>(null);
+  const [db, setDB] = React.useState<Database>(null);
+  const [view, setView] = React.useState<View>(null);
   React.useEffect(() => {
-    setDB(new PouchDB(props.db_id));
+    setDB(new Database(props.db_id));
   }, [props.db_id]);
   React.useEffect(() => {
     if (db) {
-      db.get(props.view_id)
-        .then((result: any) => {
-          if (result) {
-            setView(result);
-          } else if (props.view_id !== "all") {
-            return db.get("all");
-          }
-        })
-        .then((result: any) => {
-          if (result) {
-            setView(result);
-            // } else  {
-            //   setView(BuiltinView);
-          }
+      db.getView(props.view_id)
+        .then((temp_view: View) => {
+          setView(temp_view);
         })
         .catch((err) => {
-          console.error(err);
+          error(err);
         });
     }
   }, [db?.name, props.view_id]);

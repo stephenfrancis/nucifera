@@ -10,7 +10,7 @@ const Main: React.FC<Props> = (props) => {
       <div className="gutter">
         <BurgerMenu />
       </div>
-      {props.children}
+      <div className="mainarea">{props.children}</div>
     </div>
   );
 };

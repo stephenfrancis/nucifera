@@ -1,5 +1,6 @@
 interface CommonField {
   id: string;
+  hidden_for_edit?: boolean;
   mandatory?: boolean;
 }
 

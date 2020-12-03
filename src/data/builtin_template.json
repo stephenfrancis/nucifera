@@ -13,17 +13,20 @@
     },
     {
       "type": "p",
+      "justifyContent": "space-between",
       "cells": [
         {
           "field": {
             "type": "date",
-            "id": "created_at"
+            "id": "created_at",
+            "hidden_for_edit": true
           }
         },
         {
           "field": {
             "type": "text",
-            "id": "created_by"
+            "id": "created_by",
+            "hidden_for_edit": true
           }
         }
       ]

@@ -22,13 +22,14 @@ const Main: React.FC<Props> = (props) => {
         setOpen={setModal}
         closeOnBackgroundClick
         modalStyle={{
+          border: "1px solid black",
           borderRadius: 0,
           padding: 8,
           height: "auto",
           width: "auto",
           position: "fixed",
-          top: 41,
-          left: 41,
+          top: 40,
+          left: 0,
         }}
       >
         <div>

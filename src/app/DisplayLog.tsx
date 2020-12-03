@@ -8,11 +8,11 @@ interface Props {}
 
 const renderMessage = (msg: LogMessage) => {
   const className = `log_${msg?.level}`;
+  let time_str: string = String(msg.raised_at.getMilliseconds());
+  time_str = "0".repeat(3 - time_str.length) + time_str;
   return (
     <div className={className} key={String(msg.raised_at.valueOf())}>
-      {`${msg.raised_at.toLocaleTimeString()}.${msg.raised_at.getMilliseconds()}: ${
-        msg.text
-      }`}
+      {`${msg.raised_at.toLocaleTimeString()}.${time_str}: ${msg.text}`}
     </div>
   );
 };
@@ -36,13 +36,14 @@ const Main: React.FC<Props> = (props) => {
         setOpen={setModal}
         closeOnBackgroundClick
         modalStyle={{
+          border: "1px solid black",
           borderRadius: 0,
           padding: 8,
           height: "auto",
           width: "auto",
           position: "fixed",
-          bottom: 41,
-          left: 41,
+          bottom: 40,
+          left: 40,
           right: 0,
         }}
       >

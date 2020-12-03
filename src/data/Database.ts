@@ -1,8 +1,10 @@
 import PouchDB from "pouchdb";
 import BuiltinTemplate from "./builtin_template.json";
 
+import Document from "./Document";
 import { error, info } from "./Logger";
 import { Template } from "../types/Template";
+import { View } from "../types/View";
 
 export default class Database {
   public readonly name: string;
@@ -19,9 +21,12 @@ export default class Database {
   createNewDocumentFromTemplate(
     template_id: string,
     doc_id?: string
-  ): Promise<[{}, Template]> {
+  ): Promise<Document> {
     info(`createNewDocumentFromTemplate(${template_id}, ${doc_id})`);
     let template: Template;
+    if (!doc_id) {
+      doc_id = `d${Math.random() * 10e16}`;
+    }
     return this.pouch
       .get(template_id)
       .then((result: any) => {
@@ -32,40 +37,49 @@ export default class Database {
         template = BuiltinTemplate as Template;
       })
       .then(() => {
-        return [{}, template];
+        return new Document(this, doc_id, {}, template);
       });
   }
 
-  getExistingDocumentAndTemplate(doc_id: string): Promise<[any, Template]> {
-    let doc, template;
+  getExistingDocumentAndTemplate(doc_id: string): Promise<Document> {
+    let doc;
     info(`getExistingDocumentAndTemplate(${doc_id})`);
     return this.pouch
       .get(doc_id)
       .then((result: any) => {
         doc = result;
         const template_id = doc.template;
-        if (template_id && template_id !== "main") {
-          info(`getting template: ${template_id}`);
-          return this.pouch.get(template_id);
+        if (!template_id) {
+          throw "no template specified in document";
         }
+        info(`getting template: ${template_id}`);
+        return this.pouch.get(template_id);
       })
       .then((result: any) => {
-        if (result) {
-          template = result;
-        } else {
-          info(`getting template: main`);
-          return this.pouch.get("main");
-        }
+        return new Document(this, doc_id, doc, result);
       })
-      .then((result: any) => {
-        if (result) {
-          template = result;
+      .catch((err) => {
+        error(err);
+        if (!doc) {
+          throw err;
         }
-        if (!template) {
-          info(`getting template: builtin`);
-          template = BuiltinTemplate as Template;
-        }
-        return [doc, template];
+        info(`template not found in database, using builtin`);
+        return new Document(this, doc_id, doc, BuiltinTemplate as Template);
       });
+  }
+
+  getView(view_id: string): Promise<View> {
+    info(`getView(${view_id})`);
+    return this.pouch.get(view_id).then((result: any) => {
+      return result as View;
+    });
+    // .catch((err) => {
+    //   error(err);
+    // });
+  }
+
+  saveDocument(id: string, data: any) {
+    data._id = id;
+    return this.pouch.put(data);
   }
 }
