@@ -2,8 +2,8 @@ import * as React from "react";
 
 interface Props {}
 
-const Main: React.FC<Props> = (props) => {
-  return <div className="header"></div>;
+const Header: React.FC<Props> = (props) => {
+  return <div className="header">{props.children}</div>;
 };
 
-export default Main;
+export default Header;

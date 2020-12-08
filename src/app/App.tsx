@@ -24,6 +24,17 @@ const App: React.FC<{}> = () => {
           }}
         />
         <Route
+          path="/:db/view/:view_id"
+          render={(props) => {
+            return (
+              <OpenView
+                db_id={props.match.params.db}
+                view_id={props.match.params.view_id}
+              />
+            );
+          }}
+        />
+        <Route
           path="/:db/:edit_mode/:doc_id"
           render={(props) => {
             return (
@@ -31,17 +42,6 @@ const App: React.FC<{}> = () => {
                 db_id={props.match.params.db}
                 doc_id={props.match.params.doc_id}
                 edit_mode={props.match.params.edit_mode}
-              />
-            );
-          }}
-        />
-        <Route
-          path="/:db/view/:view_id"
-          render={(props) => {
-            return (
-              <OpenView
-                db_id={props.match.params.db}
-                view_id={props.match.params.view_id}
               />
             );
           }}

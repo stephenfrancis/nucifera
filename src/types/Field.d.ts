@@ -16,6 +16,7 @@ export interface NumberField extends CommonField {
 
 export interface OptionsField extends CommonField {
   type: "options";
+  options: string[];
 }
 
 export interface RichTextField extends CommonField {

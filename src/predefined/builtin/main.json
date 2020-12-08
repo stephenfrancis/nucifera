@@ -1,4 +1,6 @@
 {
+  "_id": "main",
+  "template": "builtin:template",
   "content": [
     {
       "type": "h1",
@@ -42,6 +44,5 @@
         }
       ]
     }
-  ],
-  "id": "builtin"
+  ]
 }

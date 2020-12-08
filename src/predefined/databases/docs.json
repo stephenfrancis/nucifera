@@ -1,0 +1,22 @@
+{
+  "_id": "docs",
+  "template": "builtin:view",
+  "type": "list",
+  "columns": [
+    {
+      "id": "_id",
+      "label": "Id",
+      "type": "text"
+    },
+    {
+      "id": "label",
+      "label": "Label",
+      "type": "text"
+    },
+    {
+      "id": "remote_url",
+      "label": "Remote URL",
+      "type": "text"
+    }
+  ]
+}

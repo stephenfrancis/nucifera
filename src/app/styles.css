@@ -1,10 +1,35 @@
+/*
+Tints:
+
+#6400c1
+#7720c9
+#8b40d1
+#9e60d8
+#b280e0
+#c59fe8
+#d8bff0
+#ecdff7
+*/
+
 * {
   box-sizing: border-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+a {
+  color: inherit;
+  text-decoration: inherit;
 }
 
 body {
   font-family: "Titillium Web", sans-serif;
   margin: 0;
+}
+
+button {
+  font: inherit;
 }
 
 input {
@@ -15,26 +40,24 @@ input {
   width: 100%;
 }
 
-button {
-  border-radius: 3px;
-  font-size: 1.2rem;
-  padding: 5px 10px;
-}
-
 .header {
   border-bottom: 1px solid black;
+  display: flex;
+  flex-flow: row nowrap;
   height: 40px;
   left: 0;
+  padding: 2px 5px 2px 45px;
   position: fixed;
   right: 0;
   top: 0;
+  width: 100%;
 }
 
 .burger_icon {
   color: #6400c1; /* primary theme colour */
   cursor: pointer;
   font-size: 24px;
-  padding: 2px 8px;
+  padding: 1px 8px;
 }
 
 .gutter {
@@ -47,32 +70,77 @@ button {
 }
 
 .mainarea {
-  margin: 40px 0 0 40px;
-  padding: 10px;
+  margin-top: 40px;
+}
+
+.list_row {
+  background-color: #eee;
+  border-bottom: 1px solid black;
+  display: flex;
+  flex-flow: row nowrap;
+  padding: 2px 5px 2px 45px;
+  width: 100%;
+}
+
+.list_row_selected {
+  background-color: #d8bff0;
+}
+
+.list_row:hover {
+  background-color: #ddd;
+}
+
+.list_cell_xs {
+  padding: 5px;
+  width: 50px;
+}
+
+.list_cell_s {
+  padding: 5px;
+  width: 100px;
+}
+
+.list_cell_m {
+  padding: 5px;
+  width: 200px;
+}
+
+.list_cell_l {
+  padding: 5px;
+  width: 400px;
+}
+
+.list_cell_xl {
+  padding: 5px;
+  width: 600px;
 }
 
 .block_h1 {
   display: flex;
   font-size: 3rem;
-  margin: 20px 0 10px 0;
+  margin: 20px 0 10px 40px;
+  padding: 0 10px;
 }
 
 .block_h2 {
   display: flex;
   font-size: 2.5rem;
-  margin: 15px 0 5px 0;
+  margin: 15px 0 5px 40px;
+  padding: 0 10px;
 }
 
 .block_h3 {
   display: flex;
   font-size: 2rem;
-  margin: 10px 0 0 0;
+  margin: 10px 0 0 40px;
+  padding: 0 10px;
 }
 
 .block_p {
   display: flex;
   font-size: 1rem;
-  margin: 0 0 0 0;
+  margin: 0 0 0 40px;
+  padding: 0 10px;
 }
 
 .cell {
@@ -80,9 +148,33 @@ button {
 }
 
 .button_pri {
+  background-color: #eee;
   border: 1px solid #6400c1; /* primary theme colour */
+  border-radius: 3px;
   color: #6400c1; /* primary theme colour */
   cursor: pointer;
+  display: block;
+  font-size: 1rem;
+  padding: 5px 10px;
+}
+
+.button_pri:hover {
+  background-color: #ccc;
+}
+
+.button_sec {
+  background-color: #eee;
+  border: 1px solid #555;
+  border-radius: 3px;
+  color: #555;
+  cursor: pointer;
+  display: block;
+  font-size: 1rem;
+  padding: 5px 10px;
+}
+
+.button_sec:hover {
+  background-color: #ccc;
 }
 
 .footer {

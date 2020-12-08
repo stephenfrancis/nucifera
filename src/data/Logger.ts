@@ -44,6 +44,10 @@ export function registerNewMessageCallback(funct: (msg: LogMessage) => void) {
   callbacks.push(funct);
 }
 
+export function unRegisterNewMessageCallback(funct: (msg: LogMessage) => void) {
+  callbacks.splice(callbacks.indexOf(funct), 1);
+}
+
 export function warn(text: string) {
   msg(text, "warn");
 }

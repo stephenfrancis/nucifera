@@ -1,0 +1,46 @@
+{
+  "_id": "main",
+  "template": "builtin:template",
+  "content": [
+    {
+      "type": "h1",
+      "cells": [
+        {
+          "field": {
+            "type": "text",
+            "id": "_id"
+          }
+        }
+      ]
+    },
+    {
+      "type": "p",
+      "cells": [
+        {
+          "field": {
+            "type": "text",
+            "id": "label"
+          }
+        }
+      ]
+    },
+    {
+      "type": "p",
+      "cells": [
+        {
+          "field": {
+            "type": "text",
+            "id": "remote_url"
+          }
+        },
+        {
+          "field": {
+            "type": "option",
+            "id": "location",
+            "options": ["local only", "remote only", "local and remote"]
+          }
+        }
+      ]
+    }
+  ]
+}

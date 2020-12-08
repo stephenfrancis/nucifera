@@ -1,10 +1,9 @@
-import { FieldsetHTMLAttributes } from "react";
-
 import { Field } from "./Field";
 
 export interface Template {
+  _id: string;
   content: TemplateBlock[];
-  id: string;
+  template: string;
 }
 
 export type TemplateBlockType = "h1" | "h2" | "h3" | "p" | "code";

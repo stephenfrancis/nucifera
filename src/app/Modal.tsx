@@ -9,7 +9,7 @@ interface Props {
   setOpen: (open: boolean) => void;
 }
 
-const Default: React.FC<Props> = (props: Props) => {
+const Modal: React.FC<Props> = (props: Props) => {
   const close = () => {
     props.setOpen(false);
   };
@@ -85,4 +85,4 @@ const Default: React.FC<Props> = (props: Props) => {
   ) : null;
 };
 
-export default Default;
+export default Modal;

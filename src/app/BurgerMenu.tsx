@@ -3,7 +3,9 @@ import * as React from "react";
 import Modal from "./Modal";
 import useModal from "./useModal";
 
-interface Props {}
+interface Props {
+  content: () => JSX.Element;
+}
 
 const Main: React.FC<Props> = (props) => {
   const [modal, setModal] = useModal();
@@ -34,6 +36,7 @@ const Main: React.FC<Props> = (props) => {
       >
         <div>
           <h1>Nucifera</h1>
+          {props.content()}
         </div>
       </Modal>
     </>

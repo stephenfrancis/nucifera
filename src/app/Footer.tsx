@@ -4,7 +4,7 @@ import DisplayLog from "./DisplayLog";
 
 interface Props {}
 
-const Main: React.FC<Props> = (props) => {
+const Footer: React.FC<Props> = (props) => {
   return (
     <div className="footer">
       <DisplayLog />
@@ -12,4 +12,4 @@ const Main: React.FC<Props> = (props) => {
   );
 };
 
-export default Main;
+export default Footer;

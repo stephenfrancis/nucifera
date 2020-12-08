@@ -14,7 +14,7 @@ interface Props {
   template_id?: string; // for create mode only
 }
 
-const Main: React.FC<Props> = (props) => {
+const OpenDocument: React.FC<Props> = (props) => {
   const [db, setDB] = React.useState<Database>(null);
   const [doc, setDoc] = React.useState<Document>(null);
   React.useEffect(() => {
@@ -44,4 +44,4 @@ const Main: React.FC<Props> = (props) => {
   );
 };
 
-export default Main;
+export default OpenDocument;

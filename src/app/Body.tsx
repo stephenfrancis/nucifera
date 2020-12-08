@@ -2,17 +2,19 @@ import * as React from "react";
 
 import BurgerMenu from "./BurgerMenu";
 
-interface Props {}
+interface Props {
+  burgerMenuContent: () => JSX.Element;
+}
 
-const Main: React.FC<Props> = (props) => {
+const Body: React.FC<Props> = (props) => {
   return (
     <div className="body">
       <div className="gutter">
-        <BurgerMenu />
+        <BurgerMenu content={props.burgerMenuContent} />
       </div>
       <div className="mainarea">{props.children}</div>
     </div>
   );
 };
 
-export default Main;
+export default Body;

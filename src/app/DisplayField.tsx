@@ -42,10 +42,10 @@ const renderUneditable = (value: any) => {
   return <>{String(value)}</>;
 };
 
-const Main: React.FC<Props> = (props) => {
+const DisplayField: React.FC<Props> = (props) => {
   return props.edit_mode === "show"
     ? renderUneditable(props.value_container[props.field.id] || "--")
     : renderEditable(props.field, props.value_container);
 };
 
-export default Main;
+export default DisplayField;

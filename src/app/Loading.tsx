@@ -6,14 +6,14 @@ import Footer from "./Footer";
 
 interface Props {}
 
-const Main: React.FC<Props> = (props) => {
+const Loading: React.FC<Props> = (props) => {
   return (
     <>
       <Header />
-      <Body />
+      <Body burgerMenuContent={() => <></>} />
       <Footer />
     </>
   );
 };
 
-export default Main;
+export default Loading;

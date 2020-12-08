@@ -19,6 +19,14 @@ export default class Document {
     return this.data;
   }
 
+  getDatabase(): Database {
+    return this.db;
+  }
+
+  getDefaultViewLink(): string {
+    return `/${this.db.name}/view/docs`;
+  }
+
   getEditLink(): string {
     return `/${this.db.name}/edit/${this.id}`;
   }

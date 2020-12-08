@@ -1,6 +1,11 @@
 import * as React from "react";
 
-import { getAll, LogMessage, registerNewMessageCallback } from "../data/Logger";
+import {
+  getAll,
+  LogMessage,
+  registerNewMessageCallback,
+  unRegisterNewMessageCallback,
+} from "../data/Logger";
 import Modal from "./Modal";
 import useModal from "./useModal";
 
@@ -17,11 +22,14 @@ const renderMessage = (msg: LogMessage) => {
   );
 };
 
-const Main: React.FC<Props> = (props) => {
+const DisplayLog: React.FC<Props> = (props) => {
   const [msg, setMsg] = React.useState<LogMessage | null>(null);
   const [modal, setModal] = useModal();
   React.useEffect(() => {
     registerNewMessageCallback(setMsg);
+    return () => {
+      unRegisterNewMessageCallback(setMsg);
+    };
   }, []);
   const toggleModal = () => {
     setModal(!modal);
@@ -58,4 +66,4 @@ const Main: React.FC<Props> = (props) => {
   );
 };
 
-export default Main;
+export default DisplayLog;
