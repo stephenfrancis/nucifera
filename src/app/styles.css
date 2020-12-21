@@ -1,5 +1,5 @@
 /*
-Tints:
+primary theme colour tints:
 
 #6400c1
 #7720c9
@@ -13,7 +13,7 @@ Tints:
 
 * {
   box-sizing: border-box;
-  overflow: hidden;
+  overflow-x: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -29,6 +29,7 @@ body {
 }
 
 button {
+  border: 0;
   font: inherit;
 }
 
@@ -37,6 +38,13 @@ input {
   border-radius: 3px;
   font-family: "Titillium Web", sans-serif;
   font-size: inherit;
+  width: 100%;
+}
+
+textarea {
+  /* height: 50vh; */
+  resize: none;
+  white-space: pre-wrap;
   width: 100%;
 }
 
@@ -53,11 +61,26 @@ input {
   width: 100%;
 }
 
+.logo {
+  font-size: 22px;
+  padding: 1px 10px;
+  position: absolute;
+  right: 0;
+}
+
+.logo > b {
+  color: #6400c1;
+}
+
 .burger_icon {
   color: #6400c1; /* primary theme colour */
   cursor: pointer;
   font-size: 24px;
-  padding: 1px 8px;
+  padding: 5px 4px;
+}
+
+.burger_icon > img {
+  width: 30px;
 }
 
 .gutter {
@@ -144,13 +167,14 @@ input {
 }
 
 .cell {
+  flex: 1 0 100px;
   padding: 0 5px 5px 0;
+  white-space: pre-wrap;
 }
 
 .button_pri {
   background-color: #eee;
-  border: 1px solid #6400c1; /* primary theme colour */
-  border-radius: 3px;
+  border-left: 1px solid black;
   color: #6400c1; /* primary theme colour */
   cursor: pointer;
   display: block;
@@ -164,8 +188,7 @@ input {
 
 .button_sec {
   background-color: #eee;
-  border: 1px solid #555;
-  border-radius: 3px;
+  border-left: 1px solid black;
   color: #555;
   cursor: pointer;
   display: block;
@@ -180,6 +203,8 @@ input {
 .footer {
   border-top: 1px solid black;
   bottom: 0;
+  display: flex;
+  flex-flow: row nowrap;
   height: 40px;
   left: 0;
   position: fixed;
@@ -194,7 +219,7 @@ input {
   padding: 6px 10px;
   text-overflow: ellipsis;
   white-space: nowrap;
-  width: calc(100vw - 60px);
+  flex: 1 0 200px;
 }
 
 .log_error {

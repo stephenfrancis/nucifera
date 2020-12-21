@@ -1,0 +1,88 @@
+{
+  "_id": "view",
+  "template": "builtin:template",
+  "content": [
+    {
+      "type": "h1",
+      "cells": [
+        {
+          "field": {
+            "type": "text",
+            "id": "_id"
+          }
+        }
+      ]
+    },
+    {
+      "type": "p",
+      "cells": [
+        {
+          "text": "Type"
+        },
+        {
+          "field": {
+            "type": "text",
+            "id": "type"
+          }
+        }
+      ]
+    },
+    {
+      "type": "h2",
+      "cells": [
+        {
+          "text": "Index"
+        }
+      ]
+    },
+    {
+      "type": "p",
+      "cells": [
+        {
+          "field": {
+            "id": "index",
+            "type": "json"
+          }
+        }
+      ]
+    },
+    {
+      "type": "h2",
+      "cells": [
+        {
+          "text": "Selector"
+        }
+      ]
+    },
+    {
+      "type": "p",
+      "cells": [
+        {
+          "field": {
+            "id": "selector",
+            "type": "json"
+          }
+        }
+      ]
+    },
+    {
+      "type": "h2",
+      "cells": [
+        {
+          "text": "Columns"
+        }
+      ]
+    },
+    {
+      "type": "p",
+      "cells": [
+        {
+          "field": {
+            "id": "columns",
+            "type": "json"
+          }
+        }
+      ]
+    }
+  ]
+}

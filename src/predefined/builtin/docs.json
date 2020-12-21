@@ -2,6 +2,12 @@
   "_id": "docs",
   "template": "builtin:view",
   "type": "list",
+  "index": ["template"],
+  "selector": {
+    "template": {
+      "$regex": "^(?!builtin:.*$).*"
+    }
+  },
   "columns": [
     {
       "id": "title",

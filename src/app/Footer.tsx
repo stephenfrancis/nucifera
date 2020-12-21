@@ -8,6 +8,7 @@ const Footer: React.FC<Props> = (props) => {
   return (
     <div className="footer">
       <DisplayLog />
+      {props.children}
     </div>
   );
 };

@@ -1,0 +1,23 @@
+{
+  "_id": "design",
+  "template": "builtin:view",
+  "type": "list",
+  "index": ["template"],
+  "selector": {
+    "template": {
+      "$regex": "^builtin:"
+    }
+  },
+  "columns": [
+    {
+      "id": "_id",
+      "label": "Title",
+      "type": "text"
+    },
+    {
+      "id": "type",
+      "label": "Type",
+      "type": "text"
+    }
+  ]
+}

@@ -31,6 +31,12 @@ const BurgerMenuDocument: React.FC<Props> = (props) => {
               <b>{props.doc.getData().template}</b>
             </td>
           </tr>
+          <tr>
+            <td>conflicts</td>
+            <td>
+              <b>{props.doc.getData()._conflicts}</b>
+            </td>
+          </tr>
         </tbody>
       </table>
     </>

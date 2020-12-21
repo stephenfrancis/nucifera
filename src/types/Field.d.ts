@@ -8,6 +8,14 @@ export interface DateField extends CommonField {
   type: "date";
 }
 
+export interface ImageField extends CommonField {
+  type: "image";
+}
+
+export interface JSONField extends CommonField {
+  type: "json";
+}
+
 export interface NumberField extends CommonField {
   max?: number;
   min?: number;
@@ -31,6 +39,8 @@ export interface TextField extends CommonField {
 
 export type Field =
   | DateField
+  | ImageField
+  | JSONField
   | NumberField
   | OptionsField
   | RichTextField

@@ -2,8 +2,9 @@ export type LogLevel = "debug" | "info" | "warn" | "error";
 
 export interface LogMessage {
   level: LogLevel;
-  text: string;
   raised_at: Date;
+  seq: number;
+  text: string;
 }
 
 const logstack = [];
@@ -32,9 +33,10 @@ export function msg(text: string, level: LogLevel) {
     return;
   }
   const msg = {
-    text,
     level,
     raised_at: new Date(),
+    seq: logstack.length,
+    text,
   };
   logstack.push(msg);
   callbacks.forEach((funct) => funct(msg));

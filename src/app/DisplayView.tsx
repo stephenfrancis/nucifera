@@ -5,12 +5,14 @@ import Body from "./Body";
 import BurgerMenuDatabase from "./BurgerMenuDatabase";
 import BurgerMenuView from "./BurgerMenuView";
 import DisplayField from "./DisplayField";
+import ErrorBoundary from "./ErrorBoundary";
 import Footer from "./Footer";
 import Header from "./Header";
 import Loading from "./Loading";
 import { error, info } from "../data/Logger";
 import { getStyleProperties, useEventListener } from "./Utils";
 import View from "../data/View";
+import { DocContent } from "../types/General";
 import { ViewColumn } from "../types/View";
 
 interface Props {
@@ -28,15 +30,15 @@ const getWidth = (col: ViewColumn) => {
   return col.initialWidth || DEFAULT_WIDTH_BY_TYPE[col.type];
 };
 
-const renderCell = (doc: Document, col: ViewColumn) => {
+const renderCell = (doc: DocContent, col: ViewColumn) => {
   return (
     <div className={`list_cell_${getWidth(col)}`} key={col.id}>
-      {/* doc[col.id] */}
-      <DisplayField
+      {doc[col.id]}
+      {/* <DisplayField
         edit_mode="show"
         field={col as Field}
         value_container={doc.getData()}
-      />
+      /> */}
     </div>
   );
 };
@@ -53,7 +55,7 @@ const renderHeaders = (view: View) => {
   );
 };
 
-const renderRow = (view: View, doc: any, selected: boolean) => {
+const renderRow = (view: View, doc: DocContent, selected: boolean) => {
   return (
     <Link key={doc._id} to={view.getShowLink(doc._id)}>
       <div className={"list_row" + (selected ? " list_row_selected" : "")}>
@@ -63,19 +65,15 @@ const renderRow = (view: View, doc: any, selected: boolean) => {
   );
 };
 
-const renderRows = (view: View, data: { rows: any[] }, selected: number) => {
+const renderRows = (view: View, data: DocContent[], selected: number) => {
   console.log(`renderRows() ${selected}`);
   return (
-    <>
-      {data.rows.map((obj, index) =>
-        renderRow(view, obj.doc, selected === index)
-      )}
-    </>
+    <>{data.map((obj, index) => renderRow(view, obj, selected === index))}</>
   );
 };
 
 const DisplayView: React.FC<Props> = (props) => {
-  const [data, setData] = React.useState<any>(null);
+  const [data, setData] = React.useState<DocContent[]>(null);
   const [selected, setSelected] = React.useState<number>(0);
   const [redirect, setRedirect] = React.useState<string>(null);
 
@@ -84,18 +82,14 @@ const DisplayView: React.FC<Props> = (props) => {
       console.log(
         `DisplayView.handleKeyboardEvents() ${event.key}, shift? ${event.shiftKey}, alt? ${event.altKey}, meta? ${event.metaKey}`
       );
-      if (
-        event.key === "ArrowDown" &&
-        data &&
-        selected < data.rows.length - 1
-      ) {
+      if (event.key === "ArrowDown" && data && selected < data.length - 1) {
         console.log(`handleKeyboardEvents() about to increment ${selected}`);
         setSelected(selected + 1);
       } else if (event.key === "ArrowUp" && selected > 0) {
         console.log(`handleKeyboardEvents() about to decrement ${selected}`);
         setSelected(selected - 1);
       } else if (event.key === "Enter" && data) {
-        setRedirect(props.view.getShowLink(data.rows[selected].doc._id));
+        setRedirect(props.view.getShowLink(data[selected]._id));
       }
     },
     [selected, data]
@@ -106,7 +100,7 @@ const DisplayView: React.FC<Props> = (props) => {
   React.useEffect(() => {
     props.view
       .execute()
-      .then((results) => setData(results))
+      .then((results: DocContent[]) => setData(results))
       .catch((err) => {
         error(err);
       });
@@ -125,22 +119,25 @@ const DisplayView: React.FC<Props> = (props) => {
       <Body
         burgerMenuContent={() => (
           <>
-            <BurgerMenuView view={props.view} />
-            <BurgerMenuDatabase db={props.view.getDatabase()} />
+            <ErrorBoundary>
+              <BurgerMenuView view={props.view} />
+            </ErrorBoundary>
+            <ErrorBoundary>
+              <BurgerMenuDatabase db={props.view.getDatabase()} />
+            </ErrorBoundary>
           </>
         )}
       >
-        {!!data && renderRows(props.view, data, selected)}
-        {!data && <Loading />}
-        <div className="block_p" key="button_block">
-          <div className="cell">
-            <Link className="button_pri" to={props.view.getNewDocumentLink()}>
-              Create a New Doc
-            </Link>
-          </div>
-        </div>
+        <ErrorBoundary>
+          {!!data && renderRows(props.view, data, selected)}
+          {!data && <Loading />}
+        </ErrorBoundary>
       </Body>
-      <Footer />
+      <Footer>
+        <Link className="button_pri" to={props.view.getNewDocumentLink()}>
+          Create a New Doc
+        </Link>
+      </Footer>
     </>
   );
 };

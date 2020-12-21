@@ -1,6 +1,9 @@
 export interface View {
   _id: string;
   columns: ViewColumn[];
+  index?: any;
+  selector?: any;
+  sort?: string[];
   template: string;
   type: "list";
 }

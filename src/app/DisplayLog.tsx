@@ -16,7 +16,7 @@ const renderMessage = (msg: LogMessage) => {
   let time_str: string = String(msg.raised_at.getMilliseconds());
   time_str = "0".repeat(3 - time_str.length) + time_str;
   return (
-    <div className={className} key={String(msg.raised_at.valueOf())}>
+    <div className={className} key={String(msg.seq)}>
       {`${msg.raised_at.toLocaleTimeString()}.${time_str}: ${msg.text}`}
     </div>
   );

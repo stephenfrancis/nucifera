@@ -1,0 +1,23 @@
+{
+  "_id": "docs",
+  "template": "builtin:view",
+  "type": "list",
+  "index": ["template"],
+  "selector": {
+    "template": {
+      "$regex": "^(?!builtin:.*$).*"
+    }
+  },
+  "columns": [
+    {
+      "id": "name",
+      "label": "Name",
+      "type": "text"
+    },
+    {
+      "id": "created_at",
+      "label": "Created At",
+      "type": "date"
+    }
+  ]
+}

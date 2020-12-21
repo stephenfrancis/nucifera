@@ -1,0 +1,39 @@
+{
+  "_id": "main",
+  "template": "builtin:template",
+  "content": [
+    {
+      "type": "h1",
+      "cells": [
+        {
+          "field": {
+            "type": "text",
+            "id": "name"
+          }
+        }
+      ]
+    },
+    {
+      "type": "p",
+      "cells": [
+        {
+          "field": {
+            "type": "richtext",
+            "id": "summary"
+          }
+        }
+      ]
+    },
+    {
+      "type": "p",
+      "cells": [
+        {
+          "field": {
+            "type": "richtext",
+            "id": "description"
+          }
+        }
+      ]
+    }
+  ]
+}

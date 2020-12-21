@@ -24,7 +24,7 @@ const OpenDocument: React.FC<Props> = (props) => {
     if (db) {
       const promise =
         props.edit_mode === "create"
-          ? db.createNewDocumentFromTemplate(props.doc_id)
+          ? db.createNewDocumentFromTemplate(props.template_id, props.doc_id)
           : db.getExistingDocumentAndTemplate(props.doc_id);
       promise
         .then((temp_doc: Document) => {

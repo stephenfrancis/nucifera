@@ -1,0 +1,42 @@
+{
+  "_id": "template",
+  "template": "builtin:template",
+  "content": [
+    {
+      "type": "h1",
+      "cells": [
+        {
+          "field": {
+            "type": "text",
+            "id": "_id"
+          }
+        }
+      ]
+    },
+    {
+      "type": "p",
+      "cells": [
+        {
+          "text": "Template"
+        },
+        {
+          "field": {
+            "id": "template",
+            "type": "text"
+          }
+        }
+      ]
+    },
+    {
+      "type": "p",
+      "cells": [
+        {
+          "field": {
+            "id": "content",
+            "type": "json"
+          }
+        }
+      ]
+    }
+  ]
+}

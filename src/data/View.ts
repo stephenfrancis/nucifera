@@ -1,5 +1,6 @@
 import Database from "./Database";
 import { error, info } from "./Logger";
+import { DocContent } from "../types/General";
 import { View as ViewSpec, ViewColumn } from "../types/View";
 
 export default class View {
@@ -13,16 +14,29 @@ export default class View {
     this.spec = spec;
   }
 
-  execute(): Promise<any> {
-    info(`execute() on view ${this.id}`);
-    // return this.db.find({
-    // selector: { field: value },
-    // fields: this.spec.columns.map((col) => col.id),
-    // sort: [ cols ]
-    // });
-    return this.db.allDocs({
-      include_docs: true,
-    });
+  execute(): Promise<DocContent[]> {
+    info(`execute() on view ${this.id} with index? ${this.spec.index}`);
+    if (this.spec.index) {
+      return this.db.find(
+        this.id,
+        this.spec.index,
+        this.spec.columns.map((col) => col.id),
+        this.spec.selector,
+        this.spec.sort
+      );
+    }
+    if (this.spec.selector || this.spec.sort) {
+      error(
+        `view ${this.id} specifies selector ${this.spec.selector} and/or sort ${this.spec.sort} without specifying an index`
+      );
+    }
+    return this.db
+      .allDocs({
+        include_docs: true,
+      })
+      .then((data) => {
+        return data.rows.map((row) => row.doc as DocContent);
+      });
   }
 
   getColumns(): ViewColumn[] {

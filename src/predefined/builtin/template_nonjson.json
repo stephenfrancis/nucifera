@@ -1,0 +1,61 @@
+{
+  "_id": "template",
+  "template": "builtin:template",
+  "content": [
+    {
+      "type": "h1",
+      "cells": [
+        {
+          "field": {
+            "type": "text",
+            "id": "_id"
+          }
+        }
+      ]
+    },
+    {
+      "type": "p",
+      "cells": [
+        {
+          "text": "Template"
+        },
+        {
+          "field": {
+            "type": "text",
+            "id": "template"
+          }
+        }
+      ]
+    },
+    {
+      "type": "arraytable",
+      "id": "content",
+      "columns": [
+        {
+          "field": {
+            "type": "text",
+            "id": "type"
+          }
+        },
+        {
+          "field": {
+            "type": "text",
+            "id": "padding"
+          }
+        },
+        {
+          "field": {
+            "type": "text",
+            "id": "border"
+          }
+        },
+        {
+          "field": {
+            "type": "text",
+            "id": "margin"
+          }
+        }
+      ]
+    }
+  ]
+}
