@@ -1,8 +1,10 @@
-import { cloneDeep, isEqual } from "lodash";
+import cloneDeep from "lodash/cloneDeep";
+import isEqual from "lodash/isEqual";
 
 import Database from "./Database";
 import { error, info } from "./Logger";
 import { Template } from "../types/Template";
+import { validateTemplate } from "../app/fields/validate";
 
 export default class Document {
   private data: any;
@@ -57,6 +59,10 @@ export default class Document {
     return !isEqual(this.data, this.orig_data);
   }
 
+  isValid(): boolean {
+    return validateTemplate(this.template, this.data);
+  }
+
   save() {
     if (this.has_been_deleted) {
       throw new Error(
@@ -66,10 +72,15 @@ export default class Document {
     if (!this.isModified()) {
       throw new Error(`document ${this._id} is not modified`);
     }
+    if (!this.isValid()) {
+      throw new Error(`document ${this._id} is not valid`);
+    }
     info(`saving document: ${this._id}`);
     if (!this.data.created_at) {
       this.data.created_at = Date.now();
     }
-    return this.db.saveDocument(this._id, this.data);
+    return this.db.saveDocument(this._id, this.data).then(() => {
+      info("saved");
+    });
   }
 }

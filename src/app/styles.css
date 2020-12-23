@@ -48,7 +48,12 @@ textarea {
   width: 100%;
 }
 
+.root {
+  background-color: #f8f8f8;
+}
+
 .header {
+  background-color: inherit;
   border-bottom: 1px solid black;
   display: flex;
   flex-flow: row nowrap;
@@ -68,6 +73,12 @@ textarea {
   right: 0;
 }
 
+.logo > img {
+  margin: 0 5px 3px 0;
+  vertical-align: bottom;
+  width: 25px;
+}
+
 .logo > b {
   color: #6400c1;
 }
@@ -75,12 +86,8 @@ textarea {
 .burger_icon {
   color: #6400c1; /* primary theme colour */
   cursor: pointer;
-  font-size: 24px;
-  padding: 5px 4px;
-}
-
-.burger_icon > img {
-  width: 30px;
+  font-size: 26px;
+  padding: 0px 7px;
 }
 
 .gutter {
@@ -172,6 +179,18 @@ textarea {
   white-space: pre-wrap;
 }
 
+.field_error input {
+  border: 1px solid red;
+}
+
+.field_error textarea {
+  border: 1px solid red;
+}
+
+.field_error > div:nth-child(2) {
+  color: red;
+}
+
 .button_pri {
   background-color: #eee;
   border-left: 1px solid black;
@@ -200,7 +219,17 @@ textarea {
   background-color: #ccc;
 }
 
+.button_disabled {
+  background-color: #eee;
+  border-left: 1px solid black;
+  color: #777;
+  display: block;
+  font-size: 1rem;
+  padding: 5px 10px;
+}
+
 .footer {
+  background-color: inherit;
   border-top: 1px solid black;
   bottom: 0;
   display: flex;

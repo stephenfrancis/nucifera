@@ -17,6 +17,23 @@
       "type": "p",
       "cells": [
         {
+          "text": "Some Number"
+        },
+        {
+          "field": {
+            "type": "number",
+            "id": "some_number",
+            "min": 4,
+            "max": 10,
+            "mandatory": true
+          }
+        }
+      ]
+    },
+    {
+      "type": "p",
+      "cells": [
+        {
           "field": {
             "type": "richtext",
             "id": "summary"

@@ -29,33 +29,100 @@ import {
   Editable as TextEditable,
   Uneditable as TextUneditable,
 } from "./fields/Text";
+import validate from "./fields/validate";
 
 interface Props {
   field: Field;
   edit_mode: editMode;
+  handleFieldBlur: () => void;
   value_container: any;
 }
 
-const renderEditable = (field: Field, value_container: any) => {
+const renderEditable = (
+  field: Field,
+  handleFieldBlur: () => void,
+  value_container: any
+) => {
+  const [error, setError] = React.useState<string | null>(
+    validate(field, value_container[field.id])
+  );
+  const className = error ? "field_error" : null;
+  const handleFieldBlurInner = () => {
+    setError(validate(field, value_container[field.id]));
+    handleFieldBlur();
+  };
+  return (
+    <div className={className} id={field.id}>
+      <div>
+        {renderEditableInner(field, handleFieldBlurInner, value_container)}
+      </div>
+      {error && <div>{error}</div>}
+    </div>
+  );
+};
+
+const renderEditableInner = (
+  field: Field,
+  handleFieldBlur: () => void,
+  value_container: any
+) => {
   switch (field.type) {
     case "date":
-      return <DateEditable field={field} value_container={value_container} />;
+      return (
+        <DateEditable
+          field={field}
+          handleFieldBlur={handleFieldBlur}
+          value_container={value_container}
+        />
+      );
     case "image":
-      return <ImageEditable field={field} value_container={value_container} />;
+      return (
+        <ImageEditable
+          field={field}
+          handleFieldBlur={handleFieldBlur}
+          value_container={value_container}
+        />
+      );
     case "json":
-      return <JSONEditable field={field} value_container={value_container} />;
+      return (
+        <JSONEditable
+          field={field}
+          handleFieldBlur={handleFieldBlur}
+          value_container={value_container}
+        />
+      );
     case "number":
-      return <NumberEditable field={field} value_container={value_container} />;
+      return (
+        <NumberEditable
+          field={field}
+          handleFieldBlur={handleFieldBlur}
+          value_container={value_container}
+        />
+      );
     case "options":
       return (
-        <OptionsEditable field={field} value_container={value_container} />
+        <OptionsEditable
+          field={field}
+          handleFieldBlur={handleFieldBlur}
+          value_container={value_container}
+        />
       );
     case "richtext":
       return (
-        <RichtextEditable field={field} value_container={value_container} />
+        <RichtextEditable
+          field={field}
+          handleFieldBlur={handleFieldBlur}
+          value_container={value_container}
+        />
       );
     case "text":
-      return <TextEditable field={field} value_container={value_container} />;
+      return (
+        <TextEditable
+          field={field}
+          handleFieldBlur={handleFieldBlur}
+          value_container={value_container}
+        />
+      );
     default:
       return <div>??</div>;
   }
@@ -86,7 +153,7 @@ const renderUneditable = (field: Field, value_container: any) => {
 const DisplayField: React.FC<Props> = (props) => {
   return props.edit_mode === "show"
     ? renderUneditable(props.field, props.value_container)
-    : renderEditable(props.field, props.value_container);
+    : renderEditable(props.field, props.handleFieldBlur, props.value_container);
 };
 
 export default DisplayField;

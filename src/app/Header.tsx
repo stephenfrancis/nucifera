@@ -7,6 +7,7 @@ const Header: React.FC<Props> = (props) => {
     <div className="header">
       {props.children}
       <div className="logo">
+        <img src="/lotus_icon.svg" />
         <b>nu</b>cifera
       </div>
     </div>

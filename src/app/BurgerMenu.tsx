@@ -17,8 +17,7 @@ const Main: React.FC<Props> = (props) => {
   return (
     <>
       <div className="burger_icon" onClick={toggleModal}>
-        {/*☰*/}
-        <img src="/lotus_icon.svg" />
+        ☰
       </div>
       <Modal
         open={modal}

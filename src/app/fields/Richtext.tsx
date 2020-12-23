@@ -5,6 +5,7 @@ import { Field } from "../../types/Field";
 
 interface Props {
   field: Field;
+  handleFieldBlur: () => void;
   value_container: any;
 }
 
@@ -12,6 +13,7 @@ export function Editable(props: Props): JSX.Element {
   const className = `input_${props.field.type}`;
   const handleBlur = (event: React.FocusEvent<HTMLTextAreaElement>) => {
     props.value_container[props.field.id] = event.target.value;
+    props.handleFieldBlur();
   };
   if (props.field.hidden_for_edit) {
     return null;

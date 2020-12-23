@@ -5,6 +5,7 @@ import { Field } from "../../types/Field";
 
 interface Props {
   field: Field;
+  handleFieldBlur: () => void;
   value_container: any;
 }
 
@@ -13,6 +14,7 @@ export function Editable(props: Props): JSX.Element {
   const handleBlur = (event: React.FocusEvent<HTMLTextAreaElement>) => {
     try {
       props.value_container[props.field.id] = JSON.parse(event.target.value);
+      props.handleFieldBlur();
     } catch (e) {
       console.error(e);
     }

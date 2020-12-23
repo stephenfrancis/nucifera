@@ -23,6 +23,7 @@ const renderBlock = (
   block: TemplateBlock,
   doc: Document,
   edit_mode: editMode,
+  handleFieldBlur: () => void,
   index: number
 ) => {
   if (block.type === "arraytable") {
@@ -30,7 +31,7 @@ const renderBlock = (
   }
   const className = `block_${block.type}`;
   const cells = block.cells.map((cell: TemplateCell, cell_index: number) => {
-    return renderCell(cell, doc, edit_mode, cell_index);
+    return renderCell(cell, doc, edit_mode, handleFieldBlur, cell_index);
   });
   return (
     <div
@@ -47,19 +48,16 @@ const renderCell = (
   cell: TemplateCell,
   doc: Document,
   edit_mode: editMode,
+  handleFieldBlur: () => void,
   index: number
 ) => {
   return (
-    <div
-      className="cell"
-      key={String(index)}
-      id={cell.field && cell.field.id}
-      style={getStyleProperties(cell)}
-    >
+    <div className="cell" key={String(index)} style={getStyleProperties(cell)}>
       {cell.field ? (
         <DisplayField
           edit_mode={edit_mode}
           field={cell.field}
+          handleFieldBlur={handleFieldBlur}
           value_container={doc.getData()}
         />
       ) : (
@@ -70,7 +68,11 @@ const renderCell = (
 };
 
 const DisplayDocument: React.FC<Props> = (props) => {
+  const [modified, setModified] = React.useState<boolean>(
+    props.edit_mode === "create"
+  );
   const [redirect, setRedirect] = React.useState<string>(null);
+  const [valid, setValid] = React.useState<boolean>(props.doc.isValid());
 
   const handleKeyboardEvents = (event: KeyboardEvent) => {
     // console.log(
@@ -93,8 +95,17 @@ const DisplayDocument: React.FC<Props> = (props) => {
     }
   };
 
+  const handleFieldBlur = () => {
+    console.log(`handleFieldBlur(): ${props.doc.isModified()}`);
+    setModified(props.doc.isModified());
+    setValid(props.doc.isValid());
+  };
+
   const handleSaveClick = () => {
     if (props.edit_mode === "show") {
+      return;
+    }
+    if (!modified || !valid) {
       return;
     }
     props.doc.save().catch((err) => error(err));
@@ -102,9 +113,12 @@ const DisplayDocument: React.FC<Props> = (props) => {
 
   const renderEditButtons = () => (
     <>
-      <button className="button_pri" onClick={handleSaveClick}>
-        Save
-      </button>
+      {modified && valid && (
+        <a className="button_pri" onClick={handleSaveClick}>
+          Save
+        </a>
+      )}
+      {(!modified || !valid) && <a className="button_disabled">Save</a>}
       <Link className="button_sec" to={props.doc.getShowLink()}>
         Cancel
       </Link>
@@ -132,7 +146,13 @@ const DisplayDocument: React.FC<Props> = (props) => {
   const blocks = props.doc
     .getTemplate()
     .content.map((block: TemplateBlock, index: number) => {
-      return renderBlock(block, props.doc, props.edit_mode, index);
+      return renderBlock(
+        block,
+        props.doc,
+        props.edit_mode,
+        handleFieldBlur,
+        index
+      );
     });
 
   return (
