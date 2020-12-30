@@ -24,11 +24,11 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-yarn-
 
-      - name: Uses Node.js 13.9.0
+      - name: Uses Node.js 14.15.1
         uses: actions/setup-node@v1
         with:
           always-auth: true
-          node-version: "13.9.0"
+          node-version: "14.15.1"
 
       - run: npm install -g yarn
 
