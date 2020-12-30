@@ -1,6 +1,7 @@
 {
   "_id": "template",
   "template": "builtin:template",
+  "description": "Standard template for a database's templates",
   "content": [
     {
       "type": "h1",

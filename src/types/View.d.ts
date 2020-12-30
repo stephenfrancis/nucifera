@@ -1,6 +1,7 @@
 export interface View {
   _id: string;
   columns: ViewColumn[];
+  description?: string;
   index?: any;
   selector?: any;
   sort?: string[];

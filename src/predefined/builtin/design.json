@@ -1,6 +1,7 @@
 {
   "_id": "design",
   "template": "builtin:view",
+  "description": "View of all design documents for a database - views and templates",
   "type": "list",
   "index": ["template"],
   "selector": {

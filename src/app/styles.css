@@ -48,7 +48,7 @@ textarea {
   width: 100%;
 }
 
-.root {
+#root {
   background-color: #f8f8f8;
 }
 
@@ -100,7 +100,7 @@ textarea {
 }
 
 .mainarea {
-  margin-top: 40px;
+  padding: 40px 0;
 }
 
 .list_row {
@@ -179,6 +179,10 @@ textarea {
   white-space: pre-wrap;
 }
 
+.display_image {
+  width: 100%;
+}
+
 .field_error input {
   border: 1px solid red;
 }
@@ -189,6 +193,16 @@ textarea {
 
 .field_error > div:nth-child(2) {
   color: red;
+}
+
+.input_image {
+  display: flex;
+  flex-direction: column;
+}
+
+.input_image > img {
+  margin-top: 5px;
+  width: 100%;
 }
 
 .button_pri {

@@ -3,6 +3,7 @@ import { Field } from "./Field";
 export interface Template {
   _id: string;
   content: TemplateBlock[];
+  description?: string;
   template: string;
 }
 

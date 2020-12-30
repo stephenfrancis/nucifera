@@ -1,6 +1,7 @@
 {
   "_id": "view",
   "template": "builtin:template",
+  "description": "Standard template for a database's views",
   "content": [
     {
       "type": "h1",

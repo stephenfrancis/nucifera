@@ -1,6 +1,7 @@
 {
   "_id": "main",
   "template": "builtin:template",
+  "description": "Default template for a database's data documents",
   "content": [
     {
       "type": "h1",

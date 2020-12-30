@@ -37,8 +37,8 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      - name: Unit Tests
-        run: yarn test:all
+      #      - name: Unit Tests
+      #        run: yarn test:all
 
-      # - name: Integration Tests
-      #   run: yarn test:cypress
+      - name: Integration Tests
+        run: yarn test:integration

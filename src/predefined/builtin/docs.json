@@ -1,6 +1,7 @@
 {
   "_id": "docs",
   "template": "builtin:view",
+  "description": "Default view of a database's data documents",
   "type": "list",
   "index": ["template"],
   "selector": {

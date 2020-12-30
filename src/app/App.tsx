@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 import { Route, Switch } from "react-router";
-import { BrowserRouter, Link } from "react-router-dom";
+import { BrowserRouter, Redirect } from "react-router-dom";
 
 import ErrorBoundary from "./ErrorBoundary";
 import OpenDocument from "./OpenDocument";
@@ -57,6 +57,9 @@ const App: React.FC<{}> = () => {
               );
             }}
           />
+          <Route exact path="/">
+            <Redirect to="/databases/view/docs" />
+          </Route>
         </Switch>
       </BrowserRouter>
     </ErrorBoundary>

@@ -35,13 +35,15 @@
     "jest": "26.5.3",
     "prettier": "2.1.2",
     "ts-jest": "26.4.3",
-    "ts-node": "9.0.0"
+    "ts-node": "9.0.0",
+    "wait-on": "^5.2.0"
   },
   "scripts": {
-    "test:cypress": "yarn run cypress open --config-file src/test/cypress.json",
-    "serve": "npx parcel serve src/app/index.html",
+    "start": "npx parcel serve src/app/index.html",
     "test": "yarn test:clearCache && jest ./packages --forceExit",
-    "test:all": "yarn lint:css && yarn test",
+    "test:all": "yarn test:integration",
+    "test:cypress": "yarn run cypress run --config-file src/test/cypress.json",
+    "test:integration": "yarn run start & yarn run wait-on http://localhost:1234/ && yarn run test:cypress && kill %1",
     "tsc": "tsc -p ./tsconfig.json"
   },
   "bugs": {

@@ -1,6 +1,7 @@
 {
   "_id": "docs",
   "template": "builtin:view",
+  "description": "Databases that are available in this device",
   "type": "list",
   "columns": [
     {
