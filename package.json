@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "description": "Lotus Notes as it should have been!",
   "main": "index.js",
+  "engines": {
+    "node": "^14.15"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/stephenfrancis/nucifera.git"
