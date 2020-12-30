@@ -46,7 +46,7 @@
     "test": "yarn test:clearCache && jest ./packages --forceExit",
     "test:all": "yarn test:integration",
     "test:cypress": "yarn run cypress run --config-file src/test/cypress.json",
-    "test:integration": "yarn run start & yarn run wait-on http://localhost:1234/ && yarn run test:cypress && kill %1",
+    "test:integration": "yarn run start & yarn run wait-on http://localhost:1234/ && yarn run test:cypress",
     "tsc": "tsc -p ./tsconfig.json"
   },
   "bugs": {
