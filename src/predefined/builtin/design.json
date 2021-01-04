@@ -11,14 +11,25 @@
   },
   "columns": [
     {
-      "id": "_id",
-      "label": "Title",
-      "type": "text"
+      "field": {
+        "id": "_id",
+        "type": "text"
+      },
+      "label": "Title"
     },
     {
-      "id": "type",
-      "label": "Type",
-      "type": "text"
+      "field": {
+        "id": "template",
+        "type": "text"
+      },
+      "label": "Template"
+    },
+    {
+      "field": {
+        "id": "type",
+        "type": "text"
+      },
+      "label": "Type"
     }
   ]
 }

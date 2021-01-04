@@ -10,14 +10,18 @@
   },
   "columns": [
     {
-      "id": "name",
-      "label": "Name",
-      "type": "text"
+      "field": {
+        "id": "name",
+        "type": "text"
+      },
+      "label": "Name"
     },
     {
-      "id": "created_at",
-      "label": "Created At",
-      "type": "date"
+      "field": {
+        "id": "created_at",
+        "type": "date"
+      },
+      "label": "Created At"
     }
   ]
 }

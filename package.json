@@ -2,7 +2,6 @@
   "name": "nucifera",
   "version": "0.0.1",
   "description": "Lotus Notes as it should have been!",
-  "main": "index.js",
   "engines": {
     "node": "^14.15"
   },
@@ -10,9 +9,10 @@
     "type": "git",
     "url": "https://github.com/stephenfrancis/nucifera.git"
   },
-  "author": "Stephen Francis <stephen.francis@gmail.com>",
+  "author": "Stephen Francis <stephen.d.francis@gmail.com>",
   "license": "UNLICENSED",
   "dependencies": {
+    "date-fns": "^2.16.1",
     "lodash": "^4.17",
     "parcel": "^2.0.0-beta.1",
     "pouchdb": "^7.2",
@@ -43,6 +43,7 @@
     "wait-on": "^5.2"
   },
   "scripts": {
+    "build": "yarn run parcel build src/app/index.html",
     "start": "yarn run parcel serve src/app/index.html",
     "test": "yarn test:clearCache && jest ./packages --forceExit",
     "test:all": "yarn test:integration",

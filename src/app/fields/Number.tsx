@@ -1,8 +1,8 @@
 import * as React from "react";
-import { Field } from "../../types/Field";
+import { NumberEditField, NumberShowField } from "../../types/Field";
 
 interface Props {
-  field: Field;
+  field: NumberEditField;
   handleFieldBlur: () => void;
   value_container: any;
 }
@@ -27,6 +27,11 @@ export function Editable(props: Props): JSX.Element {
   );
 }
 
-export function Uneditable(props: { value: string }): JSX.Element {
+interface UneditableProps {
+  field: NumberShowField;
+  value: string;
+}
+
+export function Uneditable(props: UneditableProps): JSX.Element {
   return <>{String(props.value)}</>;
 }

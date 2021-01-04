@@ -1,15 +1,14 @@
 import * as React from "react";
 import TextareaAutosize from "react-autosize-textarea";
+import { RichtextEditField, RichtextShowField } from "../../types/Field";
 
-import { Field } from "../../types/Field";
-
-interface Props {
-  field: Field;
+interface EditableProps {
+  field: RichtextEditField;
   handleFieldBlur: () => void;
   value_container: any;
 }
 
-export function Editable(props: Props): JSX.Element {
+export function Editable(props: EditableProps): JSX.Element {
   const className = `input_${props.field.type}`;
   const handleBlur = (event: React.FocusEvent<HTMLTextAreaElement>) => {
     props.value_container[props.field.id] = event.target.value;
@@ -27,6 +26,11 @@ export function Editable(props: Props): JSX.Element {
   );
 }
 
-export function Uneditable(props: { value: string }): JSX.Element {
+interface UneditableProps {
+  field: RichtextShowField;
+  value: string;
+}
+
+export function Uneditable(props: UneditableProps): JSX.Element {
   return <>{String(props.value)}</>;
 }

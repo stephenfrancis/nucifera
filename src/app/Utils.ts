@@ -5,6 +5,7 @@ const style_properties = [
   "backgroundColor",
   "border",
   "color",
+  "flex",
   "flexWrap",
   "fontSize",
   "fontWeight",
@@ -25,7 +26,7 @@ export function getStyleProperties(obj: any) {
 
 export function useEventListener(eventName, handler, element = window) {
   // Create a ref that stores handler
-  const savedHandler = React.useRef();
+  const savedHandler = React.useRef<(event: any) => void>();
 
   // Update ref.current value if handler changes.
   // This allows our effect below to always get latest handler ...

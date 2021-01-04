@@ -1,4 +1,4 @@
-import { Field } from "../../types/Field";
+import { EditField } from "../../types/Field";
 import {
   Template,
   TemplateBlock,
@@ -7,7 +7,7 @@ import {
   TemplateCell,
 } from "../../types/Template";
 
-const validate = (field: Field, val: any) => {
+const validate = (field: EditField, val: any) => {
   if (field.mandatory && !val) {
     return "required";
   }
@@ -55,6 +55,9 @@ const validate = (field: Field, val: any) => {
 };
 
 export const validateTemplate = (template: Template, value_container: any) => {
+  if (!Array.isArray(template.content)) {
+    throw new Error(`fault with template content: ${JSON.stringify(template)}`);
+  }
   return template.content.reduce((prev: boolean, curr: TemplateBlock) => {
     return prev && validateTemplateBlock(curr, value_container);
   }, true);

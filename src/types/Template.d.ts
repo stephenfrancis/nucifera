@@ -1,4 +1,4 @@
-import { Field } from "./Field";
+import { EditField } from "./Field";
 
 export interface Template {
   _id: string;
@@ -37,7 +37,7 @@ export interface TemplateBlockArrayTable extends TemplateBlockShared {
 }
 
 export interface TemplateArrayTableColumn {
-  field: Field;
+  field: EditField;
   heading?: string;
 }
 
@@ -47,7 +47,8 @@ export interface TemplateCell {
   backgroundColor?: string;
   border?: string;
   color?: string;
-  field?: Field;
+  field?: EditField;
+  flex?: string;
   padding?: string;
   text?: string;
 }

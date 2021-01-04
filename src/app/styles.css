@@ -13,6 +13,7 @@ primary theme colour tints:
 
 * {
   box-sizing: border-box;
+  overscroll-behavior: inherit;
   overflow-x: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -31,6 +32,10 @@ body {
 button {
   border: 0;
   font: inherit;
+}
+
+html {
+  overscroll-behavior: none;
 }
 
 input {
@@ -100,6 +105,7 @@ textarea {
 }
 
 .mainarea {
+  min-height: 100vh;
   padding: 40px 0;
 }
 

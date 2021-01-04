@@ -20,7 +20,7 @@ export default class View {
       return this.db.find(
         this.id,
         this.spec.index,
-        this.spec.columns.map((col) => col.id),
+        this.spec.columns.map((col) => col.field.id),
         this.spec.selector,
         this.spec.sort
       );

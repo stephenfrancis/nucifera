@@ -4,7 +4,7 @@ import { BrowserRouter, Link, Redirect } from "react-router-dom";
 import Body from "./Body";
 import BurgerMenuDatabase from "./BurgerMenuDatabase";
 import BurgerMenuView from "./BurgerMenuView";
-import DisplayField from "./DisplayField";
+import { renderUneditable } from "./DisplayField";
 import ErrorBoundary from "./ErrorBoundary";
 import Footer from "./Footer";
 import Header from "./Header";
@@ -27,18 +27,13 @@ const DEFAULT_WIDTH_BY_TYPE = {
 };
 
 const getWidth = (col: ViewColumn) => {
-  return col.initialWidth || DEFAULT_WIDTH_BY_TYPE[col.type];
+  return col.initialWidth || DEFAULT_WIDTH_BY_TYPE[col.field.type];
 };
 
 const renderCell = (doc: DocContent, col: ViewColumn) => {
   return (
-    <div className={`list_cell_${getWidth(col)}`} key={col.id}>
-      {doc[col.id]}
-      {/* <DisplayField
-        edit_mode="show"
-        field={col as Field}
-        value_container={doc.getData()}
-      /> */}
+    <div className={`list_cell_${getWidth(col)}`} key={col.field.id}>
+      {renderUneditable(col.field, doc)}
     </div>
   );
 };
@@ -47,8 +42,8 @@ const renderHeaders = (view: View) => {
   return (
     <>
       {view.getColumns().map((col) => (
-        <div className={`list_cell_${getWidth(col)}`} key={col.id}>
-          {col.label || col.id}
+        <div className={`list_cell_${getWidth(col)}`} key={col.field.id}>
+          {col.label || col.field.id}
         </div>
       ))}
     </>

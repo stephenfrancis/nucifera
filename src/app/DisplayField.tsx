@@ -1,6 +1,6 @@
 import * as React from "react";
 import { editMode } from "../types/General";
-import { Field } from "../types/Field";
+import { EditField, ShowField } from "../types/Field";
 import {
   Editable as DateEditable,
   Uneditable as DateUneditable,
@@ -32,14 +32,14 @@ import {
 import validate from "./fields/validate";
 
 interface Props {
-  field: Field;
+  field: EditField;
   edit_mode: editMode;
   handleFieldBlur: () => void;
   value_container: any;
 }
 
 const renderEditable = (
-  field: Field,
+  field: EditField,
   handleFieldBlur: () => void,
   value_container: any
 ) => {
@@ -62,7 +62,7 @@ const renderEditable = (
 };
 
 const renderEditableInner = (
-  field: Field,
+  field: EditField,
   handleFieldBlur: () => void,
   value_container: any
 ) => {
@@ -128,23 +128,23 @@ const renderEditableInner = (
   }
 };
 
-const renderUneditable = (field: Field, value_container: any) => {
+export const renderUneditable = (field: ShowField, value_container: any) => {
   const value: any = value_container[field.id] || "--";
   switch (field.type) {
     case "date":
-      return <DateUneditable value={value} />;
+      return <DateUneditable field={field} value={value} />;
     case "image":
-      return <ImageUneditable value={value} />;
+      return <ImageUneditable field={field} value={value} />;
     case "json":
-      return <JSONUneditable value={value} />;
+      return <JSONUneditable field={field} value={value} />;
     case "number":
-      return <NumberUneditable value={value} />;
+      return <NumberUneditable field={field} value={value} />;
     case "options":
-      return <OptionsUneditable value={value} />;
+      return <OptionsUneditable field={field} value={value} />;
     case "richtext":
-      return <RichtextUneditable value={value} />;
+      return <RichtextUneditable field={field} value={value} />;
     case "text":
-      return <TextUneditable value={value} />;
+      return <TextUneditable field={field} value={value} />;
     default:
       return <div>??</div>;
   }

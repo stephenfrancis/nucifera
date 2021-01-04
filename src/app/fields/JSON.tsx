@@ -1,15 +1,14 @@
 import * as React from "react";
 import TextareaAutosize from "react-autosize-textarea";
+import { JSONEditField, JSONShowField } from "../../types/Field";
 
-import { Field } from "../../types/Field";
-
-interface Props {
-  field: Field;
+interface EditableProps {
+  field: JSONEditField;
   handleFieldBlur: () => void;
   value_container: any;
 }
 
-export function Editable(props: Props): JSX.Element {
+export function Editable(props: EditableProps): JSX.Element {
   const className = `input_${props.field.type}`;
   const handleBlur = (event: React.FocusEvent<HTMLTextAreaElement>) => {
     try {
@@ -35,6 +34,11 @@ export function Editable(props: Props): JSX.Element {
   );
 }
 
-export function Uneditable(props: { value: any }): JSX.Element {
+interface UneditableProps {
+  field: JSONShowField;
+  value: string;
+}
+
+export function Uneditable(props: UneditableProps): JSX.Element {
   return <>{JSON.stringify(props.value, null, 2)}</>;
 }

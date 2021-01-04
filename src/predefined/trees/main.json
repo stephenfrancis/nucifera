@@ -17,6 +17,7 @@
       "type": "p",
       "cells": [
         {
+          "flex": "0 0 150px",
           "text": "Some Number"
         },
         {
@@ -34,10 +35,41 @@
       "type": "p",
       "cells": [
         {
+          "flex": "0 0 150px",
+          "text": "Picture"
+        },
+        {
+          "field": {
+            "type": "image",
+            "id": "picture"
+          }
+        }
+      ]
+    },
+    {
+      "type": "h2",
+      "cells": [
+        {
+          "text": "Summary"
+        }
+      ]
+    },
+    {
+      "type": "p",
+      "cells": [
+        {
           "field": {
             "type": "richtext",
             "id": "summary"
           }
+        }
+      ]
+    },
+    {
+      "type": "h2",
+      "cells": [
+        {
+          "text": "Description"
         }
       ]
     },

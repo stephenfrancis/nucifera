@@ -1,3 +1,5 @@
+import { ShowField } from "./Field";
+
 export interface View {
   _id: string;
   columns: ViewColumn[];
@@ -10,10 +12,9 @@ export interface View {
 }
 
 export interface ViewColumn {
-  id: string;
+  field: ShowField;
   initialWidth?: Width;
   label?: string;
-  type: string;
 }
 
 export type FixedWidth = "xs" | "s" | "m" | "l" | "xl";

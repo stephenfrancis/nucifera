@@ -5,19 +5,25 @@
   "type": "list",
   "columns": [
     {
-      "id": "_id",
-      "label": "Id",
-      "type": "text"
+      "field": {
+        "id": "_id",
+        "type": "text"
+      },
+      "label": "Id"
     },
     {
-      "id": "label",
-      "label": "Label",
-      "type": "text"
+      "field": {
+        "id": "label",
+        "type": "text"
+      },
+      "label": "Label"
     },
     {
-      "id": "remote_url",
-      "label": "Remote URL",
-      "type": "text"
+      "field": {
+        "id": "remote_url",
+        "type": "text"
+      },
+      "label": "Remote URL"
     }
   ]
 }

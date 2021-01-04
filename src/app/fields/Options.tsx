@@ -1,13 +1,13 @@
 import * as React from "react";
-import { Field } from "../../types/Field";
+import { OptionsEditField, OptionsShowField } from "../../types/Field";
 
-interface Props {
-  field: Field;
+interface EditableProps {
+  field: OptionsEditField;
   handleFieldBlur: () => void;
   value_container: any;
 }
 
-export function Editable(props: Props): JSX.Element {
+export function Editable(props: EditableProps): JSX.Element {
   const className = `input_${props.field.type}`;
   const handleBlur = (event: React.FocusEvent<HTMLInputElement>) => {
     props.value_container[props.field.id] = event.target.value;
@@ -26,6 +26,11 @@ export function Editable(props: Props): JSX.Element {
   );
 }
 
-export function Uneditable(props: { value: string }): JSX.Element {
+interface UneditableProps {
+  field: OptionsShowField;
+  value: string;
+}
+
+export function Uneditable(props: UneditableProps): JSX.Element {
   return <>{String(props.value)}</>;
 }

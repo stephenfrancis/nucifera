@@ -1,17 +1,20 @@
 import * as React from "react";
-import { Field } from "../../types/Field";
+import { ImageEditField, ImageShowField } from "../../types/Field";
 
-interface Props {
-  field: Field;
+interface EditableProps {
+  field: ImageEditField;
   handleFieldBlur: () => void;
   value_container: any;
 }
 
-export function Editable(props: Props): JSX.Element {
+export function Editable(props: EditableProps): JSX.Element {
   const className = `input_${props.field.type}`;
   const [imgSrc, setImgSrc] = React.useState<any>(null);
   React.useEffect(() => {
-    setImgSrc(URL.createObjectURL(props.value_container[props.field.id]));
+    const data = props.value_container[props.field.id];
+    if (data) {
+      setImgSrc(URL.createObjectURL(data));
+    }
   }, []);
   const handleBlur = (event: React.FocusEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
@@ -36,7 +39,12 @@ export function Editable(props: Props): JSX.Element {
   );
 }
 
-export function Uneditable(props: { value: string }): JSX.Element {
+interface UneditableProps {
+  field: ImageShowField;
+  value: string;
+}
+
+export function Uneditable(props: UneditableProps): JSX.Element {
   const [imgSrc, setImgSrc] = React.useState<any>(null);
   React.useEffect(() => {
     setImgSrc(URL.createObjectURL(props.value));

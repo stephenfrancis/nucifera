@@ -11,19 +11,25 @@
   },
   "columns": [
     {
-      "id": "title",
-      "label": "Title",
-      "type": "text"
+      "field": {
+        "id": "title",
+        "type": "text"
+      },
+      "label": "Title"
     },
     {
-      "id": "created_at",
-      "label": "Created At",
-      "type": "date"
+      "field": {
+        "id": "created_at",
+        "type": "date"
+      },
+      "label": "Created At"
     },
     {
-      "id": "created_by",
-      "label": "Created By",
-      "type": "text"
+      "field": {
+        "id": "created_by",
+        "type": "text"
+      },
+      "label": "Created By"
     }
   ]
 }

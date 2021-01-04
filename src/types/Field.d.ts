@@ -1,47 +1,93 @@
-interface CommonField {
+export type FieldType =
+  | "date"
+  | "image"
+  | "json"
+  | "number"
+  | "options"
+  | "richtext"
+  | "text";
+
+export interface CommonShowField {
   id: string;
+  type: FieldType;
+}
+
+export type DateType = "date-only" | "date-time" | "time-only";
+
+export type DateBrevity = "very-short" | "short" | "medium" | "long";
+
+export interface DateShowField extends CommonShowField {
+  date_brevity?: DateBrevity;
+  date_fns_format?: string;
+  date_type?: DateType;
+  type: "date";
+}
+
+export interface ImageShowField extends CommonShowField {
+  type: "image";
+}
+
+export interface JSONShowField extends CommonShowField {
+  type: "json";
+}
+
+export interface NumberShowField extends CommonShowField {
+  type: "number";
+}
+
+export interface OptionsShowField extends CommonShowField {
+  type: "options";
+}
+
+export interface RichtextShowField extends CommonShowField {
+  type: "richtext";
+}
+
+export interface TextShowField extends CommonShowField {
+  type: "text";
+}
+
+export type ShowField =
+  | DateShowField
+  | ImageShowField
+  | JSONShowField
+  | NumberShowField
+  | OptionsShowField
+  | RichtextShowField
+  | TextShowField;
+
+export interface CommonEditField {
   hidden_for_edit?: boolean;
   mandatory?: boolean;
 }
 
-export interface DateField extends CommonField {
-  type: "date";
-}
+export interface DateEditField extends DateShowField, CommonEditField {}
 
-export interface ImageField extends CommonField {
-  type: "image";
-}
+export interface ImageEditField extends ImageShowField, CommonEditField {}
 
-export interface JSONField extends CommonField {
-  type: "json";
-}
+export interface JSONEditField extends JSONShowField, CommonEditField {}
 
-export interface NumberField extends CommonField {
+export interface NumberEditField extends NumberShowField, CommonEditField {
   max?: number;
   min?: number;
-  type: "number";
 }
 
-export interface OptionsField extends CommonField {
-  type: "options";
+export interface OptionsEditField extends OptionsShowField, CommonEditField {
   options: string[];
 }
 
-export interface RichTextField extends CommonField {
-  type: "richtext";
-}
+export interface RichtextEditField extends RichtextShowField, CommonEditField {}
 
-export interface TextField extends CommonField {
+export interface TextEditField extends TextShowField, CommonEditField {
   maxLength?: number;
   regex?: string;
-  type: "text";
 }
 
-export type Field =
-  | DateField
-  | ImageField
-  | JSONField
-  | NumberField
-  | OptionsField
-  | RichTextField
-  | TextField;
+export type EditField =
+  | DateEditField
+  | ImageEditField
+  | JSONEditField
+  | NumberEditField
+  | OptionsEditField
+  | RichtextEditField
+  | TextEditField;
