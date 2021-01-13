@@ -24,9 +24,14 @@ export function getStyleProperties(obj: any) {
   return out;
 }
 
-export function useEventListener(eventName, handler, element = window) {
+type KeyboardEventHandler = (event: KeyboardEvent) => void;
+
+export function useEventListener(
+  eventName: "keyup" | "keydown" | "keypress",
+  handler: KeyboardEventHandler
+) {
   // Create a ref that stores handler
-  const savedHandler = React.useRef<(event: any) => void>();
+  const savedHandler = React.useRef<KeyboardEventHandler>();
 
   // Update ref.current value if handler changes.
   // This allows our effect below to always get latest handler ...
@@ -38,22 +43,17 @@ export function useEventListener(eventName, handler, element = window) {
 
   React.useEffect(
     () => {
-      // Make sure element supports addEventListener
-      // On
-      const isSupported = element && element.addEventListener;
-      if (!isSupported) return;
-
       // Create event listener that calls handler function stored in ref
       const eventListener = (event) => savedHandler.current(event);
 
       // Add event listener
-      element.addEventListener(eventName, eventListener);
+      window.addEventListener(eventName, eventListener);
 
       // Remove event listener on cleanup
       return () => {
-        element.removeEventListener(eventName, eventListener);
+        window.removeEventListener(eventName, eventListener);
       };
     },
-    [eventName, element] // Re-run if eventName or element changes
+    [eventName] // Re-run if eventName changes
   );
 }

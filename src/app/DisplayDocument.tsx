@@ -1,9 +1,7 @@
 import * as React from "react";
 import { BrowserRouter, Link, Redirect } from "react-router-dom";
 
-import Body from "./Body";
-import BurgerMenuDatabase from "./BurgerMenuDatabase";
-import BurgerMenuDocument from "./BurgerMenuDocument";
+import Mainarea from "./Mainarea";
 import DisplayField from "./DisplayField";
 import Document from "../data/Document";
 import { editMode } from "../types/General";
@@ -11,8 +9,11 @@ import { error, info } from "../data/Logger";
 import ErrorBoundary from "./ErrorBoundary";
 import Footer from "./Footer";
 import Header from "./Header";
+import MenuItemDatabase from "./MenuItemDatabase";
+import MenuItemDocument from "./MenuItemDocument";
+
 import { TemplateBlock, TemplateCell } from "../types/Template";
-import { getStyleProperties } from "./Utils";
+import { getStyleProperties, useEventListener } from "./Utils";
 
 interface Props {
   doc: Document;
@@ -74,26 +75,28 @@ const DisplayDocument: React.FC<Props> = (props) => {
   const [redirect, setRedirect] = React.useState<string>(null);
   const [valid, setValid] = React.useState<boolean>(props.doc.isValid());
 
-  const handleKeyboardEvents = (event: KeyboardEvent) => {
-    // console.log(
-    //   `DisplayView.handleKeyboardEvents() ${event.key}, shift? ${event.shiftKey}, alt? ${event.altKey}, meta? ${event.metaKey}`
-    // );
-    if (event.key === "s" && (event.altKey || event.metaKey)) {
-      handleSaveClick();
-    } else if (event.key === "e" && (event.altKey || event.metaKey)) {
-      if (props.edit_mode === "show") {
-        setRedirect(props.doc.getEditLink());
-      } else {
-        props.doc.save().catch((err) => error(err));
-        setRedirect(props.doc.getShowLink());
+  useEventListener(
+    "keydown",
+    React.useCallback((event: KeyboardEvent) => {
+      // console.log(
+      //   `DisplayView.handleKeyboardEvents() ${event.key}, shift? ${event.shiftKey}, alt? ${event.altKey}, meta? ${event.metaKey}`
+      // );
+      if (event.key === "s" && (event.altKey || event.metaKey)) {
+        performSave();
+      } else if (event.key === "e" && (event.altKey || event.metaKey)) {
+        if (props.edit_mode === "show") {
+          setRedirect(props.doc.getEditLink());
+        } else {
+          performSave(props.doc.getShowLink());
+        }
+      } else if (event.key === "Escape") {
+        setRedirect(props.doc.getDefaultViewLink());
+      } else if (event.key === "Delete") {
+        props.doc.delete();
+        setRedirect(props.doc.getDefaultViewLink());
       }
-    } else if (event.key === "Escape") {
-      setRedirect(props.doc.getDefaultViewLink());
-    } else if (event.key === "Delete") {
-      props.doc.delete();
-      setRedirect(props.doc.getDefaultViewLink());
-    }
-  };
+    }, [])
+  );
 
   const handleFieldBlur = () => {
     console.log(`handleFieldBlur(): ${props.doc.isModified()}`);
@@ -102,13 +105,24 @@ const DisplayDocument: React.FC<Props> = (props) => {
   };
 
   const handleSaveClick = () => {
+    performSave(props.doc.getShowLink());
+  };
+
+  const performSave = (redirect_if_successful?: string) => {
     if (props.edit_mode === "show") {
       return;
     }
     if (!modified || !valid) {
       return;
     }
-    props.doc.save().catch((err) => error(err));
+    props.doc
+      .save()
+      .then(() => {
+        if (redirect_if_successful) {
+          setRedirect(redirect_if_successful);
+        }
+      })
+      .catch((err) => error(err));
   };
 
   const renderEditButtons = () => (
@@ -136,13 +150,6 @@ const DisplayDocument: React.FC<Props> = (props) => {
     </>
   );
 
-  React.useEffect(() => {
-    window.addEventListener("keydown", handleKeyboardEvents);
-    return () => {
-      window.removeEventListener("keydown", handleKeyboardEvents);
-    };
-  });
-
   const blocks = props.doc
     .getTemplate()
     .content.map((block: TemplateBlock, index: number) => {
@@ -158,21 +165,17 @@ const DisplayDocument: React.FC<Props> = (props) => {
   return (
     <>
       {redirect && <Redirect to={redirect} />}
-      <Header />
-      <Body
-        burgerMenuContent={() => (
-          <>
-            <ErrorBoundary>
-              <BurgerMenuDocument doc={props.doc} />
-            </ErrorBoundary>
-            <ErrorBoundary>
-              <BurgerMenuDatabase db={props.doc.getDatabase()} />
-            </ErrorBoundary>
-          </>
-        )}
-      >
+      <Header>
+        <ErrorBoundary>
+          <MenuItemDatabase db={props.doc.getDatabase()} />
+        </ErrorBoundary>
+        <ErrorBoundary>
+          <MenuItemDocument doc={props.doc} />
+        </ErrorBoundary>
+      </Header>
+      <Mainarea>
         <ErrorBoundary>{blocks}</ErrorBoundary>
-      </Body>
+      </Mainarea>
       <Footer>
         {props.edit_mode === "show" ? renderShowButtons() : renderEditButtons()}
       </Footer>

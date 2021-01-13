@@ -23,17 +23,7 @@ const Modal: React.FC<Props> = (props: Props) => {
     }
   };
   const renderCloseIcon = () => (
-    <div
-      className="modal-close-button"
-      onClick={close}
-      style={{
-        cursor: "pointer",
-        fontSize: 12,
-        position: "absolute",
-        right: 10,
-        top: 10,
-      }}
-    >
+    <div className="modal_close_button" onClick={close}>
       ❌
     </div>
   );
@@ -51,30 +41,11 @@ const Modal: React.FC<Props> = (props: Props) => {
   );
   return props.open ? (
     <>
-      <div
-        style={{
-          backgroundColor: "#000",
-          bottom: 0,
-          left: 0,
-          opacity: 0.5,
-          position: "fixed",
-          right: 0,
-          top: 0,
-        }}
-      />
+      <div className="modal_opacity_layer" />
       <div
         onClick={clickOnBackground}
         ref={backgroundRef}
-        style={{
-          alignItems: "center",
-          bottom: 0,
-          display: "flex",
-          justifyContent: "center",
-          left: 0,
-          position: "fixed",
-          right: 0,
-          top: 0,
-        }}
+        className="modal_position_layer"
       >
         <div style={style}>
           {!props.hideCloseIcon && renderCloseIcon()}

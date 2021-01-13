@@ -58,17 +58,78 @@ textarea {
 }
 
 .header {
+  align-items: center;
   background-color: inherit;
   border-bottom: 1px solid black;
   display: flex;
   flex-flow: row nowrap;
   height: 40px;
   left: 0;
-  padding: 2px 5px 2px 45px;
+  padding: 2px 5px 2px 5px;
   position: fixed;
   right: 0;
   top: 0;
   width: 100%;
+}
+
+.menu_item {
+  display: flex;
+  flex-flow: column nowrap;
+  user-select: none;
+}
+
+.menu_item > div:nth-child(1) {
+  border: 1px solid transparent;
+  cursor: pointer;
+  font-size: 18px;
+  padding: 4px 10px;
+}
+
+.menu_item > div:nth-child(1) img {
+  margin-right: 5px;
+  vertical-align: top;
+}
+
+.menu_item.open > div:nth-child(1) {
+  background-color: white;
+  border: 1px solid black;
+}
+
+.menu_item > div:nth-child(2) {
+  background-color: white;
+  border: 1px solid black;
+  padding: 10px;
+  position: fixed;
+  top: 36px;
+}
+
+.modal_close_button {
+  cursor: pointer;
+  font-size: 12;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+
+.modal_opacity_layer {
+  background-color: #000;
+  bottom: 0px;
+  left: 0px;
+  opacity: 0.5;
+  position: fixed;
+  right: 0px;
+  top: 0px;
+}
+
+.modal_position_layer {
+  align-items: center;
+  bottom: 0px;
+  display: flex;
+  justify-content: center;
+  left: 0px;
+  position: fixed;
+  right: 0px;
+  top: 0px;
 }
 
 .logo {
@@ -88,13 +149,6 @@ textarea {
   color: #6400c1;
 }
 
-.burger_icon {
-  color: #6400c1; /* primary theme colour */
-  cursor: pointer;
-  font-size: 26px;
-  padding: 0px 7px;
-}
-
 .gutter {
   border-right: 1px solid black;
   bottom: 0;
@@ -109,12 +163,21 @@ textarea {
   padding: 40px 0;
 }
 
+.list_header {
+  background-color: #eee;
+  border-bottom: 1px solid black;
+  display: flex;
+  flex-flow: row nowrap;
+  padding: 2px 5px 2px 5px;
+  width: 100%;
+}
+
 .list_row {
   background-color: #eee;
   border-bottom: 1px solid black;
   display: flex;
   flex-flow: row nowrap;
-  padding: 2px 5px 2px 45px;
+  padding: 2px 5px 2px 5px;
   width: 100%;
 }
 
@@ -154,28 +217,28 @@ textarea {
 .block_h1 {
   display: flex;
   font-size: 3rem;
-  margin: 20px 0 10px 40px;
+  margin: 20px 0 10px 0;
   padding: 0 10px;
 }
 
 .block_h2 {
   display: flex;
   font-size: 2.5rem;
-  margin: 15px 0 5px 40px;
+  margin: 15px 0 5px 0;
   padding: 0 10px;
 }
 
 .block_h3 {
   display: flex;
   font-size: 2rem;
-  margin: 10px 0 0 40px;
+  margin: 10px 0 0 0;
   padding: 0 10px;
 }
 
 .block_p {
   display: flex;
   font-size: 1rem;
-  margin: 0 0 0 40px;
+  margin: 0 0 0 0;
   padding: 0 10px;
 }
 
@@ -186,7 +249,8 @@ textarea {
 }
 
 .display_image {
-  width: 100%;
+  max-width: 100%;
+  width: fit-content;
 }
 
 .field_error input {
@@ -208,7 +272,8 @@ textarea {
 
 .input_image > img {
   margin-top: 5px;
-  width: 100%;
+  max-width: 100%;
+  width: fit-content;
 }
 
 .button_pri {
@@ -263,7 +328,6 @@ textarea {
 .log {
   cursor: pointer;
   height: 30px;
-  margin-left: 40px;
   overflow: hidden;
   padding: 6px 10px;
   text-overflow: ellipsis;

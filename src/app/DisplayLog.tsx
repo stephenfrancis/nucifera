@@ -51,7 +51,7 @@ const DisplayLog: React.FC<Props> = (props) => {
           width: "auto",
           position: "fixed",
           bottom: 40,
-          left: 40,
+          left: 0,
           right: 0,
         }}
       >

@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import Body from "./Body";
+import Mainarea from "./Mainarea";
 import { error, info } from "../data/Logger";
 import Footer from "./Footer";
 import Header from "./Header";
@@ -32,9 +32,9 @@ class ErrorBoundary extends React.Component<Props, State> {
       return (
         <>
           <Header />
-          <Body burgerMenuContent={() => <></>}>
+          <Mainarea>
             <h1>Something went wrong.</h1>;
-          </Body>
+          </Mainarea>
           <Footer />
         </>
       );

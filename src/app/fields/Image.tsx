@@ -47,7 +47,9 @@ interface UneditableProps {
 export function Uneditable(props: UneditableProps): JSX.Element {
   const [imgSrc, setImgSrc] = React.useState<any>(null);
   React.useEffect(() => {
-    setImgSrc(URL.createObjectURL(props.value));
+    if (props.value) {
+      setImgSrc(URL.createObjectURL(props.value));
+    }
   }, []);
   return <>{imgSrc && <img src={imgSrc} className="display_image" />}</>;
 }

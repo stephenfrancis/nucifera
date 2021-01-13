@@ -76,9 +76,6 @@ export default class Document {
       throw new Error(`document ${this._id} is not valid`);
     }
     info(`saving document: ${this._id}`);
-    if (!this.data.created_at) {
-      this.data.created_at = Date.now();
-    }
     return this.db.saveDocument(this._id, this.data).then(() => {
       info("saved");
     });

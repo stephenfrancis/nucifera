@@ -1,16 +1,15 @@
 import * as React from "react";
-import { BrowserRouter, Link, Redirect } from "react-router-dom";
 
 import Document from "../data/Document";
+import MenuItem from "./MenuItem";
 
 interface Props {
   doc: Document;
 }
 
-const BurgerMenuDocument: React.FC<Props> = (props) => {
+const MenuItemDocument: React.FC<Props> = (props) => {
   return (
-    <>
-      <h2>Document</h2>
+    <MenuItem iconPath="/document.svg" label={props.doc._id}>
       <table>
         <tbody>
           <tr>
@@ -39,8 +38,8 @@ const BurgerMenuDocument: React.FC<Props> = (props) => {
           </tr>
         </tbody>
       </table>
-    </>
+    </MenuItem>
   );
 };
 
-export default BurgerMenuDocument;
+export default MenuItemDocument;

@@ -30,3 +30,7 @@ of these for a database to be called **nu-designed**:
 - Any URL representing a view whose view document cannot be found in the database or which is invalid will
   cause a redirect to the 'docs' (i.e. default) view. If 'docs' is missing or invalid, `builtin:docs` will be
   used.
+
+### Remote Hosts
+
+IBM Cloudant: https://9c229f2c-7db1-4aba-9c2d-45ecffb0082a-bluemix.cloudant.com/dashboard.html#/_all_dbs

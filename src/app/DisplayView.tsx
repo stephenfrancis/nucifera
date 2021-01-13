@@ -1,15 +1,15 @@
 import * as React from "react";
 import { BrowserRouter, Link, Redirect } from "react-router-dom";
 
-import Body from "./Body";
-import BurgerMenuDatabase from "./BurgerMenuDatabase";
-import BurgerMenuView from "./BurgerMenuView";
+import Body from "./Mainarea";
 import { renderUneditable } from "./DisplayField";
 import ErrorBoundary from "./ErrorBoundary";
 import Footer from "./Footer";
 import Header from "./Header";
 import Loading from "./Loading";
 import { error, info } from "../data/Logger";
+import MenuItemDatabase from "./MenuItemDatabase";
+import MenuItemView from "./MenuItemView";
 import { getStyleProperties, useEventListener } from "./Utils";
 import View from "../data/View";
 import { DocContent } from "../types/General";
@@ -20,7 +20,7 @@ interface Props {
 }
 
 const DEFAULT_WIDTH_BY_TYPE = {
-  date: "s",
+  date: "m",
   number: "s",
   options: "m",
   text: "m",
@@ -36,6 +36,10 @@ const renderCell = (doc: DocContent, col: ViewColumn) => {
       {renderUneditable(col.field, doc)}
     </div>
   );
+};
+
+const renderHeader = (view: View) => {
+  return <div className="list_header">{renderHeaders(view)}</div>;
 };
 
 const renderHeaders = (view: View) => {
@@ -72,25 +76,26 @@ const DisplayView: React.FC<Props> = (props) => {
   const [selected, setSelected] = React.useState<number>(0);
   const [redirect, setRedirect] = React.useState<string>(null);
 
-  const handleKeyboardEvents = React.useCallback(
-    (event: KeyboardEvent) => {
-      console.log(
-        `DisplayView.handleKeyboardEvents() ${event.key}, shift? ${event.shiftKey}, alt? ${event.altKey}, meta? ${event.metaKey}`
-      );
-      if (event.key === "ArrowDown" && data && selected < data.length - 1) {
-        console.log(`handleKeyboardEvents() about to increment ${selected}`);
-        setSelected(selected + 1);
-      } else if (event.key === "ArrowUp" && selected > 0) {
-        console.log(`handleKeyboardEvents() about to decrement ${selected}`);
-        setSelected(selected - 1);
-      } else if (event.key === "Enter" && data) {
-        setRedirect(props.view.getShowLink(data[selected]._id));
-      }
-    },
-    [selected, data]
+  useEventListener(
+    "keydown",
+    React.useCallback(
+      (event: KeyboardEvent) => {
+        console.log(
+          `DisplayView.handleKeyboardEvents() ${event.key}, shift? ${event.shiftKey}, alt? ${event.altKey}, meta? ${event.metaKey}`
+        );
+        if (event.key === "ArrowDown" && data && selected < data.length - 1) {
+          console.log(`handleKeyboardEvents() about to increment ${selected}`);
+          setSelected(selected + 1);
+        } else if (event.key === "ArrowUp" && selected > 0) {
+          console.log(`handleKeyboardEvents() about to decrement ${selected}`);
+          setSelected(selected - 1);
+        } else if (event.key === "Enter" && data) {
+          setRedirect(props.view.getShowLink(data[selected]._id));
+        }
+      },
+      [selected, data]
+    )
   );
-
-  useEventListener("keydown", handleKeyboardEvents);
 
   React.useEffect(() => {
     props.view
@@ -99,30 +104,21 @@ const DisplayView: React.FC<Props> = (props) => {
       .catch((err) => {
         error(err);
       });
-
-    console.log(`resetting key event listeners`);
-    window.addEventListener("keydown", handleKeyboardEvents);
-    return () => {
-      window.removeEventListener("keydown", handleKeyboardEvents);
-    };
-  }, [selected, redirect]);
+  }, []);
 
   return (
     <>
       {redirect && <Redirect to={redirect} />}
-      <Header>{renderHeaders(props.view)}</Header>
-      <Body
-        burgerMenuContent={() => (
-          <>
-            <ErrorBoundary>
-              <BurgerMenuView view={props.view} />
-            </ErrorBoundary>
-            <ErrorBoundary>
-              <BurgerMenuDatabase db={props.view.getDatabase()} />
-            </ErrorBoundary>
-          </>
-        )}
-      >
+      <Header>
+        <ErrorBoundary>
+          <MenuItemDatabase db={props.view.getDatabase()} />
+        </ErrorBoundary>
+        <ErrorBoundary>
+          <MenuItemView view={props.view} />
+        </ErrorBoundary>
+      </Header>
+      <Body>
+        {renderHeader(props.view)}
         <ErrorBoundary>
           {!!data && renderRows(props.view, data, selected)}
           {!data && <Loading />}

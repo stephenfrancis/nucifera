@@ -1,16 +1,15 @@
 import * as React from "react";
-import { BrowserRouter, Link, Redirect } from "react-router-dom";
 
+import MenuItem from "./MenuItem";
 import View from "../data/View";
 
 interface Props {
   view: View;
 }
 
-const BurgerMenuView: React.FC<Props> = (props) => {
+const MenuItemView: React.FC<Props> = (props) => {
   return (
-    <>
-      <h2>View</h2>
+    <MenuItem iconPath="/view.svg" label={props.view.id}>
       <table>
         <tbody>
           <tr>
@@ -27,8 +26,8 @@ const BurgerMenuView: React.FC<Props> = (props) => {
           </tr>
         </tbody>
       </table>
-    </>
+    </MenuItem>
   );
 };
 
-export default BurgerMenuView;
+export default MenuItemView;

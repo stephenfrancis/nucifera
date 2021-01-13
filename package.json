@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "Lotus Notes as it should have been!",
   "engines": {
-    "node": "^14.15"
+    "node": "^15"
   },
   "repository": {
     "type": "git",
@@ -35,7 +35,9 @@
     "@types/react-router": "^5.1",
     "@types/react-router-dom": "^5.1",
     "cypress": "^6.2",
+    "fakecouch": "^1.1.0",
     "jest": "^26.6",
+    "pouchdb-server": "^4.2.0",
     "prettier": "^2.2",
     "react-test-renderer": "^17.0",
     "ts-jest": "^26.4",

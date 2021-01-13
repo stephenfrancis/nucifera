@@ -24,7 +24,7 @@ export default class Database {
   }
 
   allDocs(options?: any): Promise<any> {
-    return this.pouch.allDocs(options);
+    return this.pouch.allDocs(options || {});
   }
 
   createNewDocumentFromTemplate(
@@ -135,6 +135,7 @@ export default class Database {
     return this.pouch
       .get(_id)
       .then((result: any) => {
+        info(`got doc: ${JSON.stringify(result)}`);
         doc = result;
         if (!doc._rev) {
           error(`no _rev in retrieved doc`);
@@ -147,7 +148,7 @@ export default class Database {
         return this.getDocOrBuiltIn(template_id);
       })
       .then((result: any) => {
-        info(`got doc: ${JSON.stringify(result)}`);
+        info(`got template: ${JSON.stringify(result)}`);
         return new Document(this, _id, doc, result);
       })
       .catch((err) => {
@@ -184,8 +185,25 @@ export default class Database {
       });
   }
 
+  replicateFrom(
+    remote_db: Database,
+    options?: PouchDB.Replication.ReplicateOptions
+  ): Promise<any> {
+    return this.pouch.replicate.from(remote_db.pouch, options);
+  }
+
+  replicateTo(
+    remote_db: Database,
+    options?: PouchDB.Replication.ReplicateOptions
+  ): Promise<any> {
+    return this.pouch.replicate.to(remote_db.pouch, options);
+  }
+
   saveDocument(_id: string, data: any) {
     data._id = _id;
+    if (!data.created_at) {
+      data.created_at = Date.now();
+    }
     return this.pouch.put(data);
   }
 }

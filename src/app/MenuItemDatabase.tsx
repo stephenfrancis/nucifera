@@ -1,7 +1,8 @@
 import * as React from "react";
-import { BrowserRouter, Link, Redirect } from "react-router-dom";
 
+import Credits from "./Credits";
 import Database from "../data/Database";
+import MenuItem from "./MenuItem";
 
 interface Props {
   db: Database;
@@ -26,16 +27,17 @@ const renderPouchDBInfo = (info: PouchDB.Core.DatabaseInfo) => {
   );
 };
 
-const BurgerMenuDatabase: React.FC<Props> = (props) => {
+const MenuItemDatabase: React.FC<Props> = (props) => {
   const [info, setInfo] = React.useState<PouchDB.Core.DatabaseInfo>(null);
+
   React.useEffect(() => {
     props.db.getInfo().then((result) => {
       setInfo(result);
     });
   }, [props.db.name]);
+
   return (
-    <>
-      <h2>Database</h2>
+    <MenuItem iconPath="/database.svg" label={props.db.name}>
       <table>
         <tbody>
           <tr>
@@ -47,8 +49,9 @@ const BurgerMenuDatabase: React.FC<Props> = (props) => {
           {info && renderPouchDBInfo(info)}
         </tbody>
       </table>
-    </>
+      <Credits />
+    </MenuItem>
   );
 };
 
-export default BurgerMenuDatabase;
+export default MenuItemDatabase;

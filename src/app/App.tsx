@@ -6,6 +6,7 @@ import { BrowserRouter, Redirect } from "react-router-dom";
 import ErrorBoundary from "./ErrorBoundary";
 import OpenDocument from "./OpenDocument";
 import OpenView from "./OpenView";
+import Test from "./Test";
 
 const App: React.FC<{}> = () => {
   return (
@@ -57,6 +58,9 @@ const App: React.FC<{}> = () => {
               );
             }}
           />
+          <Route path="/test">
+            <Test />
+          </Route>
           <Route exact path="/">
             <Redirect to="/databases/view/docs" />
           </Route>

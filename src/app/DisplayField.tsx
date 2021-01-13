@@ -129,7 +129,7 @@ const renderEditableInner = (
 };
 
 export const renderUneditable = (field: ShowField, value_container: any) => {
-  const value: any = value_container[field.id] || "--";
+  const value: any = value_container[field.id];
   switch (field.type) {
     case "date":
       return <DateUneditable field={field} value={value} />;
