@@ -5,9 +5,14 @@ interface Props {}
 const Credits: React.FC<Props> = (props) => {
   return (
     <div>
-      <p>Nucifera uses the following 3rd-party assets:</p>
+      <h3>Credits</h3>
       <ul>
-        <li>Icons from https://www.flaticon.com</li>
+        <li>
+          Icons from{" "}
+          <u>
+            <a href="https://www.flaticon.com">www.flaticon.com</a>
+          </u>
+        </li>
       </ul>
     </div>
   );

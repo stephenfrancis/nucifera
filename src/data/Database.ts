@@ -165,6 +165,15 @@ export default class Database {
     return this.pouch.info();
   }
 
+  getInfoDoc(): Promise<Document> {
+    return this.pouch
+      .get("info")
+      .then(
+        (result) =>
+          new Document(this, result._id, result, Builtins.info as Template)
+      );
+  }
+
   getView(view_id: string): Promise<View> {
     info(`getView(${view_id})`);
     return this.getDocOrBuiltIn(view_id)

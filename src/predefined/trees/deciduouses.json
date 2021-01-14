@@ -1,0 +1,34 @@
+{
+  "_id": "deciduouses",
+  "template": "builtin:view",
+  "type": "list",
+  "index": ["template"],
+  "selector": {
+    "template": {
+      "$regex": "^(?!builtin:.*$).*"
+    }
+  },
+  "columns": [
+    {
+      "field": {
+        "id": "name",
+        "type": "text"
+      },
+      "label": "Name"
+    },
+    {
+      "field": {
+        "id": "created_at",
+        "type": "date"
+      },
+      "label": "Created At"
+    },
+    {
+      "field": {
+        "id": "when_leaves_fall",
+        "type": "text"
+      },
+      "label": "When Leaves Fall"
+    }
+  ]
+}

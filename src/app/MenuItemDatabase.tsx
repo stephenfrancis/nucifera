@@ -1,12 +1,39 @@
 import * as React from "react";
+import { Link } from "react-router-dom";
 
 import Credits from "./Credits";
 import Database from "../data/Database";
+import Document from "../data/Document";
+import { error, info } from "../data/Logger";
 import MenuItem from "./MenuItem";
 
 interface Props {
   db: Database;
 }
+
+const makeLink = (type: string, id: string, label?: string) =>
+  id ? (
+    <u>
+      <b>
+        <Link to={`../${type}/${id}`}>{label || id}</Link>
+      </b>
+    </u>
+  ) : null;
+
+const renderNuDbInfo = (nuDbInfo: Document) => {
+  const views = nuDbInfo.getData().views || ["docs"];
+  const templates = nuDbInfo.getData().templates || ["main"];
+  const children: JSX.Element[] = [];
+  for (let i = 0; i < Math.max(views.length, templates.length); i += 1) {
+    children.push(
+      <tr key={String(i)}>
+        <td>{makeLink("create", templates[i])}</td>
+        <td>{makeLink("view", views[i])}</td>
+      </tr>
+    );
+  }
+  return <>{children}</>;
+};
 
 const renderPouchDBInfo = (info: PouchDB.Core.DatabaseInfo) => {
   return (
@@ -29,11 +56,21 @@ const renderPouchDBInfo = (info: PouchDB.Core.DatabaseInfo) => {
 
 const MenuItemDatabase: React.FC<Props> = (props) => {
   const [info, setInfo] = React.useState<PouchDB.Core.DatabaseInfo>(null);
+  const [nuDbInfo, setNuDbInfo] = React.useState<Document>(null);
 
   React.useEffect(() => {
-    props.db.getInfo().then((result) => {
-      setInfo(result);
-    });
+    props.db
+      .getInfo()
+      .then((result) => {
+        setInfo(result);
+      })
+      .catch((err) => error(err));
+    props.db
+      .getInfoDoc()
+      .then((result) => {
+        setNuDbInfo(result);
+      })
+      .catch((err) => error(err));
   }, [props.db.name]);
 
   return (
@@ -41,14 +78,47 @@ const MenuItemDatabase: React.FC<Props> = (props) => {
       <table>
         <tbody>
           <tr>
-            <td>name</td>
-            <td>
+            <td style={{ width: 180 }}>Database Name</td>
+            <td style={{ width: 180 }}>
               <b>{props.db.name}</b>
             </td>
           </tr>
           {info && renderPouchDBInfo(info)}
+          <tr className="separator">
+            <td colSpan={2} />
+          </tr>
+          <tr>
+            <td>Create a New...</td>
+            <td>Open View...</td>
+          </tr>
+          {nuDbInfo && renderNuDbInfo(nuDbInfo)}
+          {!nuDbInfo && (
+            <tr>
+              <td>{makeLink("create", "main")}</td>
+              <td>{makeLink("view", "docs")}</td>
+            </tr>
+          )}
+          <tr>
+            <td>{makeLink("create", "builtin:template", "Design Template")}</td>
+            <td>{makeLink("view", "builtin:design", "Design")}</td>
+          </tr>
+          <tr className="separator">
+            <td colSpan={2} />
+          </tr>
         </tbody>
       </table>
+      <ul>
+        <li>
+          <u>
+            <Link to="../edit/info">Edit the Info doc</Link>
+          </u>
+        </li>
+        <li>
+          <u>
+            <Link to="/databases/create/main">Create a new Database</Link>
+          </u>
+        </li>
+      </ul>
       <Credits />
     </MenuItem>
   );

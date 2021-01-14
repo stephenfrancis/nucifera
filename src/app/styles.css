@@ -87,7 +87,7 @@ textarea {
 
 .menu_item > div:nth-child(1) img {
   margin-right: 5px;
-  vertical-align: top;
+  vertical-align: sub;
 }
 
 .menu_item.open > div:nth-child(1) {
@@ -101,6 +101,10 @@ textarea {
   padding: 10px;
   position: fixed;
   top: 36px;
+}
+
+tr.separator td {
+  border-bottom: 1px solid black;
 }
 
 .modal_close_button {

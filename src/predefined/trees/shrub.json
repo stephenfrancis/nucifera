@@ -1,0 +1,88 @@
+{
+  "_id": "shrub",
+  "template": "builtin:template",
+  "content": [
+    {
+      "type": "h1",
+      "cells": [
+        {
+          "field": {
+            "type": "text",
+            "id": "name"
+          }
+        }
+      ]
+    },
+    {
+      "type": "p",
+      "cells": [
+        {
+          "flex": "0 0 150px",
+          "text": "Max Height (m)"
+        },
+        {
+          "field": {
+            "type": "number",
+            "id": "max_height",
+            "min": 0,
+            "max": 10,
+            "mandatory": true
+          }
+        }
+      ]
+    },
+    {
+      "type": "p",
+      "cells": [
+        {
+          "flex": "0 0 150px",
+          "text": "Picture"
+        },
+        {
+          "field": {
+            "type": "image",
+            "id": "picture"
+          }
+        }
+      ]
+    },
+    {
+      "type": "h2",
+      "cells": [
+        {
+          "text": "Summary"
+        }
+      ]
+    },
+    {
+      "type": "p",
+      "cells": [
+        {
+          "field": {
+            "type": "richtext",
+            "id": "summary"
+          }
+        }
+      ]
+    },
+    {
+      "type": "h2",
+      "cells": [
+        {
+          "text": "Description"
+        }
+      ]
+    },
+    {
+      "type": "p",
+      "cells": [
+        {
+          "field": {
+            "type": "richtext",
+            "id": "description"
+          }
+        }
+      ]
+    }
+  ]
+}

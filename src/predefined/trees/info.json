@@ -1,0 +1,6 @@
+{
+  "_id": "info",
+  "template": "builtin:info",
+  "templates": ["main", "shrub", "deciduous"],
+  "views": ["docs", "shrubs", "deciduouses"]
+}

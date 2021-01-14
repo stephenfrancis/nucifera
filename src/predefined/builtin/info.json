@@ -1,0 +1,46 @@
+{
+  "_id": "info",
+  "template": "builtin:template",
+  "description": "Standard template for a database's singleton info doc",
+  "content": [
+    {
+      "type": "h1",
+      "cells": [
+        {
+          "field": {
+            "type": "text",
+            "id": "_id"
+          }
+        }
+      ]
+    },
+    {
+      "type": "p",
+      "cells": [
+        {
+          "text": "Templates"
+        },
+        {
+          "field": {
+            "id": "templates",
+            "type": "json"
+          }
+        }
+      ]
+    },
+    {
+      "type": "p",
+      "cells": [
+        {
+          "text": "Views"
+        },
+        {
+          "field": {
+            "id": "views",
+            "type": "json"
+          }
+        }
+      ]
+    }
+  ]
+}

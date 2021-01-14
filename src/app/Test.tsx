@@ -6,11 +6,7 @@ import Database from "../data/Database";
 import Footer from "./Footer";
 import Header from "./Header";
 import { error, info } from "../data/Logger";
-
-import beech from "../predefined/trees/beech.json";
-import birch from "../predefined/trees/birch.json";
-import docs from "../predefined/trees/docs.json";
-import main from "../predefined/trees/main.json";
+import Trees from "../data/Trees";
 
 interface Props {}
 
@@ -37,12 +33,11 @@ const Test: React.FC<Props> = (props) => {
       })
       .then(() => {
         info(`adding new documents...`);
-        return Promise.all([
-          db_trees.saveDocument("beech", beech),
-          db_trees.saveDocument("birch", birch),
-          db_trees.saveDocument("docs", docs),
-          db_trees.saveDocument("main", main),
-        ]);
+        return Promise.all(
+          Object.keys(Trees).map((doc_id) =>
+            db_trees.saveDocument(doc_id, Trees[doc_id])
+          )
+        );
       })
       .then(() => {
         info(`finished...`);
