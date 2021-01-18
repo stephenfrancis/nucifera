@@ -4,18 +4,14 @@
   "description": "Default template for a database's data documents",
   "content": [
     {
-      "type": "h1",
-      "cells": [
-        {
-          "field": {
-            "type": "text",
-            "id": "title"
-          }
-        }
-      ]
+      "format": "h1",
+      "field": {
+        "type": "text",
+        "id": "title"
+      }
     },
     {
-      "type": "p",
+      "format": "p",
       "justifyContent": "space-between",
       "cells": [
         {
@@ -35,15 +31,11 @@
       ]
     },
     {
-      "type": "p",
-      "cells": [
-        {
-          "field": {
-            "type": "richtext",
-            "id": "body"
-          }
-        }
-      ]
+      "format": "p",
+      "field": {
+        "type": "richtext",
+        "id": "body"
+      }
     }
   ]
 }

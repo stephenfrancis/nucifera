@@ -5,7 +5,7 @@
   "index": ["template"],
   "selector": {
     "template": {
-      "$regex": "^(?!builtin:.*$).*"
+      "$eq": "deciduous"
     }
   },
   "columns": [

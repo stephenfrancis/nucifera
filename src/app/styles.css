@@ -218,37 +218,66 @@ tr.separator td {
   width: 600px;
 }
 
-.block_h1 {
+.cell {
   display: flex;
+}
+
+.cell_h1 {
   font-size: 3rem;
   margin: 20px 0 10px 0;
   padding: 0 10px;
 }
 
-.block_h2 {
-  display: flex;
+.cell_h2 {
   font-size: 2.5rem;
   margin: 15px 0 5px 0;
   padding: 0 10px;
 }
 
-.block_h3 {
+.cell_h3 {
   display: flex;
   font-size: 2rem;
   margin: 10px 0 0 0;
   padding: 0 10px;
 }
 
-.block_p {
-  display: flex;
+.cell_p {
   font-size: 1rem;
   margin: 0 0 0 0;
   padding: 0 10px;
 }
 
-.cell {
+.cell_array > div {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+}
+
+.cell_array > div > span {
+  border: 1px solid black;
+  cursor: pointer;
+  display: block;
+  padding: 0 3px;
+}
+
+.cell_field {
+  padding: 5px;
+  white-space: pre-wrap;
+}
+
+.cell_field > div {
+  /* field container */
+  width: 100%;
+}
+
+.cell_field > div > div:nth-child(1) {
+  /* field inner */
+  width: 100%;
+}
+
+.cell_text {
   flex: 1 0 100px;
-  padding: 0 5px 5px 0;
+  padding: 5px;
   white-space: pre-wrap;
 }
 

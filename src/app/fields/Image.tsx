@@ -5,13 +5,14 @@ interface EditableProps {
   field: ImageEditField;
   handleFieldBlur: () => void;
   value_container: any;
+  value_key: string | number;
 }
 
 export function Editable(props: EditableProps): JSX.Element {
   const className = `input_${props.field.type}`;
   const [imgSrc, setImgSrc] = React.useState<any>(null);
   React.useEffect(() => {
-    const data = props.value_container[props.field.id];
+    const data = props.value_container[props.value_key];
     if (data) {
       setImgSrc(URL.createObjectURL(data));
     }
@@ -19,7 +20,7 @@ export function Editable(props: EditableProps): JSX.Element {
   const handleBlur = (event: React.FocusEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
       setImgSrc(URL.createObjectURL(event.target.files[0]));
-      props.value_container[props.field.id] = event.target.files[0];
+      props.value_container[props.value_key] = event.target.files[0];
     }
     props.handleFieldBlur();
   };

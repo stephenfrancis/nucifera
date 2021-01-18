@@ -4,18 +4,14 @@
   "description": "Standard template for a database's templates",
   "content": [
     {
-      "type": "h1",
-      "cells": [
-        {
-          "field": {
-            "type": "text",
-            "id": "_id"
-          }
-        }
-      ]
+      "format": "h1",
+      "field": {
+        "type": "text",
+        "id": "_id"
+      }
     },
     {
-      "type": "p",
+      "format": "p",
       "cells": [
         {
           "text": "Template"
@@ -29,15 +25,11 @@
       ]
     },
     {
-      "type": "p",
-      "cells": [
-        {
-          "field": {
-            "id": "content",
-            "type": "json"
-          }
-        }
-      ]
+      "format": "p",
+      "field": {
+        "id": "content",
+        "type": "json"
+      }
     }
   ]
 }

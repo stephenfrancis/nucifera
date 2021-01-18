@@ -4,43 +4,41 @@
   "description": "Standard template for a database's singleton info doc",
   "content": [
     {
-      "type": "h1",
-      "cells": [
-        {
-          "field": {
-            "type": "text",
-            "id": "_id"
-          }
-        }
-      ]
+      "format": "h1",
+      "field": {
+        "type": "text",
+        "id": "_id"
+      }
     },
     {
-      "type": "p",
-      "cells": [
-        {
-          "text": "Templates"
-        },
-        {
-          "field": {
-            "id": "templates",
-            "type": "json"
-          }
-        }
-      ]
+      "format": "h2",
+      "text": "Templates"
     },
     {
-      "type": "p",
-      "cells": [
-        {
-          "text": "Views"
-        },
-        {
-          "field": {
-            "id": "views",
-            "type": "json"
-          }
+      "format": "p",
+      "id": "templates",
+      "flexDirection": "column",
+      "cell": {
+        "field": {
+          "id": "templates",
+          "type": "text"
         }
-      ]
+      }
+    },
+    {
+      "format": "h2",
+      "text": "Views"
+    },
+    {
+      "format": "p",
+      "id": "views",
+      "flexDirection": "column",
+      "cell": {
+        "field": {
+          "id": "views",
+          "type": "text"
+        }
+      }
     }
   ]
 }

@@ -2,53 +2,51 @@ import { EditField } from "./Field";
 
 export interface Template {
   _id: string;
-  content: TemplateBlock[];
+  content: TemplateCell[];
   description?: string;
   template: string;
 }
 
-export type TemplateBlockType =
-  | "h1"
-  | "h2"
-  | "h3"
-  | "p"
-  | "code"
-  | "arraytable";
+export type TemplateCellFormat = "h1" | "h2" | "h3" | "p" | "code";
 
-export interface TemplateBlockShared {
-  border?: string;
-  margin?: string;
-  padding?: string;
-  type: TemplateBlockType;
-}
-
-export interface TemplateBlockFlex extends TemplateBlockShared {
+export interface TemplateCellShared {
   alignItems?: string; // TODO vals
-  cells: TemplateCell[];
-  flexWrap?: string; // TODO vals
-  justifyContent?: string; // TODO vals
-}
-
-export interface TemplateBlockArrayTable extends TemplateBlockShared {
-  backgroundColor?: string;
-  columns: TemplateArrayTableColumn[];
-  id: string;
-  type: "arraytable";
-}
-
-export interface TemplateArrayTableColumn {
-  field: EditField;
-  heading?: string;
-}
-
-export type TemplateBlock = TemplateBlockFlex | TemplateBlockArrayTable;
-
-export interface TemplateCell {
   backgroundColor?: string;
   border?: string;
   color?: string;
-  field?: EditField;
   flex?: string;
+  flexWrap?: string; // TODO vals
+  format?: TemplateCellFormat;
+  justifyContent?: string; // TODO vals
+  margin?: string;
   padding?: string;
-  text?: string;
 }
+
+export interface TemplateCellArray extends TemplateCellShared {
+  cell: TemplateCell;
+  id: string;
+}
+
+export interface TemplateCellContainer extends TemplateCellShared {
+  cells: TemplateCell[];
+}
+
+export interface TemplateCellField extends TemplateCellShared {
+  field: EditField;
+}
+
+export interface TemplateCellMap extends TemplateCellShared {
+  id: string;
+  map: Record<string, TemplateCell>;
+}
+
+export interface TemplateCellText extends TemplateCellShared {
+  text: string;
+}
+
+export type TemplateCell =
+  | TemplateCellArray
+  | TemplateCellContainer
+  | TemplateCellField
+  | TemplateCellMap
+  | TemplateCellText;

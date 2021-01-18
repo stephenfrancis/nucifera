@@ -1,72 +1,24 @@
 import * as React from "react";
 import { BrowserRouter, Link, Redirect } from "react-router-dom";
 
-import Mainarea from "./Mainarea";
-import DisplayField from "./DisplayField";
+import { Cell } from "./DisplayCells";
 import Document from "../data/Document";
 import { editMode } from "../types/General";
 import { error, info } from "../data/Logger";
 import ErrorBoundary from "./ErrorBoundary";
 import Footer from "./Footer";
 import Header from "./Header";
+import Mainarea from "./Mainarea";
 import MenuItemDatabase from "./MenuItemDatabase";
 import MenuItemDocument from "./MenuItemDocument";
 
-import { TemplateBlock, TemplateCell } from "../types/Template";
+import { TemplateCell } from "../types/Template";
 import { getStyleProperties, useEventListener } from "./Utils";
 
 interface Props {
   doc: Document;
   edit_mode: editMode;
 }
-
-const renderBlock = (
-  block: TemplateBlock,
-  doc: Document,
-  edit_mode: editMode,
-  handleFieldBlur: () => void,
-  index: number
-) => {
-  if (block.type === "arraytable") {
-    return null;
-  }
-  const className = `block_${block.type}`;
-  const cells = block.cells.map((cell: TemplateCell, cell_index: number) => {
-    return renderCell(cell, doc, edit_mode, handleFieldBlur, cell_index);
-  });
-  return (
-    <div
-      className={className}
-      key={String(index)}
-      style={getStyleProperties(block)}
-    >
-      {cells}
-    </div>
-  );
-};
-
-const renderCell = (
-  cell: TemplateCell,
-  doc: Document,
-  edit_mode: editMode,
-  handleFieldBlur: () => void,
-  index: number
-) => {
-  return (
-    <div className="cell" key={String(index)} style={getStyleProperties(cell)}>
-      {cell.field ? (
-        <DisplayField
-          edit_mode={edit_mode}
-          field={cell.field}
-          handleFieldBlur={handleFieldBlur}
-          value_container={doc.getData()}
-        />
-      ) : (
-        cell.text
-      )}
-    </div>
-  );
-};
 
 const DisplayDocument: React.FC<Props> = (props) => {
   const [modified, setModified] = React.useState<boolean>(
@@ -152,13 +104,15 @@ const DisplayDocument: React.FC<Props> = (props) => {
 
   const blocks = props.doc
     .getTemplate()
-    .content.map((block: TemplateBlock, index: number) => {
-      return renderBlock(
-        block,
-        props.doc,
-        props.edit_mode,
-        handleFieldBlur,
-        index
+    .content.map((cell: TemplateCell, index: number) => {
+      return (
+        <Cell
+          cell={cell}
+          index={index}
+          edit_mode={props.edit_mode}
+          handleFieldBlur={handleFieldBlur}
+          value_container={props.doc.getData()}
+        />
       );
     });
 

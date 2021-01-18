@@ -6,13 +6,14 @@ interface EditableProps {
   field: JSONEditField;
   handleFieldBlur: () => void;
   value_container: any;
+  value_key: string | number;
 }
 
 export function Editable(props: EditableProps): JSX.Element {
   const className = `input_${props.field.type}`;
   const handleBlur = (event: React.FocusEvent<HTMLTextAreaElement>) => {
     try {
-      props.value_container[props.field.id] = JSON.parse(event.target.value);
+      props.value_container[props.value_key] = JSON.parse(event.target.value);
       props.handleFieldBlur();
     } catch (e) {
       console.error(e);
@@ -25,7 +26,7 @@ export function Editable(props: EditableProps): JSX.Element {
     <TextareaAutosize
       className={className}
       defaultValue={JSON.stringify(
-        props.value_container[props.field.id] || {},
+        props.value_container[props.value_key] || {},
         undefined,
         2
       )}

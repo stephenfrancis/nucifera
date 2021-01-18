@@ -33,7 +33,7 @@ const getWidth = (col: ViewColumn) => {
 const renderCell = (doc: DocContent, col: ViewColumn) => {
   return (
     <div className={`list_cell_${getWidth(col)}`} key={col.field.id}>
-      {renderUneditable(col.field, doc)}
+      {renderUneditable(col.field, doc, col.field.id)}
     </div>
   );
 };

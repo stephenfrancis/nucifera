@@ -4,18 +4,14 @@
   "description": "Standard template for a database's views",
   "content": [
     {
-      "type": "h1",
-      "cells": [
-        {
-          "field": {
-            "type": "text",
-            "id": "_id"
-          }
-        }
-      ]
+      "format": "h1",
+      "field": {
+        "type": "text",
+        "id": "_id"
+      }
     },
     {
-      "type": "p",
+      "format": "p",
       "cells": [
         {
           "text": "Type"
@@ -29,61 +25,37 @@
       ]
     },
     {
-      "type": "h2",
-      "cells": [
-        {
-          "text": "Index"
-        }
-      ]
+      "format": "h2",
+      "text": "Index"
     },
     {
-      "type": "p",
-      "cells": [
-        {
-          "field": {
-            "id": "index",
-            "type": "json"
-          }
-        }
-      ]
+      "format": "p",
+      "field": {
+        "id": "index",
+        "type": "json"
+      }
     },
     {
-      "type": "h2",
-      "cells": [
-        {
-          "text": "Selector"
-        }
-      ]
+      "format": "h2",
+      "text": "Selector"
     },
     {
-      "type": "p",
-      "cells": [
-        {
-          "field": {
-            "id": "selector",
-            "type": "json"
-          }
-        }
-      ]
+      "format": "p",
+      "field": {
+        "id": "selector",
+        "type": "json"
+      }
     },
     {
-      "type": "h2",
-      "cells": [
-        {
-          "text": "Columns"
-        }
-      ]
+      "format": "h2",
+      "text": "Columns"
     },
     {
-      "type": "p",
-      "cells": [
-        {
-          "field": {
-            "id": "columns",
-            "type": "json"
-          }
-        }
-      ]
+      "format": "p",
+      "field": {
+        "id": "columns",
+        "type": "json"
+      }
     }
   ]
 }

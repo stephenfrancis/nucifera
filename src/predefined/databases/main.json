@@ -3,29 +3,21 @@
   "template": "builtin:template",
   "content": [
     {
-      "type": "h1",
-      "cells": [
-        {
-          "field": {
-            "type": "text",
-            "id": "_id"
-          }
-        }
-      ]
+      "format": "h1",
+      "field": {
+        "type": "text",
+        "id": "_id"
+      }
     },
     {
-      "type": "p",
-      "cells": [
-        {
-          "field": {
-            "type": "text",
-            "id": "label"
-          }
-        }
-      ]
+      "format": "p",
+      "field": {
+        "type": "text",
+        "id": "label"
+      }
     },
     {
-      "type": "p",
+      "format": "p",
       "cells": [
         {
           "field": {

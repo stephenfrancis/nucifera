@@ -36,12 +36,14 @@ interface Props {
   edit_mode: editMode;
   handleFieldBlur: () => void;
   value_container: any;
+  value_key: string | number;
 }
 
 const renderEditable = (
   field: EditField,
   handleFieldBlur: () => void,
-  value_container: any
+  value_container: any,
+  value_key: string | number
 ) => {
   const [error, setError] = React.useState<string | null>(
     validate(field, value_container[field.id])
@@ -54,7 +56,12 @@ const renderEditable = (
   return (
     <div className={className} id={field.id}>
       <div>
-        {renderEditableInner(field, handleFieldBlurInner, value_container)}
+        {renderEditableInner(
+          field,
+          handleFieldBlurInner,
+          value_container,
+          value_key
+        )}
       </div>
       {error && <div>{error}</div>}
     </div>
@@ -64,7 +71,8 @@ const renderEditable = (
 const renderEditableInner = (
   field: EditField,
   handleFieldBlur: () => void,
-  value_container: any
+  value_container: any,
+  value_key: string | number
 ) => {
   switch (field.type) {
     case "date":
@@ -73,6 +81,7 @@ const renderEditableInner = (
           field={field}
           handleFieldBlur={handleFieldBlur}
           value_container={value_container}
+          value_key={value_key}
         />
       );
     case "image":
@@ -81,6 +90,7 @@ const renderEditableInner = (
           field={field}
           handleFieldBlur={handleFieldBlur}
           value_container={value_container}
+          value_key={value_key}
         />
       );
     case "json":
@@ -89,6 +99,7 @@ const renderEditableInner = (
           field={field}
           handleFieldBlur={handleFieldBlur}
           value_container={value_container}
+          value_key={value_key}
         />
       );
     case "number":
@@ -97,6 +108,7 @@ const renderEditableInner = (
           field={field}
           handleFieldBlur={handleFieldBlur}
           value_container={value_container}
+          value_key={value_key}
         />
       );
     case "options":
@@ -105,6 +117,7 @@ const renderEditableInner = (
           field={field}
           handleFieldBlur={handleFieldBlur}
           value_container={value_container}
+          value_key={value_key}
         />
       );
     case "richtext":
@@ -113,6 +126,7 @@ const renderEditableInner = (
           field={field}
           handleFieldBlur={handleFieldBlur}
           value_container={value_container}
+          value_key={value_key}
         />
       );
     case "text":
@@ -121,6 +135,7 @@ const renderEditableInner = (
           field={field}
           handleFieldBlur={handleFieldBlur}
           value_container={value_container}
+          value_key={value_key}
         />
       );
     default:
@@ -128,8 +143,12 @@ const renderEditableInner = (
   }
 };
 
-export const renderUneditable = (field: ShowField, value_container: any) => {
-  const value: any = value_container[field.id];
+export const renderUneditable = (
+  field: ShowField,
+  value_container: any,
+  value_key: string | number
+) => {
+  const value: any = value_container[value_key];
   switch (field.type) {
     case "date":
       return <DateUneditable field={field} value={value} />;
@@ -152,8 +171,13 @@ export const renderUneditable = (field: ShowField, value_container: any) => {
 
 const DisplayField: React.FC<Props> = (props) => {
   return props.edit_mode === "show"
-    ? renderUneditable(props.field, props.value_container)
-    : renderEditable(props.field, props.handleFieldBlur, props.value_container);
+    ? renderUneditable(props.field, props.value_container, props.value_key)
+    : renderEditable(
+        props.field,
+        props.handleFieldBlur,
+        props.value_container,
+        props.value_key
+      );
 };
 
 export default DisplayField;

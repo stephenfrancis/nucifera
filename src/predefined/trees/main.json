@@ -3,18 +3,14 @@
   "template": "builtin:template",
   "content": [
     {
-      "type": "h1",
-      "cells": [
-        {
-          "field": {
-            "type": "text",
-            "id": "name"
-          }
-        }
-      ]
+      "format": "h1",
+      "field": {
+        "type": "text",
+        "id": "name"
+      }
     },
     {
-      "type": "p",
+      "format": "p",
       "cells": [
         {
           "flex": "0 0 150px",
@@ -32,7 +28,7 @@
       ]
     },
     {
-      "type": "p",
+      "format": "p",
       "cells": [
         {
           "flex": "0 0 150px",
@@ -47,42 +43,26 @@
       ]
     },
     {
-      "type": "h2",
-      "cells": [
-        {
-          "text": "Summary"
-        }
-      ]
+      "format": "h2",
+      "text": "Summary"
     },
     {
-      "type": "p",
-      "cells": [
-        {
-          "field": {
-            "type": "richtext",
-            "id": "summary"
-          }
-        }
-      ]
+      "format": "p",
+      "field": {
+        "type": "richtext",
+        "id": "summary"
+      }
     },
     {
-      "type": "h2",
-      "cells": [
-        {
-          "text": "Description"
-        }
-      ]
+      "format": "h2",
+      "text": "Description"
     },
     {
-      "type": "p",
-      "cells": [
-        {
-          "field": {
-            "type": "richtext",
-            "id": "description"
-          }
-        }
-      ]
+      "format": "p",
+      "field": {
+        "type": "richtext",
+        "id": "description"
+      }
     }
   ]
 }
