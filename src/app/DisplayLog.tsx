@@ -24,15 +24,16 @@ const renderMessage = (msg: LogMessage) => {
 
 const DisplayLog: React.FC<Props> = (props) => {
   const [msg, setMsg] = React.useState<LogMessage | null>(null);
-  const [modal, setModal] = useModal();
+  const [modal, setModal] = useModal(true);
   React.useEffect(() => {
     registerNewMessageCallback(setMsg);
     return () => {
       unRegisterNewMessageCallback(setMsg);
     };
   }, []);
-  const toggleModal = () => {
+  const toggleModal = (event: React.MouseEvent) => {
     setModal(!modal);
+    event.stopPropagation();
   };
   return (
     <>
@@ -42,7 +43,6 @@ const DisplayLog: React.FC<Props> = (props) => {
       <Modal
         open={modal}
         setOpen={setModal}
-        closeOnBackgroundClick
         modalStyle={{
           border: "1px solid black",
           borderRadius: 0,
