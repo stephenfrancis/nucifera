@@ -3,6 +3,13 @@
   "template": "builtin:view",
   "description": "Databases that are available in this device",
   "type": "list",
+  "index": ["template"],
+  "selector": {
+    "template": {
+      "$regex": "^(?!builtin:.*$).*"
+    }
+  },
+  "show_doc_link": "/{doc_id}/view/docs",
   "columns": [
     {
       "field": {

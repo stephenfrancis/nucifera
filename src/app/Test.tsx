@@ -35,7 +35,7 @@ const Test: React.FC<Props> = (props) => {
         info(`adding new documents...`);
         return Promise.all(
           Object.keys(Trees).map((doc_id) =>
-            db_trees.saveDocument(doc_id, Trees[doc_id])
+            db_trees.saveDocument(Trees[doc_id])
           )
         );
       })

@@ -48,10 +48,13 @@ export default class View {
   }
 
   getNewDocumentLink(): string {
-    return `/${this.db.name}/create/main`;
+    return this.spec.new_doc_link || `/${this.db.name}/create/main`;
   }
 
   getShowLink(doc_id: string): string {
+    if (this.spec.show_doc_link) {
+      return this.spec.show_doc_link.replace("{doc_id}", doc_id);
+    }
     return `/${this.db.name}/show/${doc_id}`;
   }
 

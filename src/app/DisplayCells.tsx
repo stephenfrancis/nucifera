@@ -92,7 +92,7 @@ const CellArray: React.FC<RenderCellProps> = (props) => {
   });
   if (props.edit_mode !== "show") {
     cells.push(
-      <div>
+      <div key="add">
         <span onClick={add}>➕</span>
       </div>
     );
@@ -162,7 +162,11 @@ const CellMap: React.FC<RenderCellProps> = (props) => {
 };
 
 const CellText: React.FC<RenderCellProps> = (props) => {
-  return <>{(props.cell as TemplateCellText).text}</>;
+  return (
+    <React.Fragment key={String(props.index)}>
+      {(props.cell as TemplateCellText).text}
+    </React.Fragment>
+  );
 };
 
 const RENDER = {

@@ -30,9 +30,12 @@
     },
     {
       "format": "p",
-      "field": {
-        "id": "index",
-        "type": "json"
+      "id": "index",
+      "cell": {
+        "field": {
+          "id": "index",
+          "type": "text"
+        }
       }
     },
     {
@@ -41,10 +44,36 @@
     },
     {
       "format": "p",
-      "field": {
-        "id": "selector",
-        "type": "json"
+      "id": "selector",
+      "map": {
+        "template": {
+          "format": "p",
+          "id": "template",
+          "map": {
+            "$regex": {
+              "format": "p",
+              "field": {
+                "id": "$regex",
+                "type": "text"
+              }
+            }
+          }
+        }
       }
+    },
+    {
+      "format": "p",
+      "cells": [
+        {
+          "text": "Show Doc Link"
+        },
+        {
+          "field": {
+            "type": "text",
+            "id": "show_doc_link"
+          }
+        }
+      ]
     },
     {
       "format": "h2",

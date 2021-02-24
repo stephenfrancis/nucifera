@@ -5,7 +5,9 @@ export interface View {
   columns: ViewColumn[];
   description?: string;
   index?: any;
+  new_doc_link?: string;
   selector?: any;
+  show_doc_link?: string;
   sort?: string[];
   template: string;
   type: "list";

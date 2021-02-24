@@ -1,12 +1,13 @@
 import PouchDB from "pouchdb";
 
-import Builtins from "./Builtins";
+import docs from "../predefined/databases/docs.json";
+import main from "../predefined/databases/main.json";
 
 export function checkAndPopulateDatabase(db: PouchDB.Database): Promise<any> {
   if (db.name === "databases") {
     return db.info().then((info) => {
       if (info.doc_count === 0) {
-        return Promise.all([db.put(Builtins.docs), db.put(Builtins.main)]);
+        return Promise.all([db.put(docs), db.put(main)]);
       }
     });
     // } else if (db.name === "trees") {

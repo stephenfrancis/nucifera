@@ -23,57 +23,32 @@ export default class Database {
     checkAndPopulateDatabase(this.pouch);
   }
 
-  allDocs(options?: any): Promise<any> {
+  public allDocs(options?: any): Promise<any> {
     return this.pouch.allDocs(options || {});
   }
 
-  createNewDocumentFromTemplate(
-    template_id: string,
-    _id?: string
-  ): Promise<Document> {
-    info(`createNewDocumentFromTemplate(${template_id}, ${_id})`);
-    let builtin: Template;
-    let id_already_exists = true;
-    if (!_id) {
-      _id = `d${Math.random() * 10e16}`;
-    }
-    return this.pouch
-      .get(_id)
-      .catch((err) => {
-        if (err.name === "not_found") {
-          id_already_exists = false;
-        } else {
-          error(err);
-        }
-      })
-      .then(() => {
-        if (id_already_exists) {
-          throw new Error(`id already exists: ${_id}`);
-        }
-        builtin = this.getBuiltin(template_id);
-        if (!builtin) {
-          return this.pouch.get(template_id);
-        }
-      })
-      .then((template: any) => {
-        return new Document(
-          this,
-          _id,
-          {
-            _id,
-            template: template_id,
-          },
-          builtin || template
-        );
-      });
+  public createNewDocumentFromTemplate(template_id: string): Promise<Document> {
+    info(`createNewDocumentFromTemplate(${template_id})`);
+    let builtin: Template = this.getBuiltin(template_id);
+    return builtin
+      ? Promise.resolve(null)
+      : this.pouch.get(template_id).then((template: any) => {
+          return new Document(
+            this,
+            {
+              template: template_id,
+            },
+            builtin || template
+          );
+        });
   }
 
-  delete(_id: string, _rev: string): Promise<any> {
+  public delete(_id: string, _rev: string): Promise<any> {
     return this.pouch.remove(_id, _rev);
   }
 
   // requires pouch-find plugin
-  find(
+  public find(
     index_name: string,
     index_fields: string[],
     retrieve_fields: string[],
@@ -114,14 +89,14 @@ export default class Database {
       });
   }
 
-  getBuiltin(template_or_view_id: string): any {
+  public getBuiltin(template_or_view_id: string): any {
     if (template_or_view_id.indexOf("builtin:") === 0) {
       return Builtins[template_or_view_id.substr(8)];
     }
     return null;
   }
 
-  getDocOrBuiltIn(template_or_view_id: string): Promise<any> {
+  public getDocOrBuiltIn(template_or_view_id: string): Promise<any> {
     const builtin = this.getBuiltin(template_or_view_id);
     if (builtin) {
       return Promise.resolve(builtin);
@@ -129,7 +104,7 @@ export default class Database {
     return this.pouch.get(template_or_view_id);
   }
 
-  getExistingDocumentAndTemplate(_id: string): Promise<Document> {
+  public getExistingDocumentAndTemplate(_id: string): Promise<Document> {
     let doc;
     info(`getExistingDocumentAndTemplate(${_id})`);
     return this.pouch
@@ -149,7 +124,7 @@ export default class Database {
       })
       .then((result: any) => {
         info(`got template: ${JSON.stringify(result)}`);
-        return new Document(this, _id, doc, result);
+        return new Document(this, doc, result);
       })
       .catch((err) => {
         error(err);
@@ -157,24 +132,21 @@ export default class Database {
           throw err;
         }
         info(`template not found in database, using builtin`);
-        return new Document(this, _id, doc, Builtins.main as Template);
+        return new Document(this, doc, Builtins.main as Template);
       });
   }
 
-  getInfo(): Promise<PouchDB.Core.DatabaseInfo> {
+  public getInfo(): Promise<PouchDB.Core.DatabaseInfo> {
     return this.pouch.info();
   }
 
-  getInfoDoc(): Promise<Document> {
+  public getInfoDoc(): Promise<Document> {
     return this.pouch
       .get("info")
-      .then(
-        (result) =>
-          new Document(this, result._id, result, Builtins.info as Template)
-      );
+      .then((result) => new Document(this, result, Builtins.info as Template));
   }
 
-  getView(view_id: string): Promise<View> {
+  public getView(view_id: string): Promise<View> {
     info(`getView(${view_id})`);
     return this.getDocOrBuiltIn(view_id)
       .then((result: any) => {
@@ -194,24 +166,26 @@ export default class Database {
       });
   }
 
-  replicateFrom(
+  public replicateFrom(
     remote_db: Database,
     options?: PouchDB.Replication.ReplicateOptions
   ): Promise<any> {
     return this.pouch.replicate.from(remote_db.pouch, options);
   }
 
-  replicateTo(
+  public replicateTo(
     remote_db: Database,
     options?: PouchDB.Replication.ReplicateOptions
   ): Promise<any> {
     return this.pouch.replicate.to(remote_db.pouch, options);
   }
 
-  saveDocument(_id: string, data: any) {
-    data._id = _id;
+  public saveDocument(data: any) {
     if (!data.created_at) {
       data.created_at = Date.now();
+    }
+    if (!data._id) {
+      data._id = `d${Math.random() * 10e17}`;
     }
     return this.pouch.put(data);
   }

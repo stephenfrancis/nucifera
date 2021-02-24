@@ -218,6 +218,12 @@ tr.separator td {
   width: 600px;
 }
 
+.mainarea.show,
+.mainarea.edit {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
 .cell {
   display: flex;
 }
@@ -225,26 +231,22 @@ tr.separator td {
 .cell_h1 {
   font-size: 3rem;
   margin: 20px 0 10px 0;
-  padding: 0 10px;
 }
 
 .cell_h2 {
   font-size: 2.5rem;
   margin: 15px 0 5px 0;
-  padding: 0 10px;
 }
 
 .cell_h3 {
   display: flex;
   font-size: 2rem;
   margin: 10px 0 0 0;
-  padding: 0 10px;
 }
 
 .cell_p {
   font-size: 1rem;
   margin: 0 0 0 0;
-  padding: 0 10px;
 }
 
 .cell_array > div {
@@ -261,6 +263,7 @@ tr.separator td {
 }
 
 .cell_field {
+  flex-grow: 1;
   padding: 5px;
   white-space: pre-wrap;
 }
@@ -276,7 +279,6 @@ tr.separator td {
 }
 
 .cell_text {
-  flex: 1 0 100px;
   padding: 5px;
   white-space: pre-wrap;
 }

@@ -127,7 +127,7 @@ const DisplayDocument: React.FC<Props> = (props) => {
           <MenuItemDocument doc={props.doc} />
         </ErrorBoundary>
       </Header>
-      <Mainarea>
+      <Mainarea className={props.edit_mode}>
         <ErrorBoundary>{blocks}</ErrorBoundary>
       </Mainarea>
       <Footer>

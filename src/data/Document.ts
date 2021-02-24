@@ -14,10 +14,10 @@ export default class Document {
   public readonly _id: string;
   private template: Template;
 
-  constructor(db: Database, _id: string, data: any, template: Template) {
+  constructor(db: Database, data: any, template: Template) {
     this.db = db;
     this.has_been_deleted = false;
-    this._id = _id;
+    this._id = data._id || "<unassigned>";
     this.data = data;
     this.orig_data = cloneDeep(data);
     this.template = template;
@@ -63,7 +63,7 @@ export default class Document {
     return validateTemplate(this.template, this.data);
   }
 
-  save() {
+  save(): Promise<void> {
     if (this.has_been_deleted) {
       throw new Error(
         `document ${this._id} has been deleted and cannot be saved`
@@ -76,7 +76,7 @@ export default class Document {
       throw new Error(`document ${this._id} is not valid`);
     }
     info(`saving document: ${this._id}`);
-    return this.db.saveDocument(this._id, this.data).then(() => {
+    return this.db.saveDocument(this.data).then(() => {
       info("saved");
     });
   }

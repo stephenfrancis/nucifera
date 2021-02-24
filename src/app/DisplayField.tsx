@@ -54,7 +54,7 @@ const renderEditable = (
     handleFieldBlur();
   };
   return (
-    <div className={className} id={field.id}>
+    <div className={className} id={field.id} key={value_key || field.id}>
       <div>
         {renderEditableInner(
           field,

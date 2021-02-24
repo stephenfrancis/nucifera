@@ -27,10 +27,14 @@ const DEFAULT_WIDTH_BY_TYPE = {
 };
 
 const getWidth = (col: ViewColumn) => {
+  console.log(`getWidth() for column ${col.label}`);
   return col.initialWidth || DEFAULT_WIDTH_BY_TYPE[col.field.type];
 };
 
 const renderCell = (doc: DocContent, col: ViewColumn) => {
+  if (!col.field) {
+    return <div>Err no col.field</div>;
+  }
   return (
     <div className={`list_cell_${getWidth(col)}`} key={col.field.id}>
       {renderUneditable(col.field, doc, col.field.id)}
@@ -38,19 +42,22 @@ const renderCell = (doc: DocContent, col: ViewColumn) => {
   );
 };
 
-const renderHeader = (view: View) => {
-  return <div className="list_header">{renderHeaders(view)}</div>;
+const renderHeader = (col: ViewColumn) => {
+  if (!col.field) {
+    return <div>Err no col.field</div>;
+  }
+  return (
+    <div className={`list_cell_${getWidth(col)}`} key={col.field.id}>
+      {col.label || col.field.id}
+    </div>
+  );
 };
 
 const renderHeaders = (view: View) => {
   return (
-    <>
-      {view.getColumns().map((col) => (
-        <div className={`list_cell_${getWidth(col)}`} key={col.field.id}>
-          {col.label || col.field.id}
-        </div>
-      ))}
-    </>
+    <div className="list_header">
+      {view.getColumns().map((col) => renderHeader(col))}
+    </div>
   );
 };
 
@@ -118,7 +125,7 @@ const DisplayView: React.FC<Props> = (props) => {
         </ErrorBoundary>
       </Header>
       <Body>
-        {renderHeader(props.view)}
+        {renderHeaders(props.view)}
         <ErrorBoundary>
           {!!data && renderRows(props.view, data, selected)}
           {!data && <Loading />}
