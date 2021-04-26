@@ -1,7 +1,15 @@
 const express = require("express");
+var cors = require("cors");
 const app = express();
 const PouchDB = require("pouchdb");
 const Fs = require("fs");
+
+app.use(
+  cors({
+    origin: true,
+    credentials: true,
+  })
+);
 
 app.use(
   "/db",

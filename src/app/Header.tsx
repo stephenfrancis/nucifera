@@ -6,10 +6,10 @@ const Header: React.FC<Props> = (props) => {
   return (
     <div className="header">
       {props.children}
-      <div className="logo">
+      <a className="logo" href="/">
         <img src="/lotus_icon.svg" />
         <b>nu</b>cifera
-      </div>
+      </a>
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { BrowserRouter, Link, Redirect } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 import { Cell } from "./DisplayCells";
 import Document from "../data/Document";
@@ -34,12 +34,12 @@ const DisplayDocument: React.FC<Props> = (props) => {
       //   `DisplayView.handleKeyboardEvents() ${event.key}, shift? ${event.shiftKey}, alt? ${event.altKey}, meta? ${event.metaKey}`
       // );
       if (event.key === "s" && (event.altKey || event.metaKey)) {
-        performSave();
+        performSave(false);
       } else if (event.key === "e" && (event.altKey || event.metaKey)) {
         if (props.edit_mode === "show") {
           setRedirect(props.doc.getEditLink());
         } else {
-          performSave(props.doc.getShowLink());
+          performSave(true);
         }
       } else if (event.key === "Escape") {
         setRedirect(props.doc.getDefaultViewLink());
@@ -57,10 +57,10 @@ const DisplayDocument: React.FC<Props> = (props) => {
   };
 
   const handleSaveClick = () => {
-    performSave(props.doc.getShowLink());
+    performSave(true);
   };
 
-  const performSave = (redirect_if_successful?: string) => {
+  const performSave = (redirect_if_successful: boolean) => {
     if (props.edit_mode === "show") {
       return;
     }
@@ -71,7 +71,7 @@ const DisplayDocument: React.FC<Props> = (props) => {
       .save()
       .then(() => {
         if (redirect_if_successful) {
-          setRedirect(redirect_if_successful);
+          setRedirect(props.doc.getShowLink());
         }
       })
       .catch((err) => error(err));
@@ -85,7 +85,14 @@ const DisplayDocument: React.FC<Props> = (props) => {
         </a>
       )}
       {(!modified || !valid) && <a className="button_disabled">Save</a>}
-      <Link className="button_sec" to={props.doc.getShowLink()}>
+      <Link
+        className="button_sec"
+        to={
+          props.edit_mode === "create"
+            ? props.doc.getDefaultViewLink()
+            : props.doc.getShowLink()
+        }
+      >
         Cancel
       </Link>
     </>
@@ -109,6 +116,7 @@ const DisplayDocument: React.FC<Props> = (props) => {
         <Cell
           cell={cell}
           index={index}
+          key={String(index)}
           edit_mode={props.edit_mode}
           handleFieldBlur={handleFieldBlur}
           value_container={props.doc.getData()}

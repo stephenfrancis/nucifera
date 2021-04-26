@@ -59,37 +59,36 @@ export const Cell: React.FC<RenderCellProps> = (props) => {
 
 const CellArray: React.FC<RenderCellProps> = (props) => {
   const value_key: string = (props.cell as TemplateCellArray).id;
-  const [data, setData] = React.useState<any[]>(
-    props.value_container[value_key]
-  );
-  if (!Array.isArray(data)) {
+  const [hack, setHack] = React.useState<number>(0);
+  props.value_container[value_key] = props.value_container[value_key] || [];
+  if (!Array.isArray(props.value_container[value_key])) {
     return <div>Value for key {value_key} is not an array</div>;
   }
   const add = () => {
-    const temp = data.slice();
-    temp.push(null);
-    setData(temp);
+    props.value_container[value_key].push(null);
+    setHack(hack + 1);
   };
-  const cells = data.map((child_value: any, cell_index: number) => {
-    const remove = () => {
-      const temp = data.slice();
-      temp.splice(cell_index, 1);
-      setData(temp);
-    };
-    return (
-      <div key={String(cell_index)}>
-        {props.edit_mode !== "show" && <span onClick={remove}>➖</span>}
-        <Cell
-          cell={(props.cell as TemplateCellArray).cell}
-          index={props.index * 100 + cell_index}
-          edit_mode={props.edit_mode}
-          handleFieldBlur={props.handleFieldBlur}
-          value_container={props.value_container[value_key]}
-          value_key={cell_index}
-        />
-      </div>
-    );
-  });
+  const cells = props.value_container[value_key].map(
+    (child_value: any, cell_index: number) => {
+      const remove = () => {
+        props.value_container[value_key].splice(cell_index, 1);
+        setHack(hack + 1);
+      };
+      return (
+        <div key={String(cell_index)}>
+          {props.edit_mode !== "show" && <span onClick={remove}>➖</span>}
+          <Cell
+            cell={(props.cell as TemplateCellArray).cell}
+            index={props.index * 100 + cell_index}
+            edit_mode={props.edit_mode}
+            handleFieldBlur={props.handleFieldBlur}
+            value_container={props.value_container[value_key]}
+            value_key={cell_index}
+          />
+        </div>
+      );
+    }
+  );
   if (props.edit_mode !== "show") {
     cells.push(
       <div key="add">
@@ -107,6 +106,7 @@ const CellContainer: React.FC<RenderCellProps> = (props) => {
         <Cell
           cell={child}
           index={cell_index}
+          key={String(cell_index)}
           edit_mode={props.edit_mode}
           handleFieldBlur={props.handleFieldBlur}
           value_container={props.value_container}
@@ -141,6 +141,7 @@ const CellField: React.FC<RenderCellProps> = (props) => {
 
 const CellMap: React.FC<RenderCellProps> = (props) => {
   const value_key: string = (props.cell as TemplateCellMap).id;
+  props.value_container[value_key] = props.value_container[value_key] || {};
   if (typeof props.value_container[value_key] !== "object") {
     return <div>Value for key {value_key} is not an object</div>;
   }
@@ -150,6 +151,7 @@ const CellMap: React.FC<RenderCellProps> = (props) => {
         <Cell
           cell={(props.cell as TemplateCellMap).map[key]}
           index={cell_index}
+          key={String(cell_index)}
           edit_mode={props.edit_mode}
           handleFieldBlur={props.handleFieldBlur}
           value_container={props.value_container[value_key]}

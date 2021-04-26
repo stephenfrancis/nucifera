@@ -40,6 +40,9 @@ export default class View {
   }
 
   getColumns(): ViewColumn[] {
+    if (!this.spec.columns) {
+      throw new Error(`View ${this.id} has no columns defined`);
+    }
     return this.spec.columns;
   }
 

@@ -21,6 +21,7 @@ const OpenDocument: React.FC<Props> = (props) => {
     setDB(new Database(props.db_id));
   }, [props.db_id]);
   React.useEffect(() => {
+    setDoc(null);
     if (db) {
       const promise =
         props.edit_mode === "create"

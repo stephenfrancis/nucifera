@@ -20,9 +20,9 @@ const makeLink = (type: string, id: string, label?: string) =>
     </u>
   ) : null;
 
-const renderNuDbInfo = (nuDbInfo: Document) => {
-  const views = nuDbInfo.getData().views || ["docs"];
-  const templates = nuDbInfo.getData().templates || ["main"];
+const renderNuDbInfo = (nuDbInfo?: Document) => {
+  const views = nuDbInfo?.getData()?.views || ["docs"];
+  const templates = nuDbInfo?.getData()?.templates || ["main"];
   const children: JSX.Element[] = [];
   for (let i = 0; i < Math.max(views.length, templates.length); i += 1) {
     children.push(
@@ -91,16 +91,13 @@ const MenuItemDatabase: React.FC<Props> = (props) => {
             <td>Create a New...</td>
             <td>Open View...</td>
           </tr>
-          {nuDbInfo && renderNuDbInfo(nuDbInfo)}
-          {!nuDbInfo && (
-            <tr>
-              <td>{makeLink("create", "main")}</td>
-              <td>{makeLink("view", "docs")}</td>
-            </tr>
-          )}
+          {renderNuDbInfo(nuDbInfo)}
           <tr>
             <td>{makeLink("create", "builtin:template", "Design Template")}</td>
             <td>{makeLink("view", "builtin:design", "Design")}</td>
+          </tr>
+          <tr>
+            <td>{makeLink("create", "builtin:view", "Design View")}</td>
           </tr>
           <tr className="separator">
             <td colSpan={2} />

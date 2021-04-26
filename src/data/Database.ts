@@ -27,20 +27,29 @@ export default class Database {
     return this.pouch.allDocs(options || {});
   }
 
-  public createNewDocumentFromTemplate(template_id: string): Promise<Document> {
-    info(`createNewDocumentFromTemplate(${template_id})`);
-    let builtin: Template = this.getBuiltin(template_id);
-    return builtin
-      ? Promise.resolve(null)
-      : this.pouch.get(template_id).then((template: any) => {
-          return new Document(
-            this,
-            {
-              template: template_id,
-            },
-            builtin || template
-          );
-        });
+  public createNewDocumentFromTemplate(
+    template_id: string,
+    doc_id?: string
+  ): Promise<Document> {
+    info(`createNewDocumentFromTemplate(${template_id}, ${doc_id})`);
+    return this.getDocOrBuiltIn(template_id)
+      .catch((err) => {
+        error(err);
+        info(
+          `template '${template_id}' not found in database, using builtin:main'`
+        );
+        return Builtins.main;
+      })
+      .then((template: any) => {
+        return new Document(
+          this,
+          {
+            _id: doc_id,
+            template: template_id,
+          },
+          template
+        );
+      });
   }
 
   public delete(_id: string, _rev: string): Promise<any> {
@@ -154,11 +163,7 @@ export default class Database {
       })
       .catch((err) => {
         error(err);
-        info(
-          `view '${view_id}' not found in database, using builtin '${JSON.stringify(
-            Builtins.docs
-          )}'`
-        );
+        info(`view '${view_id}' not found in database, using builtin:docs`);
         return Builtins.docs as ViewSpec;
       })
       .then((spec: ViewSpec) => {

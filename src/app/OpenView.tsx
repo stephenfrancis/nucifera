@@ -18,6 +18,7 @@ const OpenView: React.FC<Props> = (props) => {
     setDB(new Database(props.db_id));
   }, [props.db_id]);
   React.useEffect(() => {
+    setView(null);
     if (db) {
       db.getView(props.view_id)
         .then((temp_view: View) => {

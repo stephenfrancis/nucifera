@@ -9,7 +9,7 @@ interface Props {
 
 const MenuItemDocument: React.FC<Props> = (props) => {
   return (
-    <MenuItem iconPath="/document.svg" label={props.doc._id}>
+    <MenuItem iconPath="/document.svg" label={props.doc.getId()}>
       <table>
         <tbody>
           <tr>
