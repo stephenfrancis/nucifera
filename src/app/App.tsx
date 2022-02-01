@@ -1,21 +1,21 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { Route, Switch } from "react-router";
-import { BrowserRouter, Redirect } from "react-router-dom";
+import { Route, Routes } from "react-router";
+import { BrowserRouter, Navigate } from "react-router-dom";
 
-import ErrorBoundary from "./ErrorBoundary";
-import OpenDocument from "./OpenDocument";
-import OpenView from "./OpenView";
+import ErrorBoundary from "./page/ErrorBoundary";
+import OpenDocument from "./document/OpenDocument";
+import OpenView from "./view/OpenView";
 import Test from "./Test";
 
 const App: React.FC<{}> = () => {
   return (
     <ErrorBoundary>
       <BrowserRouter>
-        <Switch>
+        <Routes>
           <Route
             path="/:db/create/:template_id/:doc_id?"
-            render={(props) => {
+            element={(props) => {
               console.log(
                 `App create routing template_id: ${props.match.params.template_id}, doc_id: ${props.match.params.doc_id}`
               );
@@ -31,7 +31,7 @@ const App: React.FC<{}> = () => {
           />
           <Route
             path="/:db/view/:view_id"
-            render={(props) => {
+            element={(props) => {
               console.log(
                 `App view routing view_id: ${props.match.params.view_id}`
               );
@@ -45,7 +45,7 @@ const App: React.FC<{}> = () => {
           />
           <Route
             path="/:db/:edit_mode/:doc_id"
-            render={(props) => {
+            element={(props) => {
               console.log(
                 `App edit/show routing doc_id: ${props.match.params.doc_id}`
               );
@@ -61,10 +61,10 @@ const App: React.FC<{}> = () => {
           <Route path="/test">
             <Test />
           </Route>
-          <Route exact path="/">
-            <Redirect to="/databases/view/docs" />
+          <Route path="/">
+            <Navigate to="/databases/view/docs" />
           </Route>
-        </Switch>
+        </Routes>
       </BrowserRouter>
     </ErrorBoundary>
   );

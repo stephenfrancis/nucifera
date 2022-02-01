@@ -1,5 +1,5 @@
 import * as React from "react";
-import { BrowserRouter, Link, Redirect } from "react-router-dom";
+import { BrowserRouter, Link, Navigate } from "react-router-dom";
 
 import Body from "../page/Mainarea";
 import { renderUneditable } from "../fields/DisplayField";
@@ -115,7 +115,7 @@ const DisplayView: React.FC<Props> = (props) => {
 
   return (
     <>
-      {redirect && <Redirect to={redirect} />}
+      {redirect && <Navigate to={redirect} />}
       <Header>
         <ErrorBoundary>
           <MenuItemDatabase db={props.view.getDatabase()} />

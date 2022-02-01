@@ -36,7 +36,7 @@ if (env === "development") {
     httpServer: {
       express: (app, express) => {
         // example on how you can set something completely custom
-        app.use(/.*\.css\.map$/, (req, res, next) => {
+        app.use(/.*\.css\.map$/, (req: any, res: any, next: any) => {
           res.status(404).end();
         });
       },

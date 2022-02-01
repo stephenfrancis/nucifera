@@ -1,10 +1,10 @@
 import * as React from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 
-import { Cell } from "../DisplayCells";
+import { Cell } from "./DisplayCells";
 import Document from "../../data/Document";
 import { editMode } from "../../types/General";
-import { error, info } from "../../data/Logger";
+import { error } from "../../data/Logger";
 import ErrorBoundary from "../page/ErrorBoundary";
 import Footer from "../page/Footer";
 import Header from "../page/Header";
@@ -126,7 +126,7 @@ const DisplayDocument: React.FC<Props> = (props) => {
 
   return (
     <>
-      {redirect && <Redirect to={redirect} />}
+      {redirect && <Navigate to={redirect} />}
       <Header>
         <ErrorBoundary>
           <MenuItemDatabase db={props.doc.getDatabase()} />
