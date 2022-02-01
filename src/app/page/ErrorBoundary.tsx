@@ -1,7 +1,7 @@
 import * as React from "react";
 
 import Mainarea from "./Mainarea";
-import { error, info } from "../data/Logger";
+import { error, info } from "../../data/Logger";
 import Footer from "./Footer";
 import Header from "./Header";
 

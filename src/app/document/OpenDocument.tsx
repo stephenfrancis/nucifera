@@ -1,11 +1,11 @@
 import * as React from "react";
 
-import Database from "../data/Database";
+import Database from "../../data/Database";
 import DisplayDocument from "./DisplayDocument";
-import Document from "../data/Document";
-import Loading from "./Loading";
-import { error, info } from "../data/Logger";
-import { editMode } from "../types/General";
+import Document from "../../data/Document";
+import Loading from "../page/Loading";
+import { error, info } from "../../data/Logger";
+import { editMode } from "../../types/General";
 
 interface Props {
   db_id: string;

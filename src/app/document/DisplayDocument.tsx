@@ -1,19 +1,19 @@
 import * as React from "react";
 import { Link, Redirect } from "react-router-dom";
 
-import { Cell } from "./DisplayCells";
-import Document from "../data/Document";
-import { editMode } from "../types/General";
-import { error, info } from "../data/Logger";
-import ErrorBoundary from "./ErrorBoundary";
-import Footer from "./Footer";
-import Header from "./Header";
-import Mainarea from "./Mainarea";
-import MenuItemDatabase from "./MenuItemDatabase";
-import MenuItemDocument from "./MenuItemDocument";
+import { Cell } from "../DisplayCells";
+import Document from "../../data/Document";
+import { editMode } from "../../types/General";
+import { error, info } from "../../data/Logger";
+import ErrorBoundary from "../page/ErrorBoundary";
+import Footer from "../page/Footer";
+import Header from "../page/Header";
+import Mainarea from "../page/Mainarea";
+import MenuItemDatabase from "../menu/MenuItemDatabase";
+import MenuItemDocument from "../menu/MenuItemDocument";
 
-import { TemplateCell } from "../types/Template";
-import { getStyleProperties, useEventListener } from "./Utils";
+import { TemplateCell } from "../../types/Template";
+import { getStyleProperties, useEventListener } from "../Utils";
 
 interface Props {
   doc: Document;

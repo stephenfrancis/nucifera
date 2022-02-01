@@ -34,3 +34,11 @@ of these for a database to be called **nu-designed**:
 ### Remote Hosts
 
 IBM Cloudant: https://9c229f2c-7db1-4aba-9c2d-45ecffb0082a-bluemix.cloudant.com/dashboard.html#/_all_dbs
+
+## TODO
+
+- Move the message history to the console
+- Migrate from parcel to fuse-box
+- Fix the images
+- Create a yarn task to create and populate an example database
+-

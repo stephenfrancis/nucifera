@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import useModal from "./useModal";
+import useModal from "../page/useModal";
 
 interface Props {
   iconPath?: string;

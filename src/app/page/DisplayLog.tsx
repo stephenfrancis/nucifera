@@ -5,7 +5,7 @@ import {
   LogMessage,
   registerNewMessageCallback,
   unRegisterNewMessageCallback,
-} from "../data/Logger";
+} from "../../data/Logger";
 import Modal from "./Modal";
 import useModal from "./useModal";
 

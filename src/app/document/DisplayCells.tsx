@@ -1,7 +1,7 @@
 import * as React from "react";
 
-import DisplayField from "./DisplayField";
-import { editMode } from "../types/General";
+import DisplayField from "../fields/DisplayField";
+import { editMode } from "../../types/General";
 
 import {
   TemplateCell,
@@ -10,8 +10,8 @@ import {
   TemplateCellField,
   TemplateCellMap,
   TemplateCellText,
-} from "../types/Template";
-import { getStyleProperties, useEventListener } from "./Utils";
+} from "../../types/Template";
+import { getStyleProperties, useEventListener } from "../Utils";
 
 const getCellClassName = (cell: TemplateCell, type: string) =>
   "cell cell_" + type + (cell.format ? " cell_" + cell.format : "");

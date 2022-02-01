@@ -1,19 +1,19 @@
 import * as React from "react";
 import { BrowserRouter, Link, Redirect } from "react-router-dom";
 
-import Body from "./Mainarea";
-import { renderUneditable } from "./DisplayField";
-import ErrorBoundary from "./ErrorBoundary";
-import Footer from "./Footer";
-import Header from "./Header";
-import Loading from "./Loading";
-import { error, info } from "../data/Logger";
-import MenuItemDatabase from "./MenuItemDatabase";
-import MenuItemView from "./MenuItemView";
-import { getStyleProperties, useEventListener } from "./Utils";
-import View from "../data/View";
-import { DocContent } from "../types/General";
-import { ViewColumn } from "../types/View";
+import Body from "../page/Mainarea";
+import { renderUneditable } from "../fields/DisplayField";
+import ErrorBoundary from "../page/ErrorBoundary";
+import Footer from "../page/Footer";
+import Header from "../page/Header";
+import Loading from "../page/Loading";
+import { error, info } from "../../data/Logger";
+import MenuItemDatabase from "../menu/MenuItemDatabase";
+import MenuItemView from "../menu/MenuItemView";
+import { getStyleProperties, useEventListener } from "../Utils";
+import View from "../../data/View";
+import { DocContent } from "../../types/General";
+import { ViewColumn } from "../../types/View";
 
 interface Props {
   view: View;

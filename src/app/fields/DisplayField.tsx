@@ -1,35 +1,35 @@
 import * as React from "react";
-import { editMode } from "../types/General";
-import { EditField, ShowField } from "../types/Field";
+import { editMode } from "../../types/General";
+import { EditField, ShowField } from "../../types/Field";
 import {
   Editable as DateEditable,
   Uneditable as DateUneditable,
-} from "./fields/Date";
+} from "./Date";
 import {
   Editable as ImageEditable,
   Uneditable as ImageUneditable,
-} from "./fields/Image";
+} from "./Image";
 import {
   Editable as JSONEditable,
   Uneditable as JSONUneditable,
-} from "./fields/JSON";
+} from "./JSON";
 import {
   Editable as NumberEditable,
   Uneditable as NumberUneditable,
-} from "./fields/Number";
+} from "./Number";
 import {
   Editable as OptionsEditable,
   Uneditable as OptionsUneditable,
-} from "./fields/Options";
+} from "./Options";
 import {
   Editable as RichtextEditable,
   Uneditable as RichtextUneditable,
-} from "./fields/Richtext";
+} from "./Richtext";
 import {
   Editable as TextEditable,
   Uneditable as TextUneditable,
-} from "./fields/Text";
-import validate from "./fields/validate";
+} from "./Text";
+import validate from "./validate";
 
 interface Props {
   field: EditField;

@@ -1,10 +1,10 @@
 import * as React from "react";
 
-import Database from "../data/Database";
+import Database from "../../data/Database";
 import DisplayView from "./DisplayView";
-import Loading from "./Loading";
-import { error, info } from "../data/Logger";
-import View from "../data/View";
+import Loading from "../page/Loading";
+import { error, info } from "../../data/Logger";
+import View from "../../data/View";
 
 interface Props {
   db_id: string;

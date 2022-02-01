@@ -2,7 +2,7 @@ import * as React from "react";
 import { Link } from "react-router-dom";
 
 import MenuItem from "./MenuItem";
-import View from "../data/View";
+import View from "../../data/View";
 
 interface Props {
   view: View;

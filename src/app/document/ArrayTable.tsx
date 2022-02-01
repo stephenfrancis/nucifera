@@ -1,9 +1,9 @@
 import * as React from "react";
 
-import Document from "../data/Document";
-import { editMode } from "../types/General";
-import { TemplateBlockArrayTable, TemplateCell } from "../types/Template";
-import { getStyleProperties } from "./Utils";
+import Document from "../../data/Document";
+import { editMode } from "../../types/General";
+import { TemplateBlockArrayTable, TemplateCell } from "../../types/Template";
+import { getStyleProperties } from "../Utils";
 
 interface Props {
   block: TemplateBlockArrayTable;

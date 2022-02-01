@@ -2,9 +2,9 @@ import * as React from "react";
 import { Link } from "react-router-dom";
 
 import Credits from "./Credits";
-import Database from "../data/Database";
-import Document from "../data/Document";
-import { error, info } from "../data/Logger";
+import Database from "../../data/Database";
+import Document from "../../data/Document";
+import { error, info } from "../../data/Logger";
 import MenuItem from "./MenuItem";
 
 interface Props {

@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import Document from "../data/Document";
+import Document from "../../data/Document";
 import MenuItem from "./MenuItem";
 
 interface Props {
