@@ -15,7 +15,6 @@
     "cors": "^2.8.5",
     "date-fns": "^2.28.0",
     "lodash": "^4.17.21",
-    "parcel": "2.2.1",
     "pouchdb": "^7.2",
     "pouchdb-find": "^7.2",
     "pouchdb-server": "^4.2.0",
