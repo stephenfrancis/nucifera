@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Link, Navigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { Cell } from "./DisplayCells";
 import Document from "../../data/Document";
@@ -24,8 +24,8 @@ const DisplayDocument: React.FC<Props> = (props) => {
   const [modified, setModified] = React.useState<boolean>(
     props.edit_mode === "create"
   );
-  const [redirect, setRedirect] = React.useState<string>(null);
   const [valid, setValid] = React.useState<boolean>(props.doc.isValid());
+  const navigate = useNavigate();
 
   useEventListener(
     "keydown",
@@ -37,15 +37,15 @@ const DisplayDocument: React.FC<Props> = (props) => {
         performSave(false);
       } else if (event.key === "e" && (event.altKey || event.metaKey)) {
         if (props.edit_mode === "show") {
-          setRedirect(props.doc.getEditLink());
+          navigate(props.doc.getEditLink());
         } else {
           performSave(true);
         }
       } else if (event.key === "Escape") {
-        setRedirect(props.doc.getDefaultViewLink());
+        navigate(props.doc.getDefaultViewLink());
       } else if (event.key === "Delete") {
         props.doc.delete();
-        setRedirect(props.doc.getDefaultViewLink());
+        navigate(props.doc.getDefaultViewLink());
       }
     }, [])
   );
@@ -71,7 +71,7 @@ const DisplayDocument: React.FC<Props> = (props) => {
       .save()
       .then(() => {
         if (redirect_if_successful) {
-          setRedirect(props.doc.getShowLink());
+          navigate(props.doc.getShowLink());
         }
       })
       .catch((err) => error(err));
@@ -126,7 +126,6 @@ const DisplayDocument: React.FC<Props> = (props) => {
 
   return (
     <>
-      {redirect && <Navigate to={redirect} />}
       <Header>
         <ErrorBoundary>
           <MenuItemDatabase db={props.doc.getDatabase()} />

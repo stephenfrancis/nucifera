@@ -4,6 +4,7 @@ import * as path from "path";
 
 const env = process.env.NODE_ENV || "";
 const workspace = path.join(__dirname, "../..");
+console.log(workspace);
 
 if (["development", "production"].indexOf(env) === -1) {
   throw new Error(
@@ -12,7 +13,7 @@ if (["development", "production"].indexOf(env) === -1) {
 }
 
 const config: IPublicConfig = {
-  entry: "../app/index.html",
+  entry: "../app/App.tsx",
   target: "browser",
   // plugins: [
   //   pluginPostCSS("*.css", {
@@ -23,9 +24,9 @@ const config: IPublicConfig = {
   //   pluginCSS(),
   // ],
   devServer: false,
-  // webIndex: {
-  //   template: "../public/index.html",
-  // },
+  webIndex: {
+    template: "../app/index.html",
+  },
   watcher: {
     root: workspace, // watch parent folder
   },
@@ -35,6 +36,7 @@ if (env === "development") {
   config.devServer = {
     httpServer: {
       express: (app, express) => {
+        app.use("/assets", express.static(`${workspace}/src/app/assets`));
         // example on how you can set something completely custom
         app.use(/.*\.css\.map$/, (req: any, res: any, next: any) => {
           res.status(404).end();

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { BrowserRouter, Link, Navigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import Body from "../page/Mainarea";
 import { renderUneditable } from "../fields/DisplayField";
@@ -81,7 +81,7 @@ const renderRows = (view: View, data: DocContent[], selected: number) => {
 const DisplayView: React.FC<Props> = (props) => {
   const [data, setData] = React.useState<DocContent[]>(null);
   const [selected, setSelected] = React.useState<number>(0);
-  const [redirect, setRedirect] = React.useState<string>(null);
+  const navigate = useNavigate();
 
   useEventListener(
     "keydown",
@@ -97,7 +97,7 @@ const DisplayView: React.FC<Props> = (props) => {
           console.log(`handleKeyboardEvents() about to decrement ${selected}`);
           setSelected(selected - 1);
         } else if (event.key === "Enter" && data) {
-          setRedirect(props.view.getShowLink(data[selected]._id));
+          navigate(props.view.getShowLink(data[selected]._id));
         }
       },
       [selected, data]
@@ -115,7 +115,6 @@ const DisplayView: React.FC<Props> = (props) => {
 
   return (
     <>
-      {redirect && <Navigate to={redirect} />}
       <Header>
         <ErrorBoundary>
           <MenuItemDatabase db={props.view.getDatabase()} />

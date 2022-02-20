@@ -57,13 +57,13 @@ textarea {
   background-color: #f8f8f8;
 }
 
-.header {
+header {
   align-items: center;
   background-color: inherit;
   border-bottom: 1px solid black;
   display: flex;
   flex-flow: row nowrap;
-  height: 40px;
+  /* height: 40px; */
   left: 0;
   overflow-y: hidden;
   padding: 2px 5px 2px 5px;
@@ -84,6 +84,7 @@ textarea {
   cursor: pointer;
   font-size: 18px;
   padding: 4px 10px;
+  z-index: 10;
 }
 
 .menu_item > div:nth-child(1) img {
@@ -94,6 +95,7 @@ textarea {
 .menu_item.open > div:nth-child(1) {
   background-color: white;
   border: 1px solid black;
+  border-bottom: 0;
 }
 
 .menu_item > div:nth-child(2) {
@@ -101,7 +103,7 @@ textarea {
   border: 1px solid black;
   padding: 10px;
   position: fixed;
-  top: 36px;
+  top: 39px;
 }
 
 tr.separator td {
@@ -221,8 +223,7 @@ tr.separator td {
 
 .mainarea.show,
 .mainarea.edit {
-  padding-left: 15px;
-  padding-right: 15px;
+  padding: 60px 20px;
 }
 
 .cell {
@@ -349,26 +350,29 @@ tr.separator td {
   padding: 5px 10px;
 }
 
-.footer {
+footer {
   background-color: inherit;
   border-top: 1px solid black;
   bottom: 0;
   display: flex;
   flex-flow: row nowrap;
-  height: 40px;
+  /* height: 36px; */
   left: 0;
   position: fixed;
   right: 0;
 }
 
 .log {
-  cursor: pointer;
-  height: 30px;
+  /* cursor: pointer; */
   overflow: hidden;
-  padding: 6px 10px;
+  padding: 5px 10px;
   text-overflow: ellipsis;
   white-space: nowrap;
   flex: 1 0 200px;
+}
+
+.log_emphasis {
+  font-weight: bold;
 }
 
 .log_error {

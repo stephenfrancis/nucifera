@@ -1,0 +1,26 @@
+{
+  "$id": "https://stephenfrancis.online/nucifera/view.schema.json",
+  "title": "Template",
+  "description": "A template for a document in a database",
+  "type": "object",
+  "properties": {
+    "_id": {
+      "type": "string"
+    },
+    "template": {
+      "type": "string"
+    },
+    "content": {
+      "type": "object",
+      "properties": {
+        "format": {
+          "enum": ["h1", "p"]
+        },
+        "cells": {
+          "type": "array"
+        }
+      }
+    }
+  },
+  "required": ["_id", "templates", "content"]
+}

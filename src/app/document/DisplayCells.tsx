@@ -76,7 +76,7 @@ const CellArray: React.FC<RenderCellProps> = (props) => {
       };
       return (
         <div key={String(cell_index)}>
-          {props.edit_mode !== "show" && <span onClick={remove}>➖</span>}
+          {props.edit_mode !== "show" && <button onClick={remove}>➖</button>}
           <Cell
             cell={(props.cell as TemplateCellArray).cell}
             index={props.index * 100 + cell_index}
@@ -92,7 +92,7 @@ const CellArray: React.FC<RenderCellProps> = (props) => {
   if (props.edit_mode !== "show") {
     cells.push(
       <div key="add">
-        <span onClick={add}>➕</span>
+        <button onClick={add}>➕</button>
       </div>
     );
   }
@@ -122,7 +122,7 @@ const CellField: React.FC<RenderCellProps> = (props) => {
   console.log(
     `renderCellField(${props.index}, ${
       (props.cell as TemplateCellField).field.id
-    }, ${JSON.stringify(props.value_container)}, ${props.value_key})`
+    }, ${Object.keys(props.value_container)}, ${props.value_key})`
   );
   return (
     <DisplayField

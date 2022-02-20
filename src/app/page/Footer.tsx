@@ -6,10 +6,10 @@ interface Props {}
 
 const Footer: React.FC<Props> = (props) => {
   return (
-    <div className="footer">
+    <footer>
       <DisplayLog />
       {props.children}
-    </div>
+    </footer>
   );
 };
 

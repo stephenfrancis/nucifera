@@ -35,6 +35,7 @@
     "@types/react-dom": "^17.0.11",
     "@types/react-router": "^5.1.18",
     "@types/react-router-dom": "^5.3.3",
+    "ajv": "^8.10.0",
     "cypress": "^9.4.1",
     "fuse-box": "^4.0.0",
     "jest": "^27.4.7",
@@ -42,11 +43,12 @@
     "react-test-renderer": "^17.0.2",
     "ts-jest": "^27.1.3",
     "ts-node": "^10.4.0",
+    "typescript-json-schema": "^0.53.0",
     "wait-on": "^6.0.0"
   },
   "scripts": {
     "build": "NODE_ENV=production ./node_modules/.bin/ts-node src/config/fuse.ts",
-    "clean": "rm -f -r .parcel-cache dist/*.js dist/*.js.map dist/*.html",
+    "clean": "rm -f -r .cache dist/*",
     "server": "cd build/couch-server && node ../../src/server/pouch.js",
     "start-old": "yarn run parcel serve src/app/index.html",
     "start": "NODE_ENV=development ./node_modules/.bin/ts-node src/config/fuse.ts",
@@ -54,7 +56,8 @@
     "test:all": "yarn test:integration",
     "test:cypress": "yarn run cypress run --config-file src/test/cypress.json",
     "test:integration": "yarn run start & yarn run wait-on http://localhost:4444/ && yarn run test:cypress",
-    "tsc": "tsc -p ./tsconfig.json"
+    "tsc": "tsc -p src/tsconfig.json --noEmit",
+    "validate": "node src/schemas/validate.js"
   },
   "bugs": {
     "url": "https://github.com/stephenfrancis/nucifera/issues"

@@ -33,7 +33,7 @@ class ErrorBoundary extends React.Component<Props, State> {
         <>
           <Header />
           <Mainarea>
-            <h1>Something went wrong.</h1>;
+            <h1>Something went wrong.</h1>
           </Mainarea>
           <Footer />
         </>

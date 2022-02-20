@@ -3,7 +3,7 @@
   "template": "builtin:template",
   "content": [
     {
-      "type": "h1",
+      "format": "h1",
       "cells": [
         {
           "field": {

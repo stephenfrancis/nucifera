@@ -119,7 +119,7 @@ export default class Database {
     return this.pouch
       .get(_id)
       .then((result: any) => {
-        info(`got doc: ${JSON.stringify(result)}`);
+        info(`got doc: ${_id}`);
         doc = result;
         if (!doc._rev) {
           error(`no _rev in retrieved doc`);
@@ -132,7 +132,7 @@ export default class Database {
         return this.getDocOrBuiltIn(template_id);
       })
       .then((result: any) => {
-        info(`got template: ${JSON.stringify(result)}`);
+        info(`got template: ${result._id}`);
         return new Document(this, doc, result);
       })
       .catch((err) => {

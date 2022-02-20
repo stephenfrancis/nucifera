@@ -11,30 +11,6 @@ interface Props {
   db: Database;
 }
 
-const makeLink = (type: string, id: string, label?: string) =>
-  id ? (
-    <u>
-      <b>
-        <Link to={`../${type}/${id}`}>{label || id}</Link>
-      </b>
-    </u>
-  ) : null;
-
-const renderNuDbInfo = (nuDbInfo?: Document) => {
-  const views = nuDbInfo?.getData()?.views || ["docs"];
-  const templates = nuDbInfo?.getData()?.templates || ["main"];
-  const children: JSX.Element[] = [];
-  for (let i = 0; i < Math.max(views.length, templates.length); i += 1) {
-    children.push(
-      <tr key={String(i)}>
-        <td>{makeLink("create", templates[i])}</td>
-        <td>{makeLink("view", views[i])}</td>
-      </tr>
-    );
-  }
-  return <>{children}</>;
-};
-
 const renderPouchDBInfo = (info: PouchDB.Core.DatabaseInfo) => {
   return (
     <>
@@ -58,6 +34,30 @@ const MenuItemDatabase: React.FC<Props> = (props) => {
   const [info, setInfo] = React.useState<PouchDB.Core.DatabaseInfo>(null);
   const [nuDbInfo, setNuDbInfo] = React.useState<Document>(null);
 
+  const makeLink = (type: string, id: string, label?: string) =>
+    id ? (
+      <u>
+        <b>
+          <Link to={`/${props.db.name}/${type}/${id}`}>{label || id}</Link>
+        </b>
+      </u>
+    ) : null;
+
+  const renderNuDbInfo = (nuDbInfo?: Document) => {
+    const views = nuDbInfo?.getData()?.views || ["docs"];
+    const templates = nuDbInfo?.getData()?.templates || ["main"];
+    const children: JSX.Element[] = [];
+    for (let i = 0; i < Math.max(views.length, templates.length); i += 1) {
+      children.push(
+        <tr key={String(i)}>
+          <td>{makeLink("create", templates[i])}</td>
+          <td>{makeLink("view", views[i])}</td>
+        </tr>
+      );
+    }
+    return <>{children}</>;
+  };
+
   React.useEffect(() => {
     props.db
       .getInfo()
@@ -74,7 +74,7 @@ const MenuItemDatabase: React.FC<Props> = (props) => {
   }, [props.db.name]);
 
   return (
-    <MenuItem iconPath="/database.svg" label={props.db.name}>
+    <MenuItem iconPath="/assets/database.svg" label={props.db.name}>
       <table>
         <tbody>
           <tr>
@@ -107,7 +107,7 @@ const MenuItemDatabase: React.FC<Props> = (props) => {
       <ul>
         <li>
           <u>
-            <Link to="../edit/info">Edit the Info doc</Link>
+            <Link to={`/${props.db.name}/edit/info`}>Edit the Info doc</Link>
           </u>
         </li>
         <li>

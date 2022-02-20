@@ -1,10 +1,9 @@
 import * as React from "react";
-import { BrowserRouter, Link, Redirect } from "react-router-dom";
 
-import Body from "./Mainarea";
+import Body from "./page/Mainarea";
 import Database from "../data/Database";
-import Footer from "./Footer";
-import Header from "./Header";
+import Footer from "./page/Footer";
+import Header from "./page/Header";
 import { error, info } from "../data/Logger";
 import Trees from "../data/Trees";
 
