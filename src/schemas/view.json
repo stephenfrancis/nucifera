@@ -1,88 +1,215 @@
 {
-  "$id": "https://stephenfrancis.online/nucifera/view.schema.json",
-  "title": "View",
-  "description": "A view of documents in a database",
-  "type": "object",
-  "properties": {
-    "_id": {
-      "type": "string"
-    },
-    "template": {
-      "type": "string"
-    },
-    "description": {
-      "type": "string"
-    },
-    "type": {
-      "type": "string"
-    },
-    "index": {
-      "type": "array",
-      "items": {
-        "type": "string"
-      },
-      "minItems": 1,
-      "uniqueItems": true
-    },
-    "selector": {
-      "type": "object",
-      "properties": {
-        "template": {
-          "type": "object",
-          "properties": {
-            "$eq": {
-              "type": "string"
-            },
-            "$regex": {
-              "type": "string"
-            }
-          }
-        },
-        "additionalProperties": false
-      },
-      "required": ["template"],
-      "additionalProperties": false
-    },
-    "show_doc_link": {
-      "type": "string"
-    },
-    "columns": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "field": {
-            "type": "object",
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "type": {
-                "enum": [
-                  "date",
-                  "image",
-                  "json",
-                  "number",
-                  "options",
-                  "richtext",
-                  "text"
-                ]
-              }
-            },
-            "required": ["id", "type"],
-            "additionalProperties": false
-          },
-          "label": {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "definitions": {
+        "DateBrevity": {
+            "enum": [
+                "long",
+                "medium",
+                "short",
+                "very-short"
+            ],
             "type": "string"
-          }
         },
-        "required": ["field", "label"],
-        "additionalProperties": false
-      },
-      "minItems": 1,
-      "uniqueItems": true
-    }
-  },
-  "required": ["_id", "template", "type", "index", "selector", "columns"],
-  "additionalProperties": false
+        "DateShowField": {
+            "properties": {
+                "date_brevity": {
+                    "$ref": "#/definitions/DateBrevity"
+                },
+                "date_fns_format": {
+                    "type": "string"
+                },
+                "date_type": {
+                    "$ref": "#/definitions/DateType"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "date"
+                    ],
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "DateType": {
+            "enum": [
+                "date-only",
+                "date-time",
+                "time-only"
+            ],
+            "type": "string"
+        },
+        "ImageShowField": {
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "image"
+                    ],
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "JSONShowField": {
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "json"
+                    ],
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "NumberShowField": {
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "number"
+                    ],
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "OptionsShowField": {
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "options"
+                    ],
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "RichtextShowField": {
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "richtext"
+                    ],
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "TextShowField": {
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "text"
+                    ],
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "ViewColumn": {
+            "properties": {
+                "field": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/DateShowField"
+                        },
+                        {
+                            "$ref": "#/definitions/ImageShowField"
+                        },
+                        {
+                            "$ref": "#/definitions/JSONShowField"
+                        },
+                        {
+                            "$ref": "#/definitions/NumberShowField"
+                        },
+                        {
+                            "$ref": "#/definitions/OptionsShowField"
+                        },
+                        {
+                            "$ref": "#/definitions/RichtextShowField"
+                        },
+                        {
+                            "$ref": "#/definitions/TextShowField"
+                        }
+                    ]
+                },
+                "initialWidth": {
+                    "$ref": "#/definitions/Width"
+                },
+                "label": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Width": {
+            "enum": [
+                "free",
+                "l",
+                "m",
+                "s",
+                "xl",
+                "xs"
+            ],
+            "type": "string"
+        }
+    },
+    "properties": {
+        "_id": {
+            "type": "string"
+        },
+        "columns": {
+            "items": {
+                "$ref": "#/definitions/ViewColumn"
+            },
+            "type": "array"
+        },
+        "description": {
+            "type": "string"
+        },
+        "index": {},
+        "new_doc_link": {
+            "type": "string"
+        },
+        "selector": {},
+        "show_doc_link": {
+            "type": "string"
+        },
+        "sort": {
+            "items": {
+                "type": "string"
+            },
+            "type": "array"
+        },
+        "template": {
+            "type": "string"
+        },
+        "type": {
+            "enum": [
+                "list"
+            ],
+            "type": "string"
+        }
+    },
+    "type": "object"
 }
+

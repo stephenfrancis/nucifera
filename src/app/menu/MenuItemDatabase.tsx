@@ -74,7 +74,7 @@ const MenuItemDatabase: React.FC<Props> = (props) => {
   }, [props.db.name]);
 
   return (
-    <MenuItem iconPath="/assets/database.svg" label={props.db.name}>
+    <MenuItem iconPath="/database.svg" label={props.db.name}>
       <table>
         <tbody>
           <tr>

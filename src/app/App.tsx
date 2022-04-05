@@ -9,6 +9,8 @@ import OpenView from "./view/OpenView";
 import Test from "./Test";
 import { editMode } from "../types/General";
 
+import "../public/styles.css";
+
 const CreateRoute: React.FC<{}> = () => {
   const { db, template_id, doc_id } = useParams();
   console.log(

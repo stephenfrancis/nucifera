@@ -1,10 +1,9 @@
 import { EditField } from "../../types/Field";
 import {
   Template,
-  TemplateBlock,
-  TemplateBlockFlex,
-  TemplateBlockShared,
   TemplateCell,
+  TemplateCellContainer,
+  TemplateCellField,
 } from "../../types/Template";
 
 const validate = (field: EditField, val: any) => {
@@ -58,25 +57,23 @@ export const validateTemplate = (template: Template, value_container: any) => {
   if (!Array.isArray(template.content)) {
     throw new Error(`fault with template content: ${JSON.stringify(template)}`);
   }
-  return template.content.reduce((prev: boolean, curr: TemplateBlock) => {
-    return prev && validateTemplateBlock(curr, value_container);
+  return template.content.reduce((prev: boolean, curr: TemplateCell) => {
+    return prev && validateTemplateCell(curr, value_container);
   }, true);
 };
 
-export const validateTemplateBlock = (
-  template_block: TemplateBlock,
+export const validateTemplateCell = (
+  template_block: TemplateCell,
   value_container: any
 ) => {
-  if ((template_block as TemplateBlockFlex).cells) {
-    return (template_block as TemplateBlockFlex).cells.reduce(
-      (prev: boolean, curr: TemplateCell) => {
-        return (
-          prev &&
-          (!curr.field || !validate(curr.field, value_container[curr.field.id]))
-        );
-      },
-      true
-    );
+  const cells = (template_block as TemplateCellContainer).cells;
+  const field = (template_block as TemplateCellField).field;
+  if (field) {
+    return !validate(field, value_container[field.id]);
+  } else if (cells) {
+    return cells.reduce((prev: boolean, curr: TemplateCell) => {
+      return prev && validateTemplateCell(curr, value_container);
+    }, true);
   }
   return true;
 };

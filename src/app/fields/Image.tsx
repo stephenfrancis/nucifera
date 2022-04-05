@@ -49,7 +49,7 @@ export function Uneditable(props: UneditableProps): JSX.Element {
   const [imgSrc, setImgSrc] = React.useState<any>(null);
   React.useEffect(() => {
     if (props.value) {
-      setImgSrc(URL.createObjectURL(props.value));
+      setImgSrc(URL.createObjectURL(new Blob([props.value])));
     }
   }, []);
   return <>{imgSrc && <img src={imgSrc} className="display_image" />}</>;

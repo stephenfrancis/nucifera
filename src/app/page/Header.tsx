@@ -7,7 +7,7 @@ const Header: React.FC<Props> = (props) => {
     <header>
       {props.children}
       <a className="logo" href="/">
-        <img src="/assets/lotus_icon.svg" />
+        <img src="/lotus_icon.svg" />
         <b>nu</b>cifera
       </a>
     </header>

@@ -1,0 +1,461 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "definitions": {
+        "DateBrevity": {
+            "enum": [
+                "long",
+                "medium",
+                "short",
+                "very-short"
+            ],
+            "type": "string"
+        },
+        "DateEditField": {
+            "properties": {
+                "date_brevity": {
+                    "$ref": "#/definitions/DateBrevity"
+                },
+                "date_fns_format": {
+                    "type": "string"
+                },
+                "date_type": {
+                    "$ref": "#/definitions/DateType"
+                },
+                "hidden_for_edit": {
+                    "type": "boolean"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "mandatory": {
+                    "type": "boolean"
+                },
+                "type": {
+                    "enum": [
+                        "date"
+                    ],
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "DateType": {
+            "enum": [
+                "date-only",
+                "date-time",
+                "time-only"
+            ],
+            "type": "string"
+        },
+        "ImageEditField": {
+            "properties": {
+                "hidden_for_edit": {
+                    "type": "boolean"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "mandatory": {
+                    "type": "boolean"
+                },
+                "type": {
+                    "enum": [
+                        "image"
+                    ],
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "JSONEditField": {
+            "properties": {
+                "hidden_for_edit": {
+                    "type": "boolean"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "mandatory": {
+                    "type": "boolean"
+                },
+                "type": {
+                    "enum": [
+                        "json"
+                    ],
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "NumberEditField": {
+            "properties": {
+                "hidden_for_edit": {
+                    "type": "boolean"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "mandatory": {
+                    "type": "boolean"
+                },
+                "max": {
+                    "type": "number"
+                },
+                "min": {
+                    "type": "number"
+                },
+                "type": {
+                    "enum": [
+                        "number"
+                    ],
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "OptionsEditField": {
+            "properties": {
+                "hidden_for_edit": {
+                    "type": "boolean"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "mandatory": {
+                    "type": "boolean"
+                },
+                "options": {
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "type": {
+                    "enum": [
+                        "options"
+                    ],
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "Record<string,TemplateCell>": {
+            "type": "object"
+        },
+        "RichtextEditField": {
+            "properties": {
+                "hidden_for_edit": {
+                    "type": "boolean"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "mandatory": {
+                    "type": "boolean"
+                },
+                "type": {
+                    "enum": [
+                        "richtext"
+                    ],
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "TemplateCell": {
+            "anyOf": [
+                {
+                    "$ref": "#/definitions/TemplateCellArray"
+                },
+                {
+                    "$ref": "#/definitions/TemplateCellContainer"
+                },
+                {
+                    "$ref": "#/definitions/TemplateCellField"
+                },
+                {
+                    "$ref": "#/definitions/TemplateCellMap"
+                },
+                {
+                    "$ref": "#/definitions/TemplateCellText"
+                }
+            ]
+        },
+        "TemplateCellArray": {
+            "properties": {
+                "alignItems": {
+                    "type": "string"
+                },
+                "backgroundColor": {
+                    "type": "string"
+                },
+                "border": {
+                    "type": "string"
+                },
+                "cell": {
+                    "$ref": "#/definitions/TemplateCell"
+                },
+                "color": {
+                    "type": "string"
+                },
+                "flex": {
+                    "type": "string"
+                },
+                "flexWrap": {
+                    "type": "string"
+                },
+                "format": {
+                    "$ref": "#/definitions/TemplateCellFormat"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "justifyContent": {
+                    "type": "string"
+                },
+                "margin": {
+                    "type": "string"
+                },
+                "padding": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "TemplateCellContainer": {
+            "properties": {
+                "alignItems": {
+                    "type": "string"
+                },
+                "backgroundColor": {
+                    "type": "string"
+                },
+                "border": {
+                    "type": "string"
+                },
+                "cells": {
+                    "items": {
+                        "$ref": "#/definitions/TemplateCell"
+                    },
+                    "type": "array"
+                },
+                "color": {
+                    "type": "string"
+                },
+                "flex": {
+                    "type": "string"
+                },
+                "flexWrap": {
+                    "type": "string"
+                },
+                "format": {
+                    "$ref": "#/definitions/TemplateCellFormat"
+                },
+                "justifyContent": {
+                    "type": "string"
+                },
+                "margin": {
+                    "type": "string"
+                },
+                "padding": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "TemplateCellField": {
+            "properties": {
+                "alignItems": {
+                    "type": "string"
+                },
+                "backgroundColor": {
+                    "type": "string"
+                },
+                "border": {
+                    "type": "string"
+                },
+                "color": {
+                    "type": "string"
+                },
+                "field": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/definitions/DateEditField"
+                        },
+                        {
+                            "$ref": "#/definitions/ImageEditField"
+                        },
+                        {
+                            "$ref": "#/definitions/JSONEditField"
+                        },
+                        {
+                            "$ref": "#/definitions/NumberEditField"
+                        },
+                        {
+                            "$ref": "#/definitions/OptionsEditField"
+                        },
+                        {
+                            "$ref": "#/definitions/RichtextEditField"
+                        },
+                        {
+                            "$ref": "#/definitions/TextEditField"
+                        }
+                    ]
+                },
+                "flex": {
+                    "type": "string"
+                },
+                "flexWrap": {
+                    "type": "string"
+                },
+                "format": {
+                    "$ref": "#/definitions/TemplateCellFormat"
+                },
+                "justifyContent": {
+                    "type": "string"
+                },
+                "margin": {
+                    "type": "string"
+                },
+                "padding": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "TemplateCellFormat": {
+            "enum": [
+                "code",
+                "h1",
+                "h2",
+                "h3",
+                "p"
+            ],
+            "type": "string"
+        },
+        "TemplateCellMap": {
+            "properties": {
+                "alignItems": {
+                    "type": "string"
+                },
+                "backgroundColor": {
+                    "type": "string"
+                },
+                "border": {
+                    "type": "string"
+                },
+                "color": {
+                    "type": "string"
+                },
+                "flex": {
+                    "type": "string"
+                },
+                "flexWrap": {
+                    "type": "string"
+                },
+                "format": {
+                    "$ref": "#/definitions/TemplateCellFormat"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "justifyContent": {
+                    "type": "string"
+                },
+                "map": {
+                    "$ref": "#/definitions/Record<string,TemplateCell>"
+                },
+                "margin": {
+                    "type": "string"
+                },
+                "padding": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "TemplateCellText": {
+            "properties": {
+                "alignItems": {
+                    "type": "string"
+                },
+                "backgroundColor": {
+                    "type": "string"
+                },
+                "border": {
+                    "type": "string"
+                },
+                "color": {
+                    "type": "string"
+                },
+                "flex": {
+                    "type": "string"
+                },
+                "flexWrap": {
+                    "type": "string"
+                },
+                "format": {
+                    "$ref": "#/definitions/TemplateCellFormat"
+                },
+                "justifyContent": {
+                    "type": "string"
+                },
+                "margin": {
+                    "type": "string"
+                },
+                "padding": {
+                    "type": "string"
+                },
+                "text": {
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        },
+        "TextEditField": {
+            "properties": {
+                "hidden_for_edit": {
+                    "type": "boolean"
+                },
+                "id": {
+                    "type": "string"
+                },
+                "mandatory": {
+                    "type": "boolean"
+                },
+                "maxLength": {
+                    "type": "number"
+                },
+                "regex": {
+                    "type": "string"
+                },
+                "type": {
+                    "enum": [
+                        "text"
+                    ],
+                    "type": "string"
+                }
+            },
+            "type": "object"
+        }
+    },
+    "properties": {
+        "_id": {
+            "type": "string"
+        },
+        "content": {
+            "items": {
+                "$ref": "#/definitions/TemplateCell"
+            },
+            "type": "array"
+        },
+        "description": {
+            "type": "string"
+        },
+        "template": {
+            "type": "string"
+        }
+    },
+    "type": "object"
+}
+

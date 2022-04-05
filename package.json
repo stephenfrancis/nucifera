@@ -11,6 +11,20 @@
   },
   "author": "Stephen Francis <stephen.d.francis@gmail.com>",
   "license": "UNLICENSED",
+  "scripts": {
+    "build": "cd src && NODE_ENV=production rollup --config config/rollup.config.js",
+    "clean": "rm -f -r .cache dist/*",
+    "compile:template-schema": "typescript-json-schema src/tsconfig.json Template > src/schemas/template.json",
+    "compile:view-schema": "typescript-json-schema src/tsconfig.json View > src/schemas/view.json",
+    "server": "cd build/couch-server && node ../../src/server/pouch.js",
+    "start": "cd src && NODE_ENV=development rollup --watch --config config/rollup.config.js",
+    "test": "jest ./packages --forceExit",
+    "test:all": "yarn test:integration",
+    "test:cypress": "yarn run cypress run --config-file src/test/cypress.json",
+    "test:integration": "yarn run start & yarn run wait-on http://localhost:4444/ && yarn run test:cypress",
+    "tsc": "tsc -p src/tsconfig.json --noEmit",
+    "validate": "node src/schemas/validate.js"
+  },
   "dependencies": {
     "cors": "^2.8.5",
     "date-fns": "^2.28.0",
@@ -26,6 +40,11 @@
     "typescript": "4.5.5"
   },
   "devDependencies": {
+    "@rollup/plugin-commonjs": "^21.0.2",
+    "@rollup/plugin-json": "^4.1.0",
+    "@rollup/plugin-node-resolve": "^13.1.3",
+    "@rollup/plugin-replace": "^4.0.0",
+    "@rollup/plugin-typescript": "^8.3.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/react-hooks": "^7.0.2",
     "@types/jest": "^27.4.0",
@@ -37,27 +56,20 @@
     "@types/react-router-dom": "^5.3.3",
     "ajv": "^8.10.0",
     "cypress": "^9.4.1",
-    "fuse-box": "^4.0.0",
     "jest": "^27.4.7",
     "prettier": "^2.5.1",
     "react-test-renderer": "^17.0.2",
+    "rollup": "^2.70.0",
+    "rollup-plugin-copy": "^3.4.0",
+    "rollup-plugin-css-only": "^3.1.0",
+    "rollup-plugin-node-builtins": "^2.1.2",
+    "rollup-plugin-node-globals": "^1.4.0",
+    "rollup-plugin-serve": "^1.1.0",
     "ts-jest": "^27.1.3",
     "ts-node": "^10.4.0",
+    "tslib": "^2.3.1",
     "typescript-json-schema": "^0.53.0",
     "wait-on": "^6.0.0"
-  },
-  "scripts": {
-    "build": "NODE_ENV=production ./node_modules/.bin/ts-node src/config/fuse.ts",
-    "clean": "rm -f -r .cache dist/*",
-    "server": "cd build/couch-server && node ../../src/server/pouch.js",
-    "start-old": "yarn run parcel serve src/app/index.html",
-    "start": "NODE_ENV=development ./node_modules/.bin/ts-node src/config/fuse.ts",
-    "test": "jest ./packages --forceExit",
-    "test:all": "yarn test:integration",
-    "test:cypress": "yarn run cypress run --config-file src/test/cypress.json",
-    "test:integration": "yarn run start & yarn run wait-on http://localhost:4444/ && yarn run test:cypress",
-    "tsc": "tsc -p src/tsconfig.json --noEmit",
-    "validate": "node src/schemas/validate.js"
   },
   "bugs": {
     "url": "https://github.com/stephenfrancis/nucifera/issues"
